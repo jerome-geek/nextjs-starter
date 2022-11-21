@@ -1,13 +1,13 @@
+import { useState } from 'react';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
+import { DefaultSeo } from 'next-seo';
 import { ThemeProvider } from 'styled-components';
-import { QueryClient, QueryClientProvider } from 'react-query';
+import { QueryClient, QueryClientProvider, Hydrate } from 'react-query';
+import { ReactQueryDevtools } from 'react-query/devtools';
 
-import Header from 'components/Common/Header';
-import Footer from 'components/Common/Footer';
 import { GlobalStyle } from 'styles/global-style';
 import { lightTheme } from 'styles/theme';
-import { DefaultSeo } from 'next-seo';
 import SEO from 'config/seo.config';
 
 const queryClient = new QueryClient({
@@ -24,6 +24,8 @@ const queryClient = new QueryClient({
 });
 
 function App({ Component, pageProps }: AppProps) {
+    const [queryClient] = useState(() => new QueryClient());
+
     return (
         <>
             <Head>
@@ -36,11 +38,12 @@ function App({ Component, pageProps }: AppProps) {
             <DefaultSeo {...SEO} />
             <GlobalStyle />
             <QueryClientProvider client={queryClient}>
-                <ThemeProvider theme={lightTheme}>
-                    <Header />
-                    <Component {...pageProps} />
-                    <Footer />
-                </ThemeProvider>
+                <Hydrate state={pageProps.dehydratedState}>
+                    <ThemeProvider theme={lightTheme}>
+                        <Component {...pageProps} />
+                    </ThemeProvider>
+                </Hydrate>
+                <ReactQueryDevtools initialIsOpen={false} />
             </QueryClientProvider>
         </>
     );
