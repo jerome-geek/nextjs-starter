@@ -1,11 +1,27 @@
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import { ThemeProvider } from 'styled-components';
-import Header from 'components/Common/Header';
+import { QueryClient, QueryClientProvider } from 'react-query';
 
-import { GlobalStyle } from '../styles/global-style';
-import { lightTheme } from '../styles/theme';
+import Header from 'components/Common/Header';
 import Footer from 'components/Common/Footer';
+import { GlobalStyle } from 'styles/global-style';
+import { lightTheme } from 'styles/theme';
+import { DefaultSeo } from 'next-seo';
+import SEO from 'config/seo.config';
+
+const queryClient = new QueryClient({
+    defaultOptions: {
+        queries: {
+            retry: 0,
+            useErrorBoundary: true,
+            refetchOnWindowFocus: process.env.REACT_APP_MODE === 'production',
+        },
+        mutations: {
+            useErrorBoundary: true,
+        },
+    },
+});
 
 function App({ Component, pageProps }: AppProps) {
     return (
@@ -15,14 +31,17 @@ function App({ Component, pageProps }: AppProps) {
                     name='viewport'
                     content='width=device-width, initial-scale=1'
                 />
-                <title>boilerplate</title>
+                <title>Voice Caddie</title>
             </Head>
+            <DefaultSeo {...SEO} />
             <GlobalStyle />
-            <ThemeProvider theme={lightTheme}>
-                <Header />
-                <Component {...pageProps} />
-                <Footer />
-            </ThemeProvider>
+            <QueryClientProvider client={queryClient}>
+                <ThemeProvider theme={lightTheme}>
+                    <Header />
+                    <Component {...pageProps} />
+                    <Footer />
+                </ThemeProvider>
+            </QueryClientProvider>
         </>
     );
 }
