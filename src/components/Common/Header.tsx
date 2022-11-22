@@ -4,10 +4,11 @@ import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import { useLockedBody, useWindowSize } from 'usehooks-ts';
 
+import SearchLayer from 'components/Search/SearchLayer';
+import MemberPopup from 'components/Member/MemberPopup';
+import { isDesktop } from 'utils/styles/responsive';
 import media from 'utils/styles/media';
 import PATHS from 'const/paths';
-import { isDesktop } from 'utils/styles/responsive';
-import SearchLayer from 'components/Search/SearchLayer';
 import CATEGORY from 'const/category';
 import HeaderLogo from 'assets/logo/headerLogo.svg';
 import SearchIcon from 'assets/icons/search.svg';
@@ -171,6 +172,12 @@ export default function Header() {
         setSideNavigationToggle(false);
         setLocked(false);
     };
+    const onLoginClick = () => {
+        router.push(PATHS.LOGIN);
+    };
+    const onLogOutClick = () => {
+        console.log('onLogOutClick Clicked!');
+    };
 
     return (
         <>
@@ -208,13 +215,13 @@ export default function Header() {
                 <IconContainer>
                     <div onClick={onMypageClick}>
                         <PersonIcon />
-                        {/* {myPageToggle && (
+                        {myPageToggle && (
                             <MemberPopup
-                                isLogin={isLogin()}
+                                isLogin={false}
                                 onLoginClick={onLoginClick}
                                 onLogOutClick={onLogOutClick}
                             />
-                        )} */}
+                        )}
                     </div>
 
                     {isDesktop(width) && (
