@@ -9,6 +9,9 @@ import { ReactQueryDevtools } from 'react-query/devtools';
 import { GlobalStyle } from 'styles/global-style';
 import { lightTheme } from 'styles/theme';
 import SEO from 'config/seo.config';
+import DefaultLayout from 'components/Layout/DefaultLayout';
+import wrapper from 'state/store';
+import { Provider } from 'react-redux';
 
 const queryClient = new QueryClient({
     defaultOptions: {
@@ -40,7 +43,9 @@ function App({ Component, pageProps }: AppProps) {
             <QueryClientProvider client={queryClient}>
                 <Hydrate state={pageProps.dehydratedState}>
                     <ThemeProvider theme={lightTheme}>
-                        <Component {...pageProps} />
+                        <DefaultLayout>
+                            <Component {...pageProps} />
+                        </DefaultLayout>
                     </ThemeProvider>
                 </Hydrate>
                 <ReactQueryDevtools initialIsOpen={false} />
@@ -49,4 +54,4 @@ function App({ Component, pageProps }: AppProps) {
     );
 }
 
-export default App;
+export default wrapper.withRedux(App);

@@ -1,16 +1,12 @@
-import Head from 'next/head';
-import Image from 'next/image';
+import type { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 
-import Header from 'components/Common/Header';
-import Footer from 'components/Common/Footer';
 import styles from '../styles/Home.module.css';
-import mall from 'api/mall';
 
-export default function Home() {
+
+const Home: NextPage = () => {
     return (
         <div>
-            <Header />
             <NextSeo
                 title='home'
                 description='home description'
@@ -72,8 +68,8 @@ export default function Home() {
                     </a>
                 </div>
             </main>
-
-            <Footer />
         </div>
     );
-}
+};
+
+export default Home;

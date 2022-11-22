@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { GetStaticProps } from 'next';
+import { GetServerSideProps, GetStaticProps } from 'next';
 import Link from 'next/link';
 import { dehydrate, QueryClient } from 'react-query';
 import styled from 'styled-components';
@@ -172,10 +172,6 @@ const FooterContents = styled.p`
 const Footer = () => {
     const { isSuccess, data: mallInfo, isLoading, isError, error } = useMall();
 
-    console.log(
-        '🚀 ~ file: Footer.tsx ~ line 175 ~ Footer ~ mallInfo',
-        mallInfo,
-    );
     const { width } = useWindowSize();
 
     const SocialMediaList = useMemo(
@@ -209,7 +205,7 @@ const Footer = () => {
     );
 
     if (isLoading) return <div>Loading</div>;
-    if (error) return <p>"An error has occurred: " + error?.message</p>;
+    if (error) return <p>{"An error has occurred: " + error?.message}</p>;
 
     return (
         <FooterContainer>
@@ -370,7 +366,7 @@ const Footer = () => {
 
 export default Footer;
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetServerSideProps = async context => {
     const queryClient = new QueryClient();
 
     await queryClient.prefetchQuery('mallInfo', () => mall.getMall());
