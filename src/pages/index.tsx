@@ -1,10 +1,19 @@
 import type { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { useTranslation } from 'next-i18next';
 
 import styles from '../styles/Home.module.css';
 
+export const getStaticProps = async ({ locale }: any) => ({
+    props: {
+        ...(await serverSideTranslations(locale, ['common', 'about'])),
+    },
+});
 
 const Home: NextPage = () => {
+    const { t } = useTranslation('about');
+
     return (
         <div>
             <NextSeo

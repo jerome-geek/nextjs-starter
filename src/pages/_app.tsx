@@ -5,13 +5,13 @@ import { DefaultSeo } from 'next-seo';
 import { ThemeProvider } from 'styled-components';
 import { QueryClient, QueryClientProvider, Hydrate } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
+import { appWithTranslation } from 'next-i18next';
 
 import { GlobalStyle } from 'styles/global-style';
 import { lightTheme } from 'styles/theme';
 import SEO from 'config/seo.config';
 import DefaultLayout from 'components/Layout/DefaultLayout';
 import wrapper from 'state/store';
-import { Provider } from 'react-redux';
 
 const queryClient = new QueryClient({
     defaultOptions: {
@@ -54,4 +54,4 @@ function App({ Component, pageProps }: AppProps) {
     );
 }
 
-export default wrapper.withRedux(App);
+export default wrapper.withRedux(appWithTranslation(App));
