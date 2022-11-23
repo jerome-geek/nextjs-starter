@@ -6,8 +6,10 @@ import { useLockedBody, useWindowSize } from 'usehooks-ts';
 
 import SearchLayer from 'components/Search/SearchLayer';
 import MemberPopup from 'components/Member/MemberPopup';
+import { useMember } from 'hooks';
 import { isDesktop } from 'utils/styles/responsive';
 import media from 'utils/styles/media';
+import { isLogin } from 'utils/users';
 import PATHS from 'const/paths';
 import CATEGORY from 'const/category';
 import HeaderLogo from 'assets/logo/headerLogo.svg';
@@ -160,6 +162,7 @@ export default function Header() {
 
     const { width } = useWindowSize();
     const [_, setLocked] = useLockedBody();
+    const { onLoginClick, onLogOutClick } = useMember();
     const router = useRouter();
 
     const onMypageClick = () => setMyPageToggle((prev) => !prev);
@@ -171,12 +174,6 @@ export default function Header() {
     const onCloseButtonClick = () => {
         setSideNavigationToggle(false);
         setLocked(false);
-    };
-    const onLoginClick = () => {
-        router.push(PATHS.LOGIN);
-    };
-    const onLogOutClick = () => {
-        console.log('onLogOutClick Clicked!');
     };
 
     return (
@@ -217,7 +214,7 @@ export default function Header() {
                         <PersonIcon />
                         {myPageToggle && (
                             <MemberPopup
-                                isLogin={false}
+                                isLogin={isLogin()}
                                 onLoginClick={onLoginClick}
                                 onLogOutClick={onLogOutClick}
                             />
