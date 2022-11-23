@@ -12,8 +12,6 @@ export const getStaticProps = async ({ locale }: any) => ({
 });
 
 const Home: NextPage = () => {
-    const { t } = useTranslation('about');
-
     return (
         <div>
             <NextSeo
