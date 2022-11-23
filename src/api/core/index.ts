@@ -27,13 +27,13 @@ request.interceptors.request.use(
     (config) => {
         config.headers = config.headers ?? {};
 
-        // const accessTokenInfo = shopbyTokenStorage.getAccessToken();
+        const accessTokenInfo = shopbyTokenStorage.getAccessToken();
 
-        // if (isLogin()) {
-        //     config.headers['accessToken'] = accessTokenInfo?.accessToken || '';
-        // } else {
-        //     shopbyTokenStorage.clear();
-        // }
+        if (isLogin()) {
+            config.headers['accessToken'] = accessTokenInfo?.accessToken || '';
+        } else {
+            shopbyTokenStorage.clear();
+        }
 
         return config;
     },
