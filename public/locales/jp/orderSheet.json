@@ -1,0 +1,134 @@
+{
+    "progress": { "now": "주문서", "next": "주문완료" },
+    "orderProduct": {
+        "title": "주문 상품",
+        "category": {
+            "information": "상품 정보",
+            "count": "수량",
+            "price": "가격",
+            "deliveryPrice": "배송비",
+            "amountPrice": "총 상품 금액"
+        }
+    },
+    "ordererInformation": {
+        "title": "주문자 정보",
+        "category": {
+            "name": "이름",
+            "phoneNumber": "전화번호",
+            "eMail": "이메일",
+            "placeholder": {
+                "name": "이름을 입력하세요.",
+                "phoneNumber": "휴대폰 번호 '-' 제외하고 입력해 주세요.",
+                "email": "이메일을 입력해주세요."
+            }
+        }
+    },
+    "shippingAddress": {
+        "title": "배송지",
+        "addressInformation": "배송지 정보",
+        "sameOrderInformation": "주문자 정보와 동일",
+        "setDefaultAddress": "기본 배송지로 설정",
+        "category": {
+            "name": "수령인 이름",
+            "phoneNumber": "휴대폰 번호",
+            "searchAddress": "주소 검색",
+            "request": "택배사 요청 사항",
+            "placeholder": {
+                "name": "이름을 입력하세요.",
+                "phoneNumber": "휴대폰 번호 '-' 제외하고 입력해 주세요.",
+                "address": "예) 테헤란로 108길 23",
+                "detailAddress": "상세 주소 입력",
+                "request": "택배사 요청 사항을 선택해 주세요."
+            }
+        },
+        "requestList": {
+            "beforeDelivery": "배송 전에 미리 연락바랍니다.",
+            "putHouse": "집앞에 놔주세요",
+            "securityOffice": "경비실에 맡겨주세요.",
+            "absenceHouse": "부재시 집앞에 놔주세요",
+            "absenceOffice": "부재 시 경비실에 맡겨주세요",
+            "directInput": "직접 입력"
+        }
+    },
+    "applyDiscount": {
+        "title": "할인 적용",
+        "category": {
+            "coupon": "할인 쿠폰",
+            "accumulation": "적립금"
+        },
+        "applyCoupon": "쿠폰 적용",
+        "useAccumulation": "적립금 사용",
+        "availableAccumulation": "사용 가능 적립금"
+    },
+    "paymentMethod": {
+        "title": "결제 방식",
+        "category": {
+            "generalPayment": "일반 결제"
+        },
+        "paymentList": {
+            "creditCart": "신용카드",
+            "realTime": "실시간 계좌 이체",
+            "virtualAccount": "가상계좌"
+        }
+    },
+    "guestPassword": {
+        "title": "비회원 주문 비밀번호",
+        "desc": "비회원 배송 조회시 사용할 비밀번호를 입력해주세요.",
+        "category": {
+            "password": "비밀번호",
+            "checkPassword": "비밀번호 확인",
+            "placeholder": {
+                "password": "비밀번호를 입력해주세요.",
+                "checkPassword": "비밀번호 확인"
+            }
+        }
+    },
+    "paymentInformation": {
+        "title": "총 결제 금액",
+        "category": {
+            "amountOrderPrice": "총 주문금액",
+            "amountDeliveryFee": "총 배송비",
+            "amountDiscount": "총 할인금액",
+            "couponDiscount": "쿠폰 할인",
+            "accumulationDiscount": "적립금 사용금액",
+            "amountPrice": "총 결제금액"
+        }
+    },
+    "term": {
+        "agreeAll": "전체 동의",
+        "serviceAgree": "서비스 이용약관 동의",
+        "privacyAgree": "개인정보 처리방침",
+        "purchaseAgree": "주문할 제품의 거래조건을 확인 하였으며,<br /> 구매에 동의하시겠습니까 ?"
+    },
+    "etc": {
+        "inviteJoin": "지금 보이스캐디의 회원이 되어 즉시 사용 가능한 3,000원 할인 쿠폰 혜택을 만나보세요.",
+        "mobileInviteJoin": "지금 바로 가입하고 3,000원 쿠폰을 받아보세요!",
+        "joinMember": "회원가입 바로가기",
+        "won": "원",
+        "search": "검색",
+        "require": "필수",
+        "readMore": "자세히보기",
+        "payment": "결제하기",
+        "guestAlert": "비회원으로 상품을 구매하시면 보이스캐디의<br/>쿠폰 및 적립급 혜택을 받으실 수 없습니다.",
+        "agreeTerm": "약관에 동의해주세요."
+    },
+    "alert": {
+        "agreeTerm": "약관에 동의해주세요.",
+        "inputPoint": "포인트를 입력해주세요",
+        "exceedPoint": "사용 가능한 포인트를 초과하였습니다.",
+        "inputPassword": "비밀번호를 입력해주세요",
+        "inputName": "이름을 입력해주세요",
+        "inputEmail": "이메일을 입력해주세요.",
+        "inputPhoneNumber": "휴대폰 번호를 입력해주세요",
+        "inputAddress": "주소를 입력해주세요",
+        "inputDetailAddress": "상세 주소를 입력해주세요"
+    },
+    "price": {
+        "totalStandardAmt": "총 상품금액",
+        "totalDeliveryAmt": "총 배송비",
+        "totalDiscountAmt": "총 할인금액",
+        "totalCouponAmt": "쿠폰 할인",
+        "usedAccumulationAmt": "적립금 결제",
+        "totalPaymentAmt": "총 결제금액"
+    }
+}
