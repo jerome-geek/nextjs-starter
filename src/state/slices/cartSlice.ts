@@ -3,29 +3,28 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { ShoppingCartBody } from 'models/order';
 
-interface CartInitialState extends ShoppingCartBody {
+export interface CartBody extends ShoppingCartBody {
     isChecked?: boolean;
 }
 
-const cartInitialState: {
-    data: CartInitialState[];
-} = {
+export interface CartInitialState extends InitialState<CartBody[]> {}
+
+const cartInitialState: CartInitialState = {
+    loading: false,
     data: [],
+    error: {},
 };
 
 export const cartSlice = createSlice({
-    name: 'member',
+    name: 'cart',
     initialState: cartInitialState,
     reducers: {
-        setCart: (state, action: PayloadAction<CartInitialState[]>) => {
+        setCart: (state, action: PayloadAction<CartBody[]>) => {
             if (state.data.length > 0) {
                 const combinedArray = [...action.payload, ...state.data];
 
-                const cartList: CartInitialState[] = combinedArray.reduce(
-                    (
-                        accumulatedCartList: CartInitialState[],
-                        currentCartData,
-                    ) => {
+                const cartList: CartBody[] = combinedArray.reduce(
+                    (accumulatedCartList: CartBody[], currentCartData) => {
                         const overlapIndex = findIndex(
                             (a) => a.optionNo === currentCartData.optionNo,
                             accumulatedCartList,
@@ -43,15 +42,18 @@ export const cartSlice = createSlice({
                 );
 
                 return {
+                    ...state,
                     data: cartList,
                 };
             }
             return {
+                ...state,
                 data: [...action.payload, ...state.data],
             };
         },
         updateCart: (state, action) => {
             return {
+                ...state,
                 data: pipe(
                     state.data,
                     map((a) =>
@@ -68,6 +70,7 @@ export const cartSlice = createSlice({
         },
         checkCart: (state, action) => {
             return {
+                ...state,
                 data: pipe(
                     state.data,
                     map((a) =>
@@ -81,6 +84,7 @@ export const cartSlice = createSlice({
         },
         checkAllCart: (state, action) => {
             return {
+                ...state,
                 data: pipe(
                     state.data,
                     map((a) => ({ ...a, isChecked: action.payload.checked })),
@@ -90,6 +94,7 @@ export const cartSlice = createSlice({
         },
         deleteCart: (state, action) => {
             return {
+                ...state,
                 data: pipe(
                     state.data,
                     filter(

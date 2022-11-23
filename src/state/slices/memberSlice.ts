@@ -2,6 +2,8 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { profile } from 'api/member';
 import { GetProfileParams } from 'models/member';
 
+export interface MemberInitialState extends InitialState<Nullable<GetProfileParams>> { }
+
 export const fetchProfile = createAsyncThunk('member/profile', async () => {
     try {
         const response = await profile.getProfile();
@@ -10,12 +12,6 @@ export const fetchProfile = createAsyncThunk('member/profile', async () => {
         return error;
     }
 });
-
-export interface MemberInitialState {
-    loading: boolean;
-    data: Nullable<GetProfileParams>;
-    error: any;
-}
 
 const memberInitialState: MemberInitialState = {
     loading: false,

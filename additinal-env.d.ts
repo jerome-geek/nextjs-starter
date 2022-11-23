@@ -37,3 +37,9 @@ interface MemberIntegrationResponse {
     code: string;
     message: string;
 }
+
+interface InitialState<T> {
+    loading: boolean;
+    data: T;
+    error: any;
+}
