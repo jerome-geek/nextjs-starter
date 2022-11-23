@@ -4,6 +4,7 @@ import { HYDRATE } from 'next-redux-wrapper';
 
 import memberSlice, { MemberInitialState } from 'state/slices/memberSlice';
 import { store } from 'state/store';
+import cartSlice from 'state/slices/cartSlice';
 
 export interface InitialRootState {
     member: MemberInitialState;
@@ -19,6 +20,7 @@ const rootReducer = (
         default: {
             const combinedReducer = combineReducers({
                 member: memberSlice.reducer,
+                cart: cartSlice.reducer,
             });
             return combinedReducer(state, action);
         }
