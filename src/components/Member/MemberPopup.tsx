@@ -69,8 +69,7 @@ const MemberPopup: FC<MemberPopupProps> = ({
         <MemberPopupContainer>
             <MemberPopupList>
                 <MemberPopupListItem
-                    // onClick={isLogin ? onLogOutClick : onLoginClick}
-                    onClick={() => router.push(PATHS.LOGIN)}
+                    onClick={isLogin ? onLogOutClick : onLoginClick}
                 >
                     {isLogin ? '로그아웃' : '로그인'}
                 </MemberPopupListItem>

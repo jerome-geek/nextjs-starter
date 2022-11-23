@@ -2,8 +2,7 @@ import { FC, HTMLAttributes, useState } from 'react';
 import Link from 'next/link';
 import styled, { css } from 'styled-components';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleDown, faAngleUp } from '@fortawesome/free-solid-svg-icons';
+import ChevronDown from 'assets/icons/chevron-down.svg';
 
 interface DropDownProps extends HTMLAttributes<HTMLDivElement> {
     title: string;
@@ -72,7 +71,7 @@ const DropDown: FC<DropDownProps> = ({
                 isBorder={isBorder}
             >
                 {title}&nbsp;
-                <FontAwesomeIcon icon={isOpen ? faAngleDown : faAngleUp} />
+                <ChevronDown />
             </DropDownHeader>
 
             {isOpen && (
