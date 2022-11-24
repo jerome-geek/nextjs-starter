@@ -49,9 +49,7 @@ const useCart = () => {
             keepPreviousData: true,
             select: (response) => response.data,
             onSuccess: (data) => setCartInfo(data),
-            onError: (error) => {
-                reset();
-            },
+            onError: () => reset(),
         },
     );
 
