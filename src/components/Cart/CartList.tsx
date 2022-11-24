@@ -1,14 +1,15 @@
 import { FC } from 'react';
 import styled from 'styled-components';
 import { useRouter } from 'next/router';
+import Image from 'next/image';
 import { useWindowSize } from 'usehooks-ts';
 import currency from 'currency.js';
 
-import  CloseButtonIcon from 'assets/icons/gray_close_icon.svg';
-import  Checked from 'assets/icons/checkbox_square_checked.svg';
-import  UnChecked from 'assets/icons/checkbox_square_unchecked.svg';
-import  Plus from 'assets/icons/plus_button.svg';
-import  Minus from 'assets/icons/minus_button.svg';
+import CloseButtonIcon from 'assets/icons/gray_close_icon.svg';
+import Checked from 'assets/icons/checkbox_square_checked.svg';
+import UnChecked from 'assets/icons/checkbox_square_unchecked.svg';
+import Plus from 'assets/icons/plus_button.svg';
+import Minus from 'assets/icons/minus_button.svg';
 import { OrderProductOption } from 'models/order';
 import { isMobile } from 'utils/styles/responsive';
 import media from 'utils/styles/media';
@@ -306,12 +307,12 @@ const CartList: FC<CartListProps> = ({
                                 </label>
                             </CartSelect>
                         )}
-                        <img
+                        <Image
                             src={cartData.imageUrl}
                             alt={cartData.optionName}
                             style={{ maxWidth: '100%' }}
                             onClick={() =>
-                                navigate(
+                                router.push(
                                     `${PATHS.PRODUCT_DETAIL}/${cartData.productNo}`,
                                 )
                             }
@@ -355,7 +356,7 @@ const CartList: FC<CartListProps> = ({
                                 </label>
                             </CartSelect>
                         )}
-                        <img
+                        <Image
                             src={cartData.imageUrl}
                             alt={cartData.optionName}
                         />
