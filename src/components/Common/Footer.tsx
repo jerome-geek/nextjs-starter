@@ -205,7 +205,7 @@ const Footer = () => {
     );
 
     if (isLoading) return <div>Loading</div>;
-    if (error) return <p>{"An error has occurred: " + error?.message}</p>;
+    if (error) return <p>{'An error has occurred: ' + error?.message}</p>;
 
     return (
         <FooterContainer>
@@ -366,7 +366,7 @@ const Footer = () => {
 
 export default Footer;
 
-export const getServerSideProps: GetServerSideProps = async context => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
     const queryClient = new QueryClient();
 
     await queryClient.prefetchQuery('mallInfo', () => mall.getMall());

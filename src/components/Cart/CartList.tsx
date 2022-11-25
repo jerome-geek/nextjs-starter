@@ -307,7 +307,7 @@ const CartList: FC<CartListProps> = ({
                                 </label>
                             </CartSelect>
                         )}
-                        <Image
+                        <img
                             src={cartData.imageUrl}
                             alt={cartData.optionName}
                             style={{ maxWidth: '100%' }}
@@ -356,7 +356,7 @@ const CartList: FC<CartListProps> = ({
                                 </label>
                             </CartSelect>
                         )}
-                        <Image
+                        <img
                             src={cartData.imageUrl}
                             alt={cartData.optionName}
                         />

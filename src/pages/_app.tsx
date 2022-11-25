@@ -26,6 +26,12 @@ const queryClient = new QueryClient({
     },
 });
 
+declare global {
+    interface Window {
+        Kakao: any;
+    }
+}
+
 function App({ Component, pageProps }: AppProps) {
     const [queryClient] = useState(() => new QueryClient());
 
