@@ -3,7 +3,6 @@ import dayjs from 'dayjs';
 import { AxiosError, AxiosResponse } from 'axios';
 
 import { coupon } from 'api/promotion';
-import { PROFILE_COUPONS } from 'const/queryKeys';
 import { Coupon, CouponsParams } from 'models/promotion';
 import { isLogin } from 'utils/users';
 
@@ -30,7 +29,7 @@ const useCouponData = ({
     options,
 }: useCouponDataParams) => {
     return useQuery(
-        [PROFILE_COUPONS, memberNo, { ...params }],
+        ['couponList', memberNo, { ...params }],
         async () => await coupon.getUserCoupons({ ...params }),
         { enabled: isLogin(), select: ({ data }) => data, ...options },
     );
