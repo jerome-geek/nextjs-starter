@@ -6,13 +6,9 @@ import { createWrapper } from 'next-redux-wrapper';
 import rootReducer, { InitialRootState } from 'state/reducers';
 
 export const store = configureStore({
-    reducer: rootReducer as Reducer<
-        CombinedState<InitialRootState>,
-        AnyAction
-    >,
-    middleware: (getDefaultMiddleware) =>
-        getDefaultMiddleware().concat(logger),
-    devTools: process.env.REACT_APP_MODE !== 'production',
+    reducer: rootReducer as Reducer<CombinedState<InitialRootState>, AnyAction>,
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
+    devTools: process.env.NODE_ENV !== 'production',
 });
 
 // export const makeStore = () => {
@@ -23,7 +19,7 @@ export const store = configureStore({
 //         >,
 //         middleware: (getDefaultMiddleware) =>
 //             getDefaultMiddleware().concat(logger),
-//         devTools: process.env.REACT_APP_MODE !== 'production',
+//         devTools: process.env.NODE_ENV !== 'production',
 //     });
 
 //     return store;

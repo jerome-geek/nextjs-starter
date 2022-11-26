@@ -366,14 +366,3 @@ const Footer = () => {
 
 export default Footer;
 
-export const getServerSideProps: GetServerSideProps = async context => {
-    const queryClient = new QueryClient();
-
-    await queryClient.prefetchQuery('mallInfo', () => mall.getMall());
-
-    return {
-        props: {
-            dehydratedState: dehydrate(queryClient),
-        },
-    };
-};

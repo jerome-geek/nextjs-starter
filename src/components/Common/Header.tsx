@@ -162,7 +162,7 @@ export default function Header() {
 
     const { width } = useWindowSize();
     const [_, setLocked] = useLockedBody();
-    const { onLoginClick, onLogOutClick } = useMember();
+    const { member, onLoginClick, onLogOutClick } = useMember();
     const router = useRouter();
 
     const onMypageClick = () => setMyPageToggle((prev) => !prev);
@@ -210,6 +210,9 @@ export default function Header() {
                 )}
 
                 <IconContainer>
+                    {isDesktop(width) && isLogin() && member && (
+                        <MemberName>{`${member?.memberName}님`}</MemberName>
+                    )}
                     <div onClick={onMypageClick}>
                         <PersonIcon />
                         {myPageToggle && (
