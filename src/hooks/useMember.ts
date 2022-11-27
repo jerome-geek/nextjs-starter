@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { shallowEqual } from 'react-redux';
 
-import { useAppDispatch, useTypedSelector } from 'state/reducers';
+import { useAppDispatch, useTypedSelector } from 'state/store';
 import { reset } from 'state/slices/memberSlice';
 import { authentication } from 'api/auth';
 import { shopbyTokenStorage } from 'utils/storage';

@@ -9,7 +9,7 @@ import { useWindowSize } from 'usehooks-ts';
 import { AxiosError } from 'axios';
 
 import { fetchProfile } from 'state/slices/memberSlice';
-import { useAppDispatch } from 'state/reducers';
+import { useAppDispatch } from 'state/store';
 import FlexContainer from 'components/Common/FlexContainer';
 import StyledInput from 'components/Input/StyledInput';
 import Checkbox from 'components/Input/Checkbox';
