@@ -418,27 +418,12 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
     await Promise.all([
         queryClient.prefetchQuery(
-            [
-                'category_info',
-                { categoryNo: params?.categoryNo ?? 'category_info' },
-            ],
+            ['category_info'],
             async () =>
                 await category.getCategory(params?.categoryNo as string),
         ),
         queryClient.prefetchQuery(
-            [
-                'productList',
-                {
-                    categoryNos: params?.categoryNo,
-                    pageNumber: 1,
-                    pageSize: 10,
-                    order: {
-                        by: PRODUCT_BY.RECENT_PRODUCT,
-                        direction: ORDER_DIRECTION.DESC,
-                    },
-                    hasOptionValues: true,
-                },
-            ],
+            ['productList'],
             async () =>
                 await category.getCategory(params?.categoryNo as string),
         ),

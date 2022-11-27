@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { isNil, pipe, map, sum, toArray, head, slice } from '@fxts/core';
 import { useLockedBody, useWindowSize } from 'usehooks-ts';
 
@@ -678,6 +679,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     return {
         props: {
             dehydratedState: JSON.parse(JSON.stringify(dehydrate(queryClient))),
+            ...(await serverSideTranslations(context.locale!, [
+                'productDetail',
+            ])),
         },
     };
 };

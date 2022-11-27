@@ -1,6 +1,6 @@
 import { Swiper as SwiperClass } from 'swiper/types';
 import SlideButton from 'components/Button/SlideButton';
-import { FC, useMemo, useRef } from 'react';
+import { FC, useMemo } from 'react';
 import styled from 'styled-components';
 import { Swiper, SwiperProps, SwiperSlide } from 'swiper/react';
 import { isBoolean } from '@fxts/core';
@@ -39,6 +39,7 @@ const PaginationContainer = styled.div`
     align-items: center;
     width: 100%;
     bottom: 20px !important;
+    position: absolute;
 
     .main-swiper-pagination-bullets {
         display: block;
@@ -63,10 +64,6 @@ const PaginationContainer = styled.div`
 const ProductImageSlider: FC<ProductImageSliderProps> = ({
     imageList = [],
 }) => {
-    const prevElRef = useRef(null);
-    const nextElRef = useRef(null);
-    const paginationRef = useRef(null);
-
     const settings = useMemo<SwiperProps>(
         () => ({
             modules: [Pagination, Navigation, A11y],
@@ -74,28 +71,21 @@ const ProductImageSlider: FC<ProductImageSliderProps> = ({
             observeParents: true,
             slidesPerView: 1,
             navigation: {
-                prevEl: prevElRef.current,
-                nextEl: nextElRef.current,
+                prevEl: '.prevEl',
+                nextEl: '.nextEl',
             },
             pagination: {
                 clickable: true,
                 type: 'bullets',
                 bulletClass: 'main-swiper-pagination-bullets',
-                el: paginationRef.current,
+                el: '.swiper-pagination',
+                bulletActiveClass: 'swiper-pagination-bullet-active',
             },
             onBeforeInit: (Swiper: SwiperClass) => {
-                if (!isBoolean(Swiper.params.navigation)) {
-                    const navigation = Swiper.params.navigation;
-                    if (navigation) {
-                        navigation.prevEl = prevElRef.current;
-                        navigation.nextEl = nextElRef.current;
-                    }
-                }
-
                 if (!isBoolean(Swiper.params.pagination)) {
                     const pagination = Swiper.params.pagination;
                     if (pagination) {
-                        pagination.el = paginationRef.current;
+                        pagination.el = '.swiper-pagination';
                     }
                 }
             },
@@ -123,13 +113,10 @@ const ProductImageSlider: FC<ProductImageSliderProps> = ({
                 </Swiper>
             )}
 
-            <SlideButton slideButtonType='prev' ref={prevElRef} />
-            <SlideButton slideButtonType='next' ref={nextElRef} />
+            <SlideButton slideButtonType='prev' className='prevEl' />
+            <SlideButton slideButtonType='next' className='nextEl' />
 
-            <PaginationContainer
-                className='swiper-pagination'
-                ref={paginationRef}
-            />
+            <PaginationContainer className='swiper-pagination' />
         </Container>
     );
 };
