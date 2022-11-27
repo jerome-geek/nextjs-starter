@@ -1,5 +1,3 @@
-import { isBoolean } from '@fxts/core';
-
 import { shopbyTokenStorage } from 'utils/storage';
 
 const isLogin = () => {
