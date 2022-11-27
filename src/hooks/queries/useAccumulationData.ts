@@ -20,8 +20,8 @@ interface useAccumulationDataParams<T = GetAccumulationSummaryResponse> {
 const useAccumulationData = ({
     memberNo = 0,
     params = {
-        startYmd: dayjs().subtract(1, 'year').format('YYYY-MM-DD'),
-        endYmd: dayjs().format('YYYY-MM-DD'),
+        startYmd: dayjs().subtract(1, 'year').format('YYYY-MM-DD HH:mm:ss'),
+        endYmd: dayjs().format('YYYY-MM-DD HH:mm:ss'),
     },
     options,
 }: useAccumulationDataParams) => {
