@@ -40,6 +40,13 @@ interface MemberIntegrationResponse {
 
 interface InitialState<T> {
     loading: boolean;
+    // loading: 'idle' | 'pending' | 'succeeded' | 'failed'
     data: T;
     error: any;
+}
+
+interface Tab {
+    key: string;
+    name: string;
+    isActive: boolean;
 }
