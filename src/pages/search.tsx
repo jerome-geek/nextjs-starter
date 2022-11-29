@@ -85,10 +85,6 @@ const SearchResultContainer = styled.div``;
 const Search = () => {
     const router = useRouter();
     const { keywords } = router.query as { keywords: string };
-    console.log(
-        '🚀 ~ file: search.tsx ~ line 94 ~ Search ~ keywords',
-        keywords,
-    );
 
     const [query, setQuery] = useState('');
     const onInputChange = ({
