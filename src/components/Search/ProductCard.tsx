@@ -1,6 +1,5 @@
 import { FC, HTMLAttributes } from 'react';
 import styled from 'styled-components';
-
 import ProductSticker from 'components/Product/ProductSticker';
 import { StickerInfo } from 'models/display';
 import { KRW } from 'utils/currency';

@@ -1,7 +1,6 @@
 import { useState, useMemo } from 'react';
 import type { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useQuery } from 'react-query';
 import { useWindowSize } from 'usehooks-ts';
 import { filter, head, pipe } from '@fxts/core';
@@ -11,7 +10,6 @@ import { SwiperProps } from 'swiper/react';
 import BandBanner from 'components/Banner/BandBanner';
 import MainSlideBanner from 'components/Banner/MainSlideBanner';
 import styles from '../styles/Home.module.css';
-import { useBanners } from 'hooks/queries';
 import BANNER from 'const/banner';
 import { isMobile } from 'utils/styles/responsive';
 import { sortBanners } from 'utils/banners';
@@ -19,12 +17,6 @@ import { banner } from 'api/display';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
-
-export const getStaticProps = async ({ locale }: any) => ({
-    props: {
-        ...(await serverSideTranslations(locale, ['common', 'about'])),
-    },
-});
 
 const Home: NextPage = () => {
     const { width } = useWindowSize();

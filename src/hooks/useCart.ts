@@ -3,7 +3,7 @@ import { shallowEqual } from 'react-redux';
 import { useQuery } from 'react-query';
 import { flatMap, pipe, pluck, size } from '@fxts/core';
 
-import { useTypedSelector } from 'state/reducers';
+import { useTypedSelector } from 'state/store';
 import { reset } from 'state/slices/memberSlice';
 import { cart, guestOrder } from 'api/order';
 import { CartList } from 'models/order';
