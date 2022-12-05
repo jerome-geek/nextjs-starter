@@ -6,7 +6,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { isNil, pipe, map, sum, toArray, head, slice } from '@fxts/core';
 import { useLockedBody, useWindowSize } from 'usehooks-ts';
 
-import { useAppDispatch } from 'state/reducers';
+import { useAppDispatch } from 'state/store';
 import { setCart } from 'state/slices/cartSlice';
 import MainCategoryBanners from 'components/Main/MainCategoryBanners';
 import LayoutResponsive from 'components/shared/LayoutResponsive';
