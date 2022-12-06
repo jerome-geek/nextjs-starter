@@ -2,6 +2,8 @@ import { ChangeEvent, KeyboardEvent } from 'react';
 import { useForm } from 'react-hook-form';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { GetStaticProps } from 'next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useMutation } from 'react-query';
 import { useAppDispatch } from 'state/store';
 import styled from 'styled-components';
@@ -662,3 +664,11 @@ const Info = () => {
 };
 
 export default Info;
+
+export const getStaticProps: GetStaticProps = async (context) => {
+    return {
+        props: {
+            ...(await serverSideTranslations(context.locale!)),
+        },
+    };
+};

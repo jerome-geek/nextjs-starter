@@ -1,0 +1,60 @@
+{
+    "infoTitle": "개인 정보 수정",
+    "email": "이메일",
+    "name": "이름",
+    "male": "남성",
+    "female": "여성",
+    "password": "비밀번호",
+    "updatePassword": "비밀번호 변경하기",
+    "phoneNumber": "전화번호",
+    "certification": "인증",
+    "birthday": "생년월일",
+    "disclosure": "정보공개",
+    "disclosureDescription": "체크 시, 다른 사람들이 회원님의 정보를 확인할 수 있습니다.",
+    "marketing": "마케팅 수신 동의",
+    "select": "선택",
+    "infoUpdate": "수정하기",
+    "wantWithdrawal": "회원 탈퇴를 원하시면",
+    "here": "여기",
+    "click": "를 눌러주세요",
+    "passwordTitle": "비밀번호 변경",
+    "currentPassword": "기존 비밀번호",
+    "newPassword": "새 비밀번호",
+    "passwordValidation": "영어, 숫자, 특수문자 포함 8자리 이상",
+    "updatePasswordButton": "비밀번호 변경",
+    "withdrawalTitle": "회원 탈퇴",
+    "withdrawalDescription": "개인정보, 쿠폰 정보, 적립금, 등록하신 제품 정보는 회원 탈퇴시 삭제되며, 다시 복구하실 수 없습니다.<br />추후에 동일 계정으로 재가입하셔도 쿠폰과 적립금 내역은 복구되지 않습니다.",
+    "withdrawalMobileDescription": "<p>개인정보, 쿠폰 정보, 적립금, 등록하신 제품 정보는<br />회원 탈퇴시 삭제되며, 다시 복구하실 수 없습니다.</p><p>추후에 동일 계정으로 재가입하셔도<br />쿠폰과 적립금 내역은 복구되지 않습니다.</p>",
+    "withdrawalReasonList": [
+        "다른 아이디 변경",
+        "원하는 콘텐츠 부족",
+        "원하는 상품 없음",
+        "개인정보 노출 우려",
+        "서비스 불만족"
+    ],
+    "etc": "기타",
+    "withdrawalReason": "탈퇴 사유",
+    "snsDescription": "간편 가입 사용자는 SNS 인증이 필요합니다.",
+    "withdrawalAgree": "회원 탈퇴 유의사항을 확인하였으며 동의합니다",
+    "withdrawalButton": "탈퇴하기",
+    "placeholder": {
+        "name": "홍길동",
+        "phoneNumber": "'-' 없이 입력해주세요",
+        "currentPassword": "비밀번호 입력",
+        "reEnterPassword": "비밀번호 재입력",
+        "withdrawal": "탈퇴 사유를 선택해주세요.",
+        "withdrawalReason": "탈퇴 사유를 적어주세요",
+        "enterPassword": "비밀번호를 입력해주세요."
+    },
+    "alert": {
+        "successUpdateInfo": "회원 정보 수정 성공",
+        "failUpdateInfo": "회원 정보 수정 실패",
+        "error": "알수 없는 에러가 발생했습니다.",
+        "successWithdrawal": "그동안 서비스를 이용해주셔서 감사합니다. 더욱더 좋은 서비스를 제공하기 위해 노력하는 보이스캐디가 되겠습니다.",
+        "failWithdrawal": "회원 탈퇴에 실패하였습니다. 비밀번호를 확인하여 주세요."
+    },
+    "error": {
+        "passwordUnMatch": "비밀번호가 일치하지 않습니다.",
+        "notice": "유의사항에 동의하여주세요."
+    }
+}
