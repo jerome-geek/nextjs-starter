@@ -205,7 +205,7 @@ const Footer = () => {
     );
 
     if (isLoading) return <div>Loading</div>;
-    if (error) return <p>{"An error has occurred: " + error?.message}</p>;
+    if (error) return <p>{'An error has occurred: ' + error?.message}</p>;
 
     return (
         <FooterContainer>
@@ -365,4 +365,3 @@ const Footer = () => {
 };
 
 export default Footer;
-

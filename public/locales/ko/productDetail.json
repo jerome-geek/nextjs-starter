@@ -1,0 +1,22 @@
+{
+    "countAlert": "1개 이상 구매하여야 합니다!",
+    "successCartAlert": "장바구니 등록이 완료됐습니다.",
+    "failCartAlert": "장바구니 등록이 실패했습니다. 다시 등록해주세요",
+    "failBuyAlert": "구매에 실패했습니다. 다시 시도해주세요",
+    "accumulateBenefits": "적립혜택",
+    "memberPoint": "회원 적립금",
+    "chooseOption": "원하는 옵션을 선택해주세요.",
+    "amountPrice": "총 상품 금액",
+    "amount": "총",
+    "count": "개",
+    "shippingInformation": "배송정보",
+    "shippingCost": "배송비",
+    "buyNow": "바로구매",
+    "goToManual": "매뉴얼 바로가기",
+    "voiceCaddieManager": "보이스캐디 매니저",
+    "voiceCaddieManual": "보이스캐디 매뉴얼",
+    "productSummary": "제품 개요",
+    "productSpecifications": "제품 스펙",
+    "productComparison": "제품 비교",
+    "productPolicy": "배송 환불/규정"
+}

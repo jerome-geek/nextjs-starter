@@ -1,8 +1,6 @@
 import { FC, HTMLAttributes } from 'react';
 import styled from 'styled-components';
-import Image from 'next/image';
-
-// import ProductSticker from 'components/Product/ProductSticker';
+import ProductSticker from 'components/Product/ProductSticker';
 import { StickerInfo } from 'models/display';
 import { KRW } from 'utils/currency';
 import media from 'utils/styles/media';
@@ -155,16 +153,10 @@ const ProductCard: FC<ProductCardProps> = ({
         <ProductCardContainer {...props}>
             <ProductCardImageContainer>
                 <ProductCardTagContainer>
-                    {/* <ProductSticker stickerInfos={stickerInfos} /> */}
+                    <ProductSticker stickerInfos={stickerInfos} />
                 </ProductCardTagContainer>
                 <ProductCardImage>
-                    {/* TODO:  protocol-relative URL (//) -> http or https 처리 (getServerSideProps) */}
-                    <Image
-                        src={`http:${imgUrl}`}
-                        alt={productName}
-                        width='200'
-                        height='200'
-                    />
+                    <img src={imgUrl} alt={productName} />
                 </ProductCardImage>
             </ProductCardImageContainer>
 

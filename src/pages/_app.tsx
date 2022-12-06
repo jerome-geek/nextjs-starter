@@ -15,6 +15,12 @@ import SEO from 'config/seo.config';
 import { GlobalStyle } from 'styles/global-style';
 import { lightTheme } from 'styles/theme';
 
+declare global {
+    interface Window {
+        Kakao: any;
+    }
+}
+
 function App({ Component, pageProps }: AppProps) {
     const [queryClient] = useState(
         () =>
