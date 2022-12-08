@@ -276,7 +276,8 @@ const Join = () => {
                     );
 
                     dispatch(fetchProfile());
-                    router.push(PATHS.JOIN_COMPLETED, {
+                    router.push({
+                        pathname: PATHS.JOIN_COMPLETED,
                         query: {
                             memberId: email,
                         },

@@ -20,6 +20,7 @@ import rootReducer, { InitialRootState } from 'state/reducers';
 const persistConfig = {
     key: 'root',
     storage,
+    timeout: 500,
 };
 
 export const persistedReducer = persistReducer(

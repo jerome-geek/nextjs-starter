@@ -25,13 +25,11 @@
     "withdrawalTitle": "회원 탈퇴",
     "withdrawalDescription": "개인정보, 쿠폰 정보, 적립금, 등록하신 제품 정보는 회원 탈퇴시 삭제되며, 다시 복구하실 수 없습니다.<br />추후에 동일 계정으로 재가입하셔도 쿠폰과 적립금 내역은 복구되지 않습니다.",
     "withdrawalMobileDescription": "<p>개인정보, 쿠폰 정보, 적립금, 등록하신 제품 정보는<br />회원 탈퇴시 삭제되며, 다시 복구하실 수 없습니다.</p><p>추후에 동일 계정으로 재가입하셔도<br />쿠폰과 적립금 내역은 복구되지 않습니다.</p>",
-    "withdrawalReasonList": [
-        "다른 아이디 변경",
-        "원하는 콘텐츠 부족",
-        "원하는 상품 없음",
-        "개인정보 노출 우려",
-        "서비스 불만족"
-    ],
+    "changeId": "다른 아이디 변경",
+    "lackOfContent": "원하는 콘텐츠 부족",
+    "noProduct": "원하는 상품 없음",
+    "personalInformation": "개인정보 노출 우려",
+    "dissatisfactionService": "서비스 불만족",
     "etc": "기타",
     "withdrawalReason": "탈퇴 사유",
     "snsDescription": "간편 가입 사용자는 SNS 인증이 필요합니다.",
