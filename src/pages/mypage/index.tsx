@@ -4,22 +4,22 @@ import Link from 'next/link';
 import dayjs from 'dayjs';
 import styled from 'styled-components';
 
-// import GenuineRegisterModal from 'components/Modal/GenuineRegisterModal';
+import GenuineRegisterModal from 'components/Modal/GenuineRegisterModal';
 import LayoutResponsive from 'components/Layout/LayoutResponsive';
-// import OrderSummarySection from 'components/Order/OrderSummarySection';
-// import ShoppingSummary from 'components/Order/ShoppingSummary';
-// import CouponSummary from 'components/MyPage/CouponSummary';
-// import MyGoodsSummary from 'components/MyPage/MyGoodsSummary';
+import OrderSummarySection from 'components/Order/OrderSummarySection';
+import ShoppingSummary from 'components/Order/ShoppingSummary';
+import CouponSummary from 'components/MyPage/CouponSummary';
+import MyGoodsSummary from 'components/MyPage/MyGoodsSummary';
 import { accumulation } from 'api/manage';
 import { myOrder } from 'api/order';
 import PATHS from 'const/paths';
 import { useMember } from 'hooks';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
+import AngleRightGray from 'assets/icons/angle_right_gray.svg';
 import useCouponData from 'hooks/queries/useCouponData';
 import { isLogin } from 'utils/users';
 import useOrderSummary from 'hooks/queries/useOrderSummary';
 import { useAccumulationData } from 'hooks/queries';
+import { PROFILE_ACCUMULATION, PROFILE_ORDER_SUMMARY } from 'const/queryKeys';
 
 const MyPageSummaryContainer = styled.div`
     display: flex;
@@ -53,45 +53,15 @@ const Index = () => {
     const [isGenuineRegisterModal, setIsGenuineRegisterModal] = useState(false);
 
     const { member, onLogOutClick } = useMember();
-    console.log('🚀 ~ file: index.tsx ~ line 56 ~ Index ~ member', member);
 
-    // const { data: accumulationData } = useQuery(
-    //     ['accumulation', member?.memberId],
-    //     async () =>
-    //         await accumulation.getAccumulationSummary({
-    //             startYmd: dayjs()
-    //                 .subtract(1, 'year')
-    //                 .format('YYYY-MM-DD HH:mm:ss'),
-    //             endYmd: dayjs().format('YYYY-MM-DD HH:mm:ss'),
-    //         }),
-    //     {
-    //         enabled: isLogin(),
-    //         select: ({ data }) => data,
-    //     },
-    // );
-
-    // const { data: orderSummary } = useQuery(
-    //     [PROFILE_ORDER_SUMMARY, member?.memberId],
-    //     async () =>
-    //         await myOrder.getOrderOptionStatus({
-    //             startYmd: dayjs().subtract(1, 'year').format('YYYY-MM-DD'),
-    //             endYmd: dayjs().format('YYYY-MM-DD'),
-    //         }),
-    //     {
-    //         enabled: isLogin(),
-    //         select: ({ data }) => data,
-    //     },
-    // );
     const { data: accumulationData } = useAccumulationData({
         memberNo: member?.memberNo,
     });
-    console.log(
-        '🚀 ~ file: index.tsx ~ line 88 ~ Index ~ accumulationData',
-        accumulationData,
-    );
+
     const { data: orderSummary } = useOrderSummary({
         memberNo: member?.memberNo,
     });
+
     const { data: couponData } = useCouponData({ memberNo: member?.memberNo });
 
     return (
@@ -128,15 +98,15 @@ const Index = () => {
                     </p>
 
                     <StyledLink href={{ pathname: PATHS.MY_INFO }}>
-                        정보수정 <FontAwesomeIcon icon={faAngleRight} />
+                        정보수정 <AngleRightGray />
                     </StyledLink>
                 </MyPageSummaryContainer>
 
-                {/* {accumulationData && couponData.data && (
+                {accumulationData && couponData && (
                     <ShoppingSummary
                         myGoodsCount={0}
                         totalAvailableAmt={accumulationData.totalAvailableAmt}
-                        couponCount={couponData.totalCount}
+                        couponCount={couponData?.totalCount}
                     />
                 )}
 
@@ -145,20 +115,18 @@ const Index = () => {
                         orderSummary={orderSummary}
                         to={PATHS.MY_ORDER_LIST}
                     />
-                )} */}
+                )}
             </MyPageSection>
 
             <MyPageSection>
-                {/* <MyGoodsSummary
+                <MyGoodsSummary
                     setIsGenuineRegisterModal={setIsGenuineRegisterModal}
                     myGoods={[1, 2, 3, 4]}
-                /> */}
+                />
             </MyPageSection>
 
             <MyPageSection style={{ border: 0 }}>
-                {/* {couponData && (
-                    <CouponSummary coupons={couponData.items} />
-                )} */}
+                {couponData && <CouponSummary coupons={couponData?.items} />}
             </MyPageSection>
         </MyPageContainer>
     );

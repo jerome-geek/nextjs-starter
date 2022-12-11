@@ -1,10 +1,11 @@
-import { Link, useLocation, useNavigate, Navigate } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import dayjs from 'dayjs';
 import { useWindowSize } from 'usehooks-ts';
 import styled from 'styled-components';
 import { head } from '@fxts/core';
 import { AxiosResponse, AxiosError } from 'axios';
+import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 import FlexContainer from 'components/shared/FlexContainer';
 import PrimaryButton from 'components/Button/PrimaryButton';
@@ -15,8 +16,8 @@ import { coupon } from 'api/promotion';
 import { Coupon } from 'models/promotion';
 import PATHS from 'const/paths';
 import { MY_COUPON_LIST } from 'const/queryKeys';
-import { ReactComponent as JoinLogo } from 'assets/logo/joinLogo.svg';
-import { ReactComponent as HeaderLogo } from 'assets/logo/headerLogo.svg';
+import JoinLogo from 'assets/logo/joinLogo.svg';
+import HeaderLogo from 'assets/logo/headerLogo.svg';
 import BREAKPOINTS from 'const/breakpoints';
 import { isLogin } from 'utils/users';
 
@@ -115,7 +116,7 @@ const CouponDescription = styled.span`
 `;
 
 const JoinCompleted = () => {
-    const navigate = useNavigate();
+    const router = useRouter();
 
     const { width } = useWindowSize();
     const { member } = useMember();
@@ -130,10 +131,12 @@ const JoinCompleted = () => {
     });
 
     // react-router-dom v6부터는 generic 지원X
-    const location = useLocation() as { state: { memberId: string } };
+    const { memberId } = router.query as unknown as {
+        memberId: string;
+    };
 
-    if (!isLogin() || !location?.state?.memberId) {
-        return <Navigate to={PATHS.LOGIN} replace />;
+    if (!isLogin() || memberId) {
+        router.push(PATHS.LOGIN);
     }
 
     return (
@@ -181,7 +184,7 @@ const JoinCompleted = () => {
                     </div>
                 )}
 
-                <MoveButton onClick={() => navigate(PATHS.MAIN)}>
+                <MoveButton onClick={() => router.push(PATHS.MAIN)}>
                     쇼핑하러 가기
                 </MoveButton>
 
@@ -195,7 +198,7 @@ const JoinCompleted = () => {
                         정품 등록하러 가기
                     </MoveButton>
                     {width > BREAKPOINTS.MEDIUM && (
-                        <StyledLink to={PATHS.MAIN}>
+                        <StyledLink href={PATHS.MAIN}>
                             메인페이지 바로가기
                         </StyledLink>
                     )}

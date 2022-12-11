@@ -120,7 +120,8 @@ const JoinAgreement = () => {
     const checkIsAllChecked = () => {
         if (isAllChecked) {
             // 약관 key값만 넘길 수 있도록!
-            router.push(PATHS.JOIN, {
+            router.push({
+                pathname: PATHS.JOIN,
                 query: {
                     joinTermsAgreements: pipe(
                         agreements,
