@@ -11,6 +11,16 @@ module.exports = withBundleAnalyzer({
         domains: ['rlyfaazj0.toastcdn.net'],
     },
 
+    async rewrites() {
+        return [
+            {
+                source: '/golf-course/search-realm.ajax.php/:path*',
+                destination:
+                    'https://voicecaddie.co.kr/golf-course/search-realm.ajax.php/:path*',
+            },
+        ];
+    },
+
     env: {
         BASE_URL: process.env.BASE_URL,
     },

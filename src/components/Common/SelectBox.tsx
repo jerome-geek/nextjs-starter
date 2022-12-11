@@ -114,6 +114,8 @@ const SelectBox = forwardRef(
     },
 );
 
+SelectBox.displayName = 'SelectBox';
+
 export default SelectBox as <
     Option,
     IsMulti extends boolean = false,
@@ -121,5 +123,3 @@ export default SelectBox as <
 >(
     props: Props<Option, IsMulti, Group>,
 ) => JSX.Element;
-
-SelectBox.displayName = 'SelectBox';

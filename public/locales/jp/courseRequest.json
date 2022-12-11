@@ -1,0 +1,68 @@
+{
+    "title": "코스 요청하기",
+    "subTitle": "보이스캐디 코스 요청",
+    "description": "보이스캐디 코스 요청하기",
+    "myRequestResult": "나의 요청 결과",
+    "detail": "자세히",
+    "guideMessage": "필요한 골프장 정보를 입력해주세요.<br/>신속하게 반영될 수 있도록 노력하겠습니다.",
+    "requesterInformation": {
+        "title": "요청자 정보",
+        "email": {
+            "title": "이메일",
+            "placeholder": "이메일을 입력해주세요.",
+            "alert": "이메일을 입력해주세요."
+        },
+        "name": {
+            "title": "이름",
+            "placeholder": "이름을 입력해주세요.",
+            "alert": "이름을 입력해주세요."
+        }
+    },
+    "requestCourseInformation": {
+        "title": "골프장 요청 정보",
+        "country": {
+            "title": "국가",
+            "placeholder": "국가를 선택해주세요.",
+            "alert": "국가를 선택해주세요."
+        },
+        "region": {
+            "title": "지역"
+        },
+        "courseName": {
+            "title": "골프장명"
+        },
+        "requestCategory": {
+            "title": "요청항목",
+            "value": [
+                "골프장 정보 추가 및 업데이트",
+                "고도 정보 추가 및 업데이트",
+                "그린뷰 정보 추가 및 업데이트",
+                "코스뷰 정보 추가 및 업데이트"
+            ],
+            "placeholder": "요청 항목을 선택해주세요.",
+            "alert": "요청 항목을 선택해주세요."
+        },
+        "requestDetail": {
+            "title": "세부내용",
+            "placeholder": "세부내용을 입력해주세요.",
+            "alert": "세부내용을 입력해주세요."
+        },
+        "product": {
+            "title": "사용제품",
+            "placeholder": "사용제품을 입력해주세요.",
+            "alert": "사용제품을 입력해주세요."
+        },
+        "imageFile": {
+            "scoreCardTitle": "스코어카드 이미지",
+            "courseLayoutTitle": "코스 레이아웃 이미지",
+            "placeholder": "파일을 선택해주세요",
+            "selectFile": "파일 선택"
+        }
+    },
+    "etc": {
+        "allowTermAlert": "약관에 동의해주세요.",
+        "agreePrivacyTerm": "개인정보수집에 대한 내용을 읽었으며, 동의합니다.",
+        "detailTerm": "자세히보기",
+        "requestGolfCourse": "골프 코스 요청하기"
+    }
+}
