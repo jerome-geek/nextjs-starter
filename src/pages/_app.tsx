@@ -18,6 +18,7 @@ import { lightTheme } from 'styles/theme';
 declare global {
     interface Window {
         Kakao: any;
+        kakao: any;
     }
 }
 

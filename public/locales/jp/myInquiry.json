@@ -1,0 +1,21 @@
+{
+    "title": "문의 내역",
+    "subTitle": "1:1 문의하기",
+    "mobileTitle": "1:1 문의",
+    "description": "보이스캐디 1:1 문의 내역",
+    "orderNo": "주문 번호",
+    "modify": "수정하기",
+    "delete": "삭제하기",
+    "inquiry": "문의",
+    "answer": "답변",
+    "noAnswer": "등록된 답변이 없습니다.",
+    "deletedAlert": "삭제가 완료 됐습니다.",
+    "toDeleteAlert": "삭제하시겠습니까?",
+    "noInquiry": "등록된 문의가 없습니다.",
+    "inquiryStatus": {
+        "ISSUED": "답변대기",
+        "ASKED": "답변대기",
+        "IN_PROGRESS": "답변 진행중",
+        "ANSWERED": "답변완료"
+    }
+}
