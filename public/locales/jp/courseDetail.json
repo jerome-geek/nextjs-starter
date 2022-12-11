@@ -1,0 +1,31 @@
+{
+    "title": "지원 골프 코스",
+    "description": "지원 골프 코스 상세 페이지",
+    "inputDetailAddress": "상세 지역을 입력하세요.",
+    "courseAddress": {
+        "country": "국가",
+        "state": "시/도/주",
+        "city": "도시"
+    },
+    "searchPlaceholder": "나라/지역/상세검색",
+    "search": "검색",
+    "courseRequestMessage": "원하는 코스가 없으면 요청해 보세요.",
+    "courseRequest": "코스 요청하기",
+    "courseCategory": {
+        "product": "제품",
+        "country": "국가",
+        "state": "시/도/주",
+        "city": "도시",
+        "golfCourse": "골프장",
+        "course": "코스",
+        "green": "그린<br/>앞/뒤",
+        "altitude": "고도",
+        "courseView": "코스뷰",
+        "greenView": "그린뷰",
+        "finleyLoad": "그린뷰<br/>핀리로드",
+        "hazard": "벙커<br/>해저드",
+        "shape": "형태",
+        "contour": "등고"
+    },
+    "noSearchMessage": "검색 결과가 없습니다."
+}
