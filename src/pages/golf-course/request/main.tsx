@@ -1,37 +1,28 @@
-import { useMemo, useState } from 'react';
+import { ChangeEvent, useMemo, useState } from 'react';
 import { GetServerSideProps } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'react-i18next';
+import { useMutation } from 'react-query';
 import styled from 'styled-components';
 import { StylesConfig } from 'react-select';
 import { useForm } from 'react-hook-form';
 import { ErrorMessage } from '@hookform/error-message';
 import { useWindowSize } from 'usehooks-ts';
-import { head } from '@fxts/core';
+import { every, head, pipe } from '@fxts/core';
 
 import SelectBox, { customStyle } from 'components/Common/SelectBox';
 import StyledErrorMessage from 'components/Common/StyledErrorMessage';
+import Loader from 'components/shared/Loader';
 // import PersonalInformationModal from 'components/Modal/PersonalInformationModal';
 import GolfCourseRequestLayout from 'components/Layout/GolfCourseRequestLayout';
 import Checked from 'assets/icons/checkbox_square_checked.svg';
 import UnChecked from 'assets/icons/checkbox_square_unchecked.svg';
-import { countries } from 'const/country';
+import { courseRequestCountries } from 'const/country';
 import { isDesktop, isMobile } from 'utils/styles/responsive';
 import media from 'utils/styles/media';
+import upload from 'api/etc/upload';
 import { useMember } from 'hooks';
-
-interface CourseRequestBody {
-    userEmail: string;
-    userName: string;
-    country: string;
-    region?: string;
-    golfCourseName?: string;
-    requestCategory: string;
-    requestDetail: string;
-    productName: string;
-    scoreImageUrl?: string;
-    courseLayoutImageUrl?: string;
-}
+import golfCourse, { AdminCourseRequestBody } from 'api/etc/golfCourse';
 
 const CourseRequestContainer = styled.section`
     width: 100%;
@@ -239,12 +230,20 @@ const CourseRequestButton = styled.button`
     }
 `;
 
+interface AddNameBlob extends Blob {
+    name?: string;
+    lastModified?: number;
+    lastModifiedDate?: string;
+}
+
+interface imagesType {
+    scoreCard?: AddNameBlob;
+    courseLayout?: AddNameBlob;
+}
+
 const Request = () => {
     const [isAgreeTerm, setIsAgreeTerm] = useState(false);
-    const [imageName, setImageName] = useState<{
-        scoreImageName?: string;
-        courseLayoutImageName?: string;
-    }>({});
+    const [uploadFile, setUploadFile] = useState<imagesType>();
     const [isPersonalInformationModal, setIsPersonalInformationModal] =
         useState(false);
 
@@ -258,10 +257,10 @@ const Request = () => {
         handleSubmit,
         setValue,
         formState: { errors },
-    } = useForm<CourseRequestBody>({
+    } = useForm<AdminCourseRequestBody & { productName: string }>({
         defaultValues: {
-            userEmail: member?.email,
-            userName: member?.memberName,
+            memberEmail: member?.email,
+            memberName: member?.memberName,
         },
     });
 
@@ -306,13 +305,189 @@ const Request = () => {
         };
     }, [width]);
 
-    const onSubmit = handleSubmit(() => {
-        if (!isAgreeTerm) {
-            alert(courseRequest('etc.allowTermAlert'));
-            return;
+    const uploadFileHandler = (
+        e: ChangeEvent<HTMLInputElement>,
+        uploadFor: string,
+    ) => {
+        const MAX_FILE_SIZE = 10 * 1024 * 1024;
+
+        const fileList = e.target.files;
+
+        if (fileList) {
+            const isSmallerThanMaxSize = pipe(
+                fileList,
+                every((a) => a.size < MAX_FILE_SIZE),
+            );
+
+            if (!isSmallerThanMaxSize) {
+                alert('10MB가 넘는 파일은 등록할 수 없습니다.');
+                return;
+            }
+            if (uploadFor === 'courseLayout') {
+                setUploadFile((prev) => ({
+                    ...prev,
+                    courseLayout: fileList[0],
+                }));
+            }
+            if (uploadFor === 'scoreCard') {
+                setUploadFile((prev) => ({
+                    ...prev,
+                    scoreCard: fileList[0],
+                }));
+            }
         }
-        // TODO 요청완료시 alert “골프장코스요청이완료되었습니다.신속하게반영될수있도록노력하겠습니다."
-    });
+    };
+
+    const courseRequestMutate = useMutation(
+        async ({
+            shopbyMemberNo,
+            memberEmail,
+            memberName,
+            countryCode,
+            region,
+            fieldName,
+            requestTitle,
+            requestDetail,
+            shopbyProductNo,
+            scoreCardImgUrl,
+            courseLayoutImgUrl,
+            consentFl,
+        }: AdminCourseRequestBody) =>
+            await golfCourse.courseRequest({
+                shopbyMemberNo,
+                memberEmail,
+                memberName,
+                countryCode,
+                region,
+                fieldName,
+                requestTitle,
+                requestDetail,
+                shopbyProductNo: 10101,
+                scoreCardImgUrl,
+                courseLayoutImgUrl,
+                consentFl,
+            }),
+        {
+            onSuccess: () => alert('코스 요청이 완료됐습니다.'),
+            onError: () =>
+                alert('코스 요청에 실패하였습니다! 다시 시도해주세요!'),
+        },
+    );
+
+    const onSubmit = handleSubmit(
+        async ({
+            memberEmail,
+            memberName,
+            countryCode,
+            region,
+            fieldName,
+            requestTitle,
+            requestDetail,
+            shopbyProductNo,
+        }) => {
+            if (!isAgreeTerm) {
+                alert(courseRequest('etc.allowTermAlert'));
+                return;
+            }
+
+            try {
+                if (uploadFile?.scoreCard && uploadFile?.courseLayout) {
+                    const scoreCardData = () => {
+                        const data = new FormData();
+                        data.append('file', uploadFile.scoreCard as Blob);
+                        return data;
+                    };
+                    const courseLayoutData = () => {
+                        const data = new FormData();
+                        data.append('file', uploadFile.courseLayout as Blob);
+                        return data;
+                    };
+                    await Promise.all([
+                        upload.uploadImageForAdmin(scoreCardData()),
+                        upload.uploadImageForAdmin(courseLayoutData()),
+                    ]).then((res) => {
+                        courseRequestMutate.mutate({
+                            shopbyMemberNo: member?.memberNo!,
+                            memberEmail,
+                            memberName,
+                            countryCode,
+                            region,
+                            fieldName,
+                            requestTitle,
+                            requestDetail,
+                            shopbyProductNo: 10101,
+                            consentFl: 'Y',
+                            scoreCardImgUrl: res[0].data.filePath,
+                            courseLayoutImgUrl: res[1].data.filePath,
+                        });
+                    });
+                } else if (uploadFile?.scoreCard && !uploadFile?.courseLayout) {
+                    const scoreCardData = () => {
+                        const data = new FormData();
+                        data.append('file', uploadFile.scoreCard as Blob);
+                        return data;
+                    };
+                    await upload
+                        .uploadImageForAdmin(scoreCardData())
+                        .then((res) => {
+                            courseRequestMutate.mutate({
+                                shopbyMemberNo: member?.memberNo!,
+                                memberEmail,
+                                memberName,
+                                countryCode,
+                                region,
+                                fieldName,
+                                requestTitle,
+                                requestDetail,
+                                shopbyProductNo: 10101,
+                                consentFl: 'Y',
+                                scoreCardImgUrl: res.data.filePath,
+                            });
+                        });
+                } else if (!uploadFile?.scoreCard && uploadFile?.courseLayout) {
+                    const courseLayoutData = () => {
+                        const data = new FormData();
+                        data.append('file', uploadFile?.courseLayout as Blob);
+                        return data;
+                    };
+                    await upload
+                        .uploadImageForAdmin(courseLayoutData())
+                        .then((res) => {
+                            courseRequestMutate.mutate({
+                                shopbyMemberNo: member?.memberNo!,
+                                memberEmail,
+                                memberName,
+                                countryCode,
+                                region,
+                                fieldName,
+                                requestTitle,
+                                requestDetail,
+                                shopbyProductNo: 10101,
+                                consentFl: 'Y',
+                                scoreCardImgUrl: res.data.filePath,
+                            });
+                        });
+                } else {
+                    courseRequestMutate.mutate({
+                        shopbyMemberNo: member?.memberNo!,
+                        memberEmail,
+                        memberName,
+                        countryCode,
+                        region,
+                        fieldName,
+                        requestTitle,
+                        requestDetail,
+                        shopbyProductNo: 10101,
+                        consentFl: 'Y',
+                    });
+                }
+            } catch {
+                alert('코스요청에 실패했습니다!');
+            }
+
+            // TODO 요청완료시 alert “골프장코스요청이완료되었습니다.신속하게반영될수있도록노력하겠습니다."
+        },
+    );
 
     const requestCategoryTranslation = courseRequest(
         'requestCourseInformation.requestCategory.value',
@@ -320,7 +495,7 @@ const Request = () => {
             returnObjects: true,
         },
     ) as unknown as Array<string>;
-
+    console.log(uploadFile);
     return (
         <>
             {/* {isPersonalInformationModal && (
@@ -369,7 +544,7 @@ const Request = () => {
                                             'requesterInformation.email.placeholder',
                                         )!
                                     }
-                                    {...register('userEmail', {
+                                    {...register('memberEmail', {
                                         required: {
                                             value: true,
                                             message: courseRequest(
@@ -380,7 +555,7 @@ const Request = () => {
                                 />
                                 <ErrorMessage
                                     errors={errors}
-                                    name='userEmail'
+                                    name='memberEmail'
                                     render={({ message }) => (
                                         <StyledErrorMessage>
                                             {message}
@@ -402,7 +577,7 @@ const Request = () => {
                                             'requesterInformation.name.placeholder',
                                         )!
                                     }
-                                    {...register('userName', {
+                                    {...register('memberName', {
                                         required: {
                                             value: true,
                                             message: courseRequest(
@@ -413,7 +588,7 @@ const Request = () => {
                                 />
                                 <ErrorMessage
                                     errors={errors}
-                                    name='userName'
+                                    name='memberName'
                                     render={({ message }) => (
                                         <StyledErrorMessage>
                                             {message}
@@ -447,13 +622,8 @@ const Request = () => {
                                             false
                                         >),
                                     }}
-                                    options={countries.map((country) => {
-                                        return {
-                                            label: country,
-                                            value: country,
-                                        };
-                                    })}
-                                    {...register('country', {
+                                    options={courseRequestCountries}
+                                    {...register('countryCode', {
                                         required: {
                                             value: true,
                                             message: courseRequest(
@@ -462,7 +632,7 @@ const Request = () => {
                                         },
                                     })}
                                     onChange={(e) => {
-                                        setValue('country', e?.value);
+                                        setValue('countryCode', e?.value);
                                     }}
                                     placeholder={courseRequest(
                                         'requestCourseInformation.country.placeholder',
@@ -470,7 +640,7 @@ const Request = () => {
                                 />
                                 <ErrorMessage
                                     errors={errors}
-                                    name='country'
+                                    name='countryCode'
                                     render={({ message }) => (
                                         <StyledErrorMessage>
                                             {message}
@@ -497,7 +667,7 @@ const Request = () => {
                                 </CourseRequestInputTitle>
                                 <CourseRequestInput
                                     type={'text'}
-                                    {...register('golfCourseName')}
+                                    {...register('fieldName')}
                                 />
                             </CourseRequestInputContainer>
                             <CourseRequestInputContainer>
@@ -526,7 +696,7 @@ const Request = () => {
                                             };
                                         },
                                     )}
-                                    {...register('requestCategory', {
+                                    {...register('requestTitle', {
                                         required: {
                                             value: true,
                                             message: courseRequest(
@@ -535,7 +705,7 @@ const Request = () => {
                                         },
                                     })}
                                     onChange={(e) => {
-                                        setValue('requestCategory', e?.value);
+                                        setValue('requestTitle', e?.value);
                                     }}
                                     placeholder={courseRequest(
                                         'requestCourseInformation.requestCategory.placeholder',
@@ -543,7 +713,7 @@ const Request = () => {
                                 />
                                 <ErrorMessage
                                     errors={errors}
-                                    name='requestCategory'
+                                    name='requestTitle'
                                     render={({ message }) => (
                                         <StyledErrorMessage>
                                             {message}
@@ -627,25 +797,21 @@ const Request = () => {
                                         }
                                         type='text'
                                         disabled
-                                        value={imageName.scoreImageName}
+                                        value={
+                                            uploadFile?.scoreCard?.name || ''
+                                        }
                                     />
                                     <label htmlFor='scoreCard'>
                                         <input
                                             type='file'
                                             id='scoreCard'
-                                            accept='.bmp, .tif, .tiff, .miff, .gif, .jpe, .jpeg, .jpg, .jps, .pjpeg, .jng, .mng, .png'
+                                            accept='.bmp, .tif, .tiff, .miff, .jpe, .jpeg, .jpg, .jps, .pjpeg, .jng, .mng, .png'
                                             onChange={(e) => {
                                                 if (e.target.files) {
-                                                    setImageName((prev) => {
-                                                        return {
-                                                            ...prev,
-                                                            scoreImageName:
-                                                                head(
-                                                                    e.target
-                                                                        .files!,
-                                                                )?.name,
-                                                        };
-                                                    });
+                                                    uploadFileHandler(
+                                                        e,
+                                                        'scoreCard',
+                                                    );
                                                 }
                                             }}
                                         />
@@ -670,7 +836,9 @@ const Request = () => {
                                         }
                                         type='text'
                                         disabled
-                                        value={imageName.courseLayoutImageName}
+                                        value={
+                                            uploadFile?.courseLayout?.name || ''
+                                        }
                                     />
                                     <label htmlFor='courseLayout'>
                                         <input
@@ -679,16 +847,10 @@ const Request = () => {
                                             accept='.bmp, .tif, .tiff, .miff, .gif, .jpe, .jpeg, .jpg, .jps, .pjpeg, .jng, .mng, .png'
                                             onChange={(e) => {
                                                 if (e.target.files) {
-                                                    setImageName((prev) => {
-                                                        return {
-                                                            ...prev,
-                                                            courseLayoutImageName:
-                                                                head(
-                                                                    e.target
-                                                                        .files!,
-                                                                )?.name,
-                                                        };
-                                                    });
+                                                    uploadFileHandler(
+                                                        e,
+                                                        'courseLayout',
+                                                    );
                                                 }
                                             }}
                                         />
@@ -719,9 +881,13 @@ const Request = () => {
                             {courseRequest('etc.detailTerm')}
                         </button>
                     </AgreeTermContainer>
-                    <CourseRequestButton onClick={() => onSubmit()}>
-                        {courseRequest('etc.requestGolfCourse')}
-                    </CourseRequestButton>
+                    {courseRequestMutate.isLoading ? (
+                        <Loader />
+                    ) : (
+                        <CourseRequestButton onClick={() => onSubmit()}>
+                            {courseRequest('etc.requestGolfCourse')}
+                        </CourseRequestButton>
+                    )}
                 </CourseRequestContainer>
             </GolfCourseRequestLayout>
         </>
