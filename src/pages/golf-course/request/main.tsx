@@ -495,7 +495,7 @@ const Request = () => {
             returnObjects: true,
         },
     ) as unknown as Array<string>;
-    console.log(uploadFile);
+
     return (
         <>
             {/* {isPersonalInformationModal && (
