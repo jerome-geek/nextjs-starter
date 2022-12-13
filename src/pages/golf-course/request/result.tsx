@@ -1,13 +1,19 @@
+import React from 'react';
+import { shallowEqual } from 'react-redux';
 import styled from 'styled-components';
 import { useWindowSize } from 'usehooks-ts';
 import { useTranslation } from 'react-i18next';
-import { GetServerSideProps, GetStaticProps } from 'next';
+import { GetServerSideProps } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import dayjs from 'dayjs';
 
 import GolfCourseRequestLayout from 'components/Layout/GolfCourseRequestLayout';
 import media from 'utils/styles/media';
 import { isMobile } from 'utils/styles/responsive';
+import { useQuery } from 'react-query';
+import golfCourse from 'api/etc/golfCourse';
+import { useTypedSelector } from 'state/store';
+import { COURSE_REQUEST_STATUS } from 'models';
 
 const NoticeContainer = styled.div`
     border-top: 2px solid #222943;
@@ -60,13 +66,13 @@ const RequestStatus = styled.p<{ status: string }>`
 
     color: ${(props) => {
         switch (props.status) {
-            case 'wait':
+            case 'W':
                 return '#999';
-            case 'cancel':
+            case 'C':
                 return `${props.theme.primary}`;
-            case 'done':
+            case 'D':
                 return '#508CFE';
-            case 'progress':
+            case 'P':
                 return '#191919';
         }
     }};
@@ -119,43 +125,42 @@ const NoticeListItem = styled.li`
     }
 `;
 
+const statusText = (status: COURSE_REQUEST_STATUS) => {
+    switch (status) {
+        case COURSE_REQUEST_STATUS.W:
+            return '대기';
+        case COURSE_REQUEST_STATUS.C:
+            return `취소`;
+        case COURSE_REQUEST_STATUS.D:
+            return '완료';
+        case COURSE_REQUEST_STATUS.P:
+            return '중복 취소';
+    }
+};
+
 const Result = () => {
     const { width } = useWindowSize();
     const { t: courseList } = useTranslation('courseList');
 
-    const requestList = [
-        {
-            status: 'wait',
-            statusLabel: '대기',
-            title: '강원도 골프장',
-            regDt: '2022-01-17',
-        },
-        {
-            status: 'cancel',
-            statusLabel: '취소',
-            title: '강원도 골프장',
-            regDt: '2022-01-17',
-        },
-        {
-            status: 'done',
-            statusLabel: '완료',
-            title: '강원도 골프장',
-            regDt: '2022-01-17',
-        },
-        {
-            status: 'progress',
-            statusLabel: '진행중',
-            title: '강원도 골프장',
-            regDt: '2022-01-17',
-        },
-    ];
+    const { member } = useTypedSelector(
+        ({ member }) => ({
+            member: member.data,
+        }),
+        shallowEqual,
+    );
+
+    const requestListQuery = useQuery(
+        ['golfCourseList', { memberNo: member?.memberNo }],
+        () => golfCourse.getCourseRequestList(member?.memberNo!),
+        { enabled: !!member?.memberNo, select: (res) => res.data },
+    );
 
     const noticeContentList = courseList('notice.content', {
         returnObjects: true,
     }) as Array<string>;
 
     return (
-        <GolfCourseRequestLayout>
+        <GolfCourseRequestLayout courseRequestList={requestListQuery.data}>
             <section>
                 <RequestList>
                     {!isMobile(width) && (
@@ -166,18 +171,19 @@ const Result = () => {
                         </RequestListHeaderItem>
                     )}
 
-                    {requestList.length > 0 ? (
-                        requestList.map((request, index) => {
+                    {requestListQuery.data &&
+                    requestListQuery.data.length > 0 ? (
+                        requestListQuery.data.map((request) => {
                             return (
-                                <>
+                                <React.Fragment key={request.sno}>
                                     {!isMobile(width) ? (
-                                        <RequestListItem key={index}>
+                                        <RequestListItem>
                                             <RequestStatus
                                                 status={request.status}
                                             >
-                                                {request.statusLabel}
+                                                {statusText(request.status)}
                                             </RequestStatus>
-                                            <p>{request.title}</p>
+                                            <p>{request.requestTitle}</p>
                                             <RequestDt>
                                                 {dayjs(request.regDt).format(
                                                     'YY-MM-DD',
@@ -185,11 +191,11 @@ const Result = () => {
                                             </RequestDt>
                                         </RequestListItem>
                                     ) : (
-                                        <RequestListItem key={index}>
+                                        <RequestListItem>
                                             <RequestStatus
                                                 status={request.status}
                                             >
-                                                {request.statusLabel}
+                                                {statusText(request.status)}
                                             </RequestStatus>
                                             <div
                                                 style={{
@@ -201,7 +207,9 @@ const Result = () => {
                                                     color: '#191919',
                                                 }}
                                             >
-                                                <span>{request.title}</span>
+                                                <span>
+                                                    {request.requestTitle}
+                                                </span>
                                                 <span
                                                     style={{ fontSize: '10px' }}
                                                 >
@@ -212,7 +220,7 @@ const Result = () => {
                                             </div>
                                         </RequestListItem>
                                     )}
-                                </>
+                                </React.Fragment>
                             );
                         })
                     ) : (
@@ -353,7 +361,7 @@ const Result = () => {
 
 export default Result;
 
-export const getStaticProps: GetStaticProps = async (context) => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
     return {
         props: {
             //TODO dehydratedState: dehydrate(queryClient), 에러 수정

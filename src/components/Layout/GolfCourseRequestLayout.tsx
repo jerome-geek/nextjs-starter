@@ -9,6 +9,9 @@ import ArrowRight from 'assets/icons/arrow_right_small.svg';
 import media from 'utils/styles/media';
 import { flex } from 'utils/styles/mixin';
 import { isMobile } from 'utils/styles/responsive';
+import { GolfCourseRequestList } from 'api/etc/golfCourse';
+import { map, pipe, reduce, take, toArray } from '@fxts/core';
+import { COURSE_REQUEST_STATUS } from 'models';
 
 const StyledLayout = styled(LayoutResponsive)`
     text-align: left;
@@ -93,7 +96,18 @@ const Count = styled.p`
     }
 `;
 
-const Layout = ({ children }: PropsWithChildren) => {
+interface GolfCourseRequestLayoutProps extends PropsWithChildren {
+    courseRequestList?: GolfCourseRequestList[];
+}
+
+interface RequestStatusCount {
+    [COURSE_REQUEST_STATUS: string]: number;
+}
+
+const Layout = ({
+    children,
+    courseRequestList,
+}: GolfCourseRequestLayoutProps) => {
     const { width } = useWindowSize();
     const router = useRouter();
 
@@ -102,6 +116,30 @@ const Layout = ({ children }: PropsWithChildren) => {
             !isMobile(width) &&
             router.pathname !== '/golf-course/request/result',
         [width, router.pathname],
+    );
+
+    const requestStatusCount: RequestStatusCount = useMemo(
+        () =>
+            courseRequestList
+                ? courseRequestList.reduce(
+                      (acc: RequestStatusCount, cur) => {
+                          acc[cur.status] += 1;
+                          return acc;
+                      },
+                      {
+                          W: 0,
+                          C: 0,
+                          D: 0,
+                          P: 0,
+                      },
+                  )
+                : {
+                      W: 0,
+                      C: 0,
+                      D: 0,
+                      P: 0,
+                  },
+        [courseRequestList],
     );
 
     return (
@@ -123,19 +161,20 @@ const Layout = ({ children }: PropsWithChildren) => {
                 <ProcessListItem>
                     <Status>대기</Status>
                     <Count>
-                        2 <sub>건</sub>
+                        {requestStatusCount.W} <sub>건</sub>
                     </Count>
                 </ProcessListItem>
                 <ProcessListItem>
                     <Status>취소</Status>
                     <Count>
-                        1 <sub>건</sub>
+                        {requestStatusCount.P + requestStatusCount.C}{' '}
+                        <sub>건</sub>
                     </Count>
                 </ProcessListItem>
                 <ProcessListItem>
                     <Status>완료</Status>
                     <Count>
-                        1 <sub>건</sub>
+                        {requestStatusCount.D} <sub>건</sub>
                     </Count>
                 </ProcessListItem>
             </ProcessList>

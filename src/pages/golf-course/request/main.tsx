@@ -2,7 +2,7 @@ import { ChangeEvent, useMemo, useState } from 'react';
 import { GetServerSideProps } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'react-i18next';
-import { useMutation } from 'react-query';
+import { useMutation, useQuery } from 'react-query';
 import styled from 'styled-components';
 import { StylesConfig } from 'react-select';
 import { useForm } from 'react-hook-form';
@@ -305,6 +305,12 @@ const Request = () => {
         };
     }, [width]);
 
+    const requestListQuery = useQuery(
+        ['golfCourseList', { memberNo: member?.memberNo }],
+        () => golfCourse.getCourseRequestList(member?.memberNo!),
+        { enabled: !!member?.memberNo, select: (res) => res.data },
+    );
+
     const uploadFileHandler = (
         e: ChangeEvent<HTMLInputElement>,
         uploadFor: string,
@@ -515,7 +521,7 @@ const Request = () => {
                     url: courseRequest('title'),
                 }}
             /> */}
-            <GolfCourseRequestLayout>
+            <GolfCourseRequestLayout courseRequestList={requestListQuery.data}>
                 <CourseRequestContainer>
                     <CourseRequestTitle>
                         {courseRequest('title')}
