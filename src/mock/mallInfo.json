@@ -1,0 +1,900 @@
+{
+    "mall": {
+        "mallName": "voicecaddie",
+        "url": { "pc": "", "mobile": "", "android": "", "ios": "" },
+        "grades": [
+            {
+                "used": true,
+                "label": "기본등급",
+                "description": "",
+                "evaluationCondition": {
+                    "minimumCount": 0,
+                    "minimumPayment": 0
+                },
+                "reserveAutoSupplying": {
+                    "used": false,
+                    "amount": 0,
+                    "type": "NONE"
+                },
+                "reserveBenefit": { "used": false, "reserveRate": 0.0 },
+                "coupons": [],
+                "pointRate": 0,
+                "gradeDescription": "",
+                "accumulationRate": 0.0,
+                "minOrderCnt": 0,
+                "minOrderAmt": 0
+            },
+            {
+                "used": true,
+                "label": "캐디등급",
+                "description": "",
+                "evaluationCondition": {
+                    "minimumCount": 0,
+                    "minimumPayment": 0
+                },
+                "reserveAutoSupplying": {
+                    "used": false,
+                    "amount": 0,
+                    "type": "NONE"
+                },
+                "reserveBenefit": { "used": false, "reserveRate": 0.0 },
+                "coupons": [],
+                "pointRate": 0,
+                "gradeDescription": "",
+                "accumulationRate": 0.0,
+                "minOrderCnt": 0,
+                "minOrderAmt": 0
+            },
+            {
+                "used": true,
+                "label": "임직원등급",
+                "description": "",
+                "evaluationCondition": {
+                    "minimumCount": 0,
+                    "minimumPayment": 0
+                },
+                "reserveAutoSupplying": {
+                    "used": false,
+                    "amount": 0,
+                    "type": "NONE"
+                },
+                "reserveBenefit": { "used": false, "reserveRate": 0.0 },
+                "coupons": [],
+                "pointRate": 0,
+                "gradeDescription": "",
+                "accumulationRate": 0.0,
+                "minOrderCnt": 0,
+                "minOrderAmt": 0
+            }
+        ],
+        "serviceCenter": {
+            "email": "help@vcinc.co.kr",
+            "phoneNo": "02-538-3100"
+        },
+        "countryCode": "KR",
+        "introRedirection": { "pc": "NONE", "mobile": "NONE" },
+        "godoSno": null,
+        "createdDateTime": "2022-02-10 12:11:35",
+        "escrowLogo": null
+    },
+    "inquiryType": [
+        {
+            "inquiryTypeNo": 7837,
+            "inquiryTypeName": "상품",
+            "inquiryTypeDescription": "상품 관련 문의"
+        },
+        {
+            "inquiryTypeNo": 7838,
+            "inquiryTypeName": "반품",
+            "inquiryTypeDescription": "반품 관련 문의"
+        },
+        {
+            "inquiryTypeNo": 7839,
+            "inquiryTypeName": "배송",
+            "inquiryTypeDescription": "배송 관련 문의"
+        },
+        {
+            "inquiryTypeNo": 7840,
+            "inquiryTypeName": "교환",
+            "inquiryTypeDescription": "교환 관련 문의"
+        },
+        {
+            "inquiryTypeNo": 7841,
+            "inquiryTypeName": "취소",
+            "inquiryTypeDescription": "취소 관련 문의"
+        },
+        {
+            "inquiryTypeNo": 7842,
+            "inquiryTypeName": "환불",
+            "inquiryTypeDescription": "환불 관련 문의"
+        },
+        {
+            "inquiryTypeNo": 7843,
+            "inquiryTypeName": "기타",
+            "inquiryTypeDescription": "기타 문의 사항"
+        }
+    ],
+    "productInquiryType": [
+        { "label": "상품", "value": "PRODUCT" },
+        { "label": "배송", "value": "DELIVERY" },
+        { "label": "취소", "value": "CANCEL" },
+        { "label": "반품", "value": "RETURN" },
+        { "label": "교환", "value": "EXCHANGE" },
+        { "label": "환불", "value": "REFUND" },
+        { "label": "기타", "value": "OTHER" }
+    ],
+    "productReviewReportType": [
+        { "label": "저작권 침해 및 기타사유", "value": "COPYRIGHT" },
+        { "label": "욕설 또는 비방", "value": "SLANDER" }
+    ],
+    "claimReasonType": [
+        { "label": "단순변심(색상,사이즈)", "value": "CHANGE_MIND" },
+        { "label": "상품불량/파손", "value": "DEFECTIVE_PRODUCT" },
+        { "label": "배송누락/오배송", "value": "WRONG_DELIVERY" },
+        { "label": "재고부족(시스템)", "value": "OUT_OF_STOCK_SYSTEM" },
+        { "label": "입금전취소", "value": "CANCEL_BEFORE_PAY" },
+        { "label": "상품상세 정보와 다름", "value": "WRONG_PRODUCT_DETAIL" },
+        { "label": "판매자 배송 지연", "value": "DELAY_DELIVERY" },
+        { "label": "상품 품절/재고 없음", "value": "OUT_OF_STOCK" },
+        { "label": "기타(판매자 귀책)", "value": "OTHERS_SELLER" },
+        { "label": "기타(구매자 귀책)", "value": "OTHERS_BUYER" }
+    ],
+    "claimStatusType": [
+        { "label": "취소완료[환불없음]", "value": "CANCEL_NO_REFUND" },
+        { "label": "취소신청[승인대기]", "value": "CANCEL_REQUEST" },
+        {
+            "label": "취소처리[환불보류]",
+            "value": "CANCEL_PROC_REQUEST_REFUND"
+        },
+        {
+            "label": "취소처리[환불대기]",
+            "value": "CANCEL_PROC_WAITING_REFUND"
+        },
+        { "label": "취소완료[환불완료]", "value": "CANCEL_DONE" },
+        { "label": "반품신청[승인대기]", "value": "RETURN_REQUEST" },
+        { "label": "반품신청[철회대기]", "value": "RETURN_REJECT_REQUEST" },
+        {
+            "label": "반품처리[수거진행]",
+            "value": "RETURN_PROC_BEFORE_RECEIVE"
+        },
+        {
+            "label": "반품처리[환불보류]",
+            "value": "RETURN_PROC_REQUEST_REFUND"
+        },
+        {
+            "label": "반품처리[환불대기]",
+            "value": "RETURN_PROC_WAITING_REFUND"
+        },
+        { "label": "반품완료[환불완료]", "value": "RETURN_DONE" },
+        {
+            "label": "교환처리[조정요청]",
+            "value": "RETURN_REFUND_AMT_ADJUST_REQUESTED"
+        },
+        { "label": "교환신청[승인대기]", "value": "EXCHANGE_REQUEST" },
+        { "label": "교환처리[철회대기]", "value": "EXCHANGE_REJECT_REQUEST" },
+        {
+            "label": "교환처리[수거진행]",
+            "value": "EXCHANGE_PROC_BEFORE_RECEIVE"
+        },
+        { "label": "교환처리[결제대기]", "value": "EXCHANGE_PROC_REQUEST_PAY" },
+        {
+            "label": "교환처리[환불보류]",
+            "value": "EXCHANGE_PROC_REQUEST_REFUND"
+        },
+        { "label": "교환처리[처리대기]", "value": "EXCHANGE_PROC_WAITING" },
+        { "label": "교환완료", "value": "EXCHANGE_DONE" },
+        {
+            "label": "교환처리[입금처리대기]",
+            "value": "EXCHANGE_PROC_WAITING_PAY"
+        },
+        {
+            "label": "교환처리[환불대기]",
+            "value": "EXCHANGE_PROC_WAITING_REFUND"
+        },
+        { "label": "교환완료[결제완료]", "value": "EXCHANGE_DONE_PAY_DONE" },
+        { "label": "교환완료[환불완료]", "value": "EXCHANGE_DONE_REFUND_DONE" }
+    ],
+    "orderStatusType": [
+        { "label": "입금대기", "value": "DEPOSIT_WAIT" },
+        { "label": "결제완료", "value": "PAY_DONE" },
+        { "label": "상품준비중", "value": "PRODUCT_PREPARE" },
+        { "label": "배송준비중", "value": "DELIVERY_PREPARE" },
+        { "label": "배송중", "value": "DELIVERY_ING" },
+        { "label": "배송완료", "value": "DELIVERY_DONE" },
+        { "label": "구매확정", "value": "BUY_CONFIRM" },
+        { "label": "취소완료", "value": "CANCEL_DONE" },
+        { "label": "반품완료", "value": "RETURN_DONE" },
+        { "label": "교환완료", "value": "EXCHANGE_DONE" },
+        { "label": "결제대기", "value": "PAY_WAIT" },
+        { "label": "결제포기", "value": "PAY_CANCEL" },
+        { "label": "결제실패", "value": "PAY_FAIL" },
+        { "label": "삭제", "value": "DELETE" },
+        { "label": "교환대기", "value": "EXCHANGE_WAIT" },
+        { "label": "환불완료", "value": "REFUND_DONE" }
+    ],
+    "bankType": [
+        {
+            "value": "ANONYMOUS",
+            "name": "미확인은행",
+            "code": "000",
+            "kcpCode": ""
+        },
+        { "value": "KDB", "name": "산업은행", "code": "002", "kcpCode": "02" },
+        { "value": "IBK", "name": "기업은행", "code": "003", "kcpCode": "03" },
+        { "value": "KB", "name": "국민은행", "code": "004", "kcpCode": "04" },
+        { "value": "KEB", "name": "외환은행", "code": "005", "kcpCode": "05" },
+        { "value": "SUHYUP", "name": "수협", "code": "007", "kcpCode": "07" },
+        {
+            "value": "KEXIM",
+            "name": "수출입은행",
+            "code": "008",
+            "kcpCode": "08"
+        },
+        { "value": "NH", "name": "NH농협은행", "code": "011", "kcpCode": "11" },
+        {
+            "value": "NHLOCAL",
+            "name": "지역농축협",
+            "code": "012",
+            "kcpCode": "12"
+        },
+        {
+            "value": "WOORI",
+            "name": "우리은행",
+            "code": "020",
+            "kcpCode": "20"
+        },
+        { "value": "SC", "name": "SC제일은행", "code": "023", "kcpCode": "23" },
+        {
+            "value": "CITY",
+            "name": "한국씨티은행",
+            "code": "027",
+            "kcpCode": "27"
+        },
+        {
+            "value": "DAEGU",
+            "name": "대구은행",
+            "code": "031",
+            "kcpCode": "31"
+        },
+        {
+            "value": "PUSAN",
+            "name": "부산은행",
+            "code": "032",
+            "kcpCode": "32"
+        },
+        {
+            "value": "GWANGJU",
+            "name": "광주은행",
+            "code": "034",
+            "kcpCode": "34"
+        },
+        { "value": "JEJU", "name": "제주은행", "code": "035", "kcpCode": "35" },
+        {
+            "value": "JEONBUK",
+            "name": "전북은행",
+            "code": "037",
+            "kcpCode": "37"
+        },
+        {
+            "value": "GYEONGNAM",
+            "name": "경남은행",
+            "code": "039",
+            "kcpCode": "39"
+        },
+        {
+            "value": "KFCC",
+            "name": "새마을금고",
+            "code": "045",
+            "kcpCode": "45"
+        },
+        { "value": "CU", "name": "신협", "code": "048", "kcpCode": "48" },
+        {
+            "value": "SANGHO",
+            "name": "상호저축은행",
+            "code": "050",
+            "kcpCode": ""
+        },
+        { "value": "HSBC", "name": "HSBC은행", "code": "054", "kcpCode": "54" },
+        {
+            "value": "DEUTSCHE",
+            "name": "도이치은행",
+            "code": "055",
+            "kcpCode": ""
+        },
+        {
+            "value": "NFCF",
+            "name": "산림조합중앙회",
+            "code": "064",
+            "kcpCode": "64"
+        },
+        { "value": "EPOST", "name": "우체국", "code": "071", "kcpCode": "71" },
+        {
+            "value": "KEBHANA",
+            "name": "KEB하나은행",
+            "code": "081",
+            "kcpCode": "81"
+        },
+        {
+            "value": "SHINHAN",
+            "name": "신한은행",
+            "code": "088",
+            "kcpCode": "26"
+        },
+        {
+            "value": "KBANK",
+            "name": "케이뱅크",
+            "code": "089",
+            "kcpCode": "89"
+        },
+        {
+            "value": "KAKAO",
+            "name": "카카오뱅크",
+            "code": "090",
+            "kcpCode": "90"
+        },
+        { "value": "TOSS", "name": "토스뱅크", "code": "092", "kcpCode": "92" },
+        {
+            "value": "YUANTA",
+            "name": "유안타증권",
+            "code": "209",
+            "kcpCode": "209"
+        },
+        { "value": "KBSEC", "name": "KB증권", "code": "218", "kcpCode": "218" },
+        {
+            "value": "MIRAE",
+            "name": "미래에셋증권",
+            "code": "230",
+            "kcpCode": "238"
+        },
+        {
+            "value": "MIRAEDAEWOO",
+            "name": "미래에셋대우증권",
+            "code": "238",
+            "kcpCode": "238"
+        },
+        {
+            "value": "SAMSUNG",
+            "name": "삼성증권",
+            "code": "240",
+            "kcpCode": "240"
+        },
+        {
+            "value": "HANKOOK",
+            "name": "한국투자증권",
+            "code": "243",
+            "kcpCode": "243"
+        },
+        {
+            "value": "NH_INVEST",
+            "name": "NH투자증권",
+            "code": "247",
+            "kcpCode": "247"
+        },
+        {
+            "value": "KYOBO",
+            "name": "교보증권",
+            "code": "261",
+            "kcpCode": "261"
+        },
+        {
+            "value": "HI_INVEST",
+            "name": "하이투자증권",
+            "code": "262",
+            "kcpCode": "262"
+        },
+        {
+            "value": "HMC_INVEST",
+            "name": "HMC투자증권",
+            "code": "263",
+            "kcpCode": "263"
+        },
+        {
+            "value": "KIWOOM",
+            "name": "키움증권",
+            "code": "264",
+            "kcpCode": "264"
+        },
+        {
+            "value": "EBEST",
+            "name": "이베스트투자증권",
+            "code": "265",
+            "kcpCode": "265"
+        },
+        { "value": "SK", "name": "SK증권", "code": "266", "kcpCode": "266" },
+        {
+            "value": "DAISHIN",
+            "name": "대신증권",
+            "code": "267",
+            "kcpCode": "267"
+        },
+        {
+            "value": "SOLOMON_INVEST",
+            "name": "솔로몬증권",
+            "code": "268",
+            "kcpCode": "268"
+        },
+        {
+            "value": "HANHWA",
+            "name": "한화투자증권",
+            "code": "269",
+            "kcpCode": "269"
+        },
+        {
+            "value": "HANA_INVEST",
+            "name": "하나금융투자",
+            "code": "270",
+            "kcpCode": "270"
+        },
+        {
+            "value": "SHINHAN_INVEST",
+            "name": "신한금융투자",
+            "code": "278",
+            "kcpCode": "278"
+        },
+        {
+            "value": "DONGBU",
+            "name": "DB금융투자",
+            "code": "279",
+            "kcpCode": "279"
+        },
+        {
+            "value": "EUGENE_INVEST",
+            "name": "유진투자증권",
+            "code": "280",
+            "kcpCode": "280"
+        },
+        {
+            "value": "MERITZ_COMPREHENSIVE",
+            "name": "메리츠종합금융증권",
+            "code": "287",
+            "kcpCode": "287"
+        },
+        {
+            "value": "BOOKOOK",
+            "name": "부국증권",
+            "code": "290",
+            "kcpCode": "290"
+        },
+        {
+            "value": "SHINYOUNG",
+            "name": "신영증권",
+            "code": "291",
+            "kcpCode": "291"
+        },
+        {
+            "value": "CAPE",
+            "name": "케이프투자증권",
+            "code": "292",
+            "kcpCode": "292"
+        },
+        {
+            "value": "MIZUHO",
+            "name": "미즈호은행",
+            "code": "901",
+            "kcpCode": ""
+        },
+        { "value": "UFJ", "name": "UFJ은행", "code": "905", "kcpCode": "" },
+        {
+            "value": "SMBC",
+            "name": "미쓰이스미토모은행",
+            "code": "909",
+            "kcpCode": ""
+        },
+        {
+            "value": "RESONA",
+            "name": "리소나은행",
+            "code": "910",
+            "kcpCode": ""
+        }
+    ],
+    "categories": {
+        "multiLevelCategories": [
+            {
+                "categoryNo": 103725,
+                "label": "서비스",
+                "depth": 1,
+                "icon": "",
+                "content": "",
+                "children": []
+            },
+            {
+                "categoryNo": 103723,
+                "label": "거리 측정기",
+                "depth": 1,
+                "icon": "//rlyfaazj0.toastcdn.net/20220818/151126.149513000/구성 요소 126 – 1.png",
+                "content": "<p><img src=\"//rlyfaazj0.toastcdn.net/20220919/173349.297945000/스크린샷 2022-09-19 오후 5.33.19.png\"><br></p>",
+                "children": [
+                    {
+                        "categoryNo": 103729,
+                        "label": "디지털 야디지북",
+                        "depth": 2,
+                        "icon": "",
+                        "content": "",
+                        "children": []
+                    },
+                    {
+                        "categoryNo": 103726,
+                        "label": "시계형",
+                        "depth": 2,
+                        "icon": "//rlyfaazj0.toastcdn.net/20220818/151143.127747000/구성 요소 127 – 1.png",
+                        "content": "",
+                        "children": []
+                    },
+                    {
+                        "categoryNo": 103727,
+                        "label": "레이저형",
+                        "depth": 2,
+                        "icon": "//rlyfaazj0.toastcdn.net/20220818/151158.238416000/구성 요소 128 – 1.png",
+                        "content": "",
+                        "children": []
+                    },
+                    {
+                        "categoryNo": 103728,
+                        "label": "음성형",
+                        "depth": 2,
+                        "icon": "//rlyfaazj0.toastcdn.net/20220818/151207.263527000/구성 요소 87 – 3.png",
+                        "content": "",
+                        "children": []
+                    }
+                ]
+            },
+            {
+                "categoryNo": 103724,
+                "label": "론치 모니터",
+                "depth": 1,
+                "icon": "//rlyfaazj0.toastcdn.net/20220818/151218.365050000/구성 요소 130 – 1.png",
+                "content": "",
+                "children": []
+            }
+        ],
+        "flatCategories": [
+            {
+                "depth1CategoryNo": 103724,
+                "depth1Label": "론치 모니터",
+                "depth1Icon": "//rlyfaazj0.toastcdn.net/20220818/151218.365050000/구성 요소 130 – 1.png",
+                "depth1Content": "",
+                "depth1DisplayOrder": 4,
+                "depth2CategoryNo": 0,
+                "depth2Label": "",
+                "depth2Icon": null,
+                "depth2Content": null,
+                "depth2DisplayOrder": 0,
+                "depth3CategoryNo": 0,
+                "depth3Label": "",
+                "depth3Icon": null,
+                "depth3Content": null,
+                "depth3DisplayOrder": 0,
+                "depth4CategoryNo": 0,
+                "depth4Label": "",
+                "depth4Icon": null,
+                "depth4Content": null,
+                "depth4DisplayOrder": 0,
+                "depth5CategoryNo": 103724,
+                "depth5Label": "론치 모니터",
+                "depth5Icon": "//rlyfaazj0.toastcdn.net/20220818/151218.365050000/구성 요소 130 – 1.png",
+                "depth5Content": "",
+                "depth5DisplayOrder": 4,
+                "fullCategoryName": "론치 모니터"
+            },
+            {
+                "depth1CategoryNo": 103725,
+                "depth1Label": "서비스",
+                "depth1Icon": null,
+                "depth1Content": "",
+                "depth1DisplayOrder": 2,
+                "depth2CategoryNo": 0,
+                "depth2Label": "",
+                "depth2Icon": null,
+                "depth2Content": null,
+                "depth2DisplayOrder": 0,
+                "depth3CategoryNo": 0,
+                "depth3Label": "",
+                "depth3Icon": null,
+                "depth3Content": null,
+                "depth3DisplayOrder": 0,
+                "depth4CategoryNo": 0,
+                "depth4Label": "",
+                "depth4Icon": null,
+                "depth4Content": null,
+                "depth4DisplayOrder": 0,
+                "depth5CategoryNo": 103725,
+                "depth5Label": "서비스",
+                "depth5Icon": null,
+                "depth5Content": "",
+                "depth5DisplayOrder": 2,
+                "fullCategoryName": "서비스"
+            },
+            {
+                "depth1CategoryNo": 103723,
+                "depth1Label": "거리 측정기",
+                "depth1Icon": "//rlyfaazj0.toastcdn.net/20220818/151126.149513000/구성 요소 126 – 1.png",
+                "depth1Content": "<p><img src=\"//rlyfaazj0.toastcdn.net/20220919/173349.297945000/스크린샷 2022-09-19 오후 5.33.19.png\"><br></p>",
+                "depth1DisplayOrder": 3,
+                "depth2CategoryNo": 103726,
+                "depth2Label": "시계형",
+                "depth2Icon": "//rlyfaazj0.toastcdn.net/20220818/151143.127747000/구성 요소 127 – 1.png",
+                "depth2Content": "",
+                "depth2DisplayOrder": 2,
+                "depth3CategoryNo": 0,
+                "depth3Label": "",
+                "depth3Icon": null,
+                "depth3Content": null,
+                "depth3DisplayOrder": 0,
+                "depth4CategoryNo": 0,
+                "depth4Label": "",
+                "depth4Icon": null,
+                "depth4Content": null,
+                "depth4DisplayOrder": 0,
+                "depth5CategoryNo": 103726,
+                "depth5Label": "시계형",
+                "depth5Icon": "//rlyfaazj0.toastcdn.net/20220818/151143.127747000/구성 요소 127 – 1.png",
+                "depth5Content": "",
+                "depth5DisplayOrder": 2,
+                "fullCategoryName": "거리 측정기>시계형"
+            },
+            {
+                "depth1CategoryNo": 103723,
+                "depth1Label": "거리 측정기",
+                "depth1Icon": "//rlyfaazj0.toastcdn.net/20220818/151126.149513000/구성 요소 126 – 1.png",
+                "depth1Content": "<p><img src=\"//rlyfaazj0.toastcdn.net/20220919/173349.297945000/스크린샷 2022-09-19 오후 5.33.19.png\"><br></p>",
+                "depth1DisplayOrder": 3,
+                "depth2CategoryNo": 103727,
+                "depth2Label": "레이저형",
+                "depth2Icon": "//rlyfaazj0.toastcdn.net/20220818/151158.238416000/구성 요소 128 – 1.png",
+                "depth2Content": "",
+                "depth2DisplayOrder": 3,
+                "depth3CategoryNo": 0,
+                "depth3Label": "",
+                "depth3Icon": null,
+                "depth3Content": null,
+                "depth3DisplayOrder": 0,
+                "depth4CategoryNo": 0,
+                "depth4Label": "",
+                "depth4Icon": null,
+                "depth4Content": null,
+                "depth4DisplayOrder": 0,
+                "depth5CategoryNo": 103727,
+                "depth5Label": "레이저형",
+                "depth5Icon": "//rlyfaazj0.toastcdn.net/20220818/151158.238416000/구성 요소 128 – 1.png",
+                "depth5Content": "",
+                "depth5DisplayOrder": 3,
+                "fullCategoryName": "거리 측정기>레이저형"
+            },
+            {
+                "depth1CategoryNo": 103723,
+                "depth1Label": "거리 측정기",
+                "depth1Icon": "//rlyfaazj0.toastcdn.net/20220818/151126.149513000/구성 요소 126 – 1.png",
+                "depth1Content": "<p><img src=\"//rlyfaazj0.toastcdn.net/20220919/173349.297945000/스크린샷 2022-09-19 오후 5.33.19.png\"><br></p>",
+                "depth1DisplayOrder": 3,
+                "depth2CategoryNo": 103728,
+                "depth2Label": "음성형",
+                "depth2Icon": "//rlyfaazj0.toastcdn.net/20220818/151207.263527000/구성 요소 87 – 3.png",
+                "depth2Content": "",
+                "depth2DisplayOrder": 4,
+                "depth3CategoryNo": 0,
+                "depth3Label": "",
+                "depth3Icon": null,
+                "depth3Content": null,
+                "depth3DisplayOrder": 0,
+                "depth4CategoryNo": 0,
+                "depth4Label": "",
+                "depth4Icon": null,
+                "depth4Content": null,
+                "depth4DisplayOrder": 0,
+                "depth5CategoryNo": 103728,
+                "depth5Label": "음성형",
+                "depth5Icon": "//rlyfaazj0.toastcdn.net/20220818/151207.263527000/구성 요소 87 – 3.png",
+                "depth5Content": "",
+                "depth5DisplayOrder": 4,
+                "fullCategoryName": "거리 측정기>음성형"
+            },
+            {
+                "depth1CategoryNo": 103723,
+                "depth1Label": "거리 측정기",
+                "depth1Icon": "//rlyfaazj0.toastcdn.net/20220818/151126.149513000/구성 요소 126 – 1.png",
+                "depth1Content": "<p><img src=\"//rlyfaazj0.toastcdn.net/20220919/173349.297945000/스크린샷 2022-09-19 오후 5.33.19.png\"><br></p>",
+                "depth1DisplayOrder": 3,
+                "depth2CategoryNo": 103729,
+                "depth2Label": "디지털 야디지북",
+                "depth2Icon": null,
+                "depth2Content": "",
+                "depth2DisplayOrder": 1,
+                "depth3CategoryNo": 0,
+                "depth3Label": "",
+                "depth3Icon": null,
+                "depth3Content": null,
+                "depth3DisplayOrder": 0,
+                "depth4CategoryNo": 0,
+                "depth4Label": "",
+                "depth4Icon": null,
+                "depth4Content": null,
+                "depth4DisplayOrder": 0,
+                "depth5CategoryNo": 103729,
+                "depth5Label": "디지털 야디지북",
+                "depth5Icon": null,
+                "depth5Content": "",
+                "depth5DisplayOrder": 1,
+                "fullCategoryName": "거리 측정기>디지털 야디지북"
+            }
+        ]
+    },
+    "boardsCategories": [
+        {
+            "boardNo": 8064,
+            "boardId": null,
+            "boardName": "공지사항",
+            "categories": [
+                { "categoryNo": 1411, "label": "뉴스&이벤트" },
+                { "categoryNo": 1412, "label": "펌웨어 업데이트" },
+                { "categoryNo": 1501, "label": "전자 공고" },
+                { "categoryNo": 1502, "label": "KC 인증 식별" }
+            ],
+            "memberWrite": true,
+            "guestWrite": true,
+            "secreted": true,
+            "replied": true,
+            "used": true,
+            "thumbnailUsed": true,
+            "categoryUsed": true,
+            "displayType": "LIST",
+            "imageDisplayType": "NOT_USED",
+            "attachmentUsed": true
+        },
+        {
+            "boardNo": 9061,
+            "boardId": null,
+            "boardName": "FAQ",
+            "categories": [
+                { "categoryNo": 1495, "label": "1" },
+                { "categoryNo": 1496, "label": "2" },
+                { "categoryNo": 1497, "label": "3" }
+            ],
+            "memberWrite": false,
+            "guestWrite": false,
+            "secreted": false,
+            "replied": false,
+            "used": true,
+            "thumbnailUsed": false,
+            "categoryUsed": true,
+            "displayType": "LIST",
+            "imageDisplayType": "NOT_USED",
+            "attachmentUsed": true
+        },
+        {
+            "boardNo": 9216,
+            "boardId": null,
+            "boardName": "자주 묻는 질문",
+            "categories": [
+                { "categoryNo": 1503, "label": "시계형" },
+                { "categoryNo": 1504, "label": "레이저형" },
+                { "categoryNo": 1505, "label": "음성형" },
+                { "categoryNo": 1506, "label": "론치 모니터" },
+                { "categoryNo": 1507, "label": "디지털 야디지북" },
+                { "categoryNo": 1508, "label": "서비스" }
+            ],
+            "memberWrite": false,
+            "guestWrite": false,
+            "secreted": false,
+            "replied": false,
+            "used": true,
+            "thumbnailUsed": false,
+            "categoryUsed": true,
+            "displayType": "LIST",
+            "imageDisplayType": "NOT_USED",
+            "attachmentUsed": true
+        },
+        {
+            "boardNo": 9235,
+            "boardId": null,
+            "boardName": "매뉴얼",
+            "categories": [
+                { "categoryNo": 1509, "label": "디지털 야디지북" },
+                { "categoryNo": 1510, "label": "시계형" },
+                { "categoryNo": 1511, "label": "레이저형" },
+                { "categoryNo": 1512, "label": "음성형" }
+            ],
+            "memberWrite": false,
+            "guestWrite": false,
+            "secreted": false,
+            "replied": false,
+            "used": true,
+            "thumbnailUsed": true,
+            "categoryUsed": true,
+            "displayType": "LIST",
+            "imageDisplayType": "NOT_USED",
+            "attachmentUsed": true
+        }
+    ],
+    "serviceBasicInfo": {
+        "companyName": "(주)브이씨",
+        "businessRegistrationNo": "2098139552",
+        "representativeName": "김준오",
+        "businessType": "제조업, 서비스업 등",
+        "businessCondition": "반도체, 통신판매 등",
+        "representPhoneNo": "02-538-3100",
+        "representEmail": "jh@vcinc.co.kr",
+        "faxNo": "025383104",
+        "onlineMarketingBusinessDeclarationNo": "2019-서울강남-03541호",
+        "zipCd": "06246",
+        "address": "서울특별시 강남구 논현로 417",
+        "addressDetail": "(역삼동, 화원빌딩)",
+        "jibunAddress": "서울특별시 강남구 역삼동 746-1",
+        "jibunAddressDetail": "3F, 4F (주)브이씨",
+        "privacyManagerName": "이상윤",
+        "privacyManagerPhoneNo": "02-538-3100",
+        "plan": "PREMIUM"
+    },
+    "bankAccountInfo": {
+        "bankName": "기업은행",
+        "bankAccount": "28505191304013",
+        "bankDepositorName": "(주)브이씨"
+    },
+    "bankAccountInfos": [
+        {
+            "bankName": "기업은행",
+            "bankAccount": "28505191304013",
+            "bankDepositorName": "(주)브이씨"
+        }
+    ],
+    "memberJoinConfig": {
+        "memberId": "NOT_USED",
+        "birthday": "NOT_USED",
+        "password": "NOT_USED",
+        "sex": "NOT_USED",
+        "memberName": "NOT_USED",
+        "email": "NOT_USED",
+        "nickname": "NOT_USED",
+        "address": "NOT_USED",
+        "phoneNo": "NOT_USED",
+        "mobileNo": "NOT_USED",
+        "nationality": "NOT_USED"
+    },
+    "accumulationConfig": {
+        "useProductAccumulation": false,
+        "useMemberAccumulation": false,
+        "accumulationRate": 5,
+        "accumulationName": "VC 적립금",
+        "accumulationDisplayFormatType": "FIRST_FIXED_RATE",
+        "accumulationUnit": "point",
+        "accumulationGivePoint": "AFTER_A_WEEK",
+        "accumulationValidPeriod": 12,
+        "useExpireNotification": true,
+        "expireNotificationPoint": 30,
+        "productAccumulationBasisType": "DISCOUNTED_PROMOTION_PRICE",
+        "useSignUpAccumulation": false,
+        "signUpAccumulation": 0,
+        "useReviewsAccumulation": false,
+        "reviewsAccumulationDetail": {
+            "reviewsLength": 0,
+            "reviewsAccumulation": 0,
+            "photoReviewsLength": 0,
+            "photoReviewsAccumulation": 0
+        },
+        "limitMinProductPrice": false,
+        "accumulationUseMinProductPrice": 0,
+        "limitMinPrice": false,
+        "accumulationUseMinPrice": 0,
+        "limitMaxRate": false,
+        "accumulationUseMaxRate": 0,
+        "excludingReservePayAccumulation": false,
+        "excludingReservePayCoupon": false,
+        "adminMemo": ""
+    },
+    "cartConfig": {
+        "cartEquivalentOptionUnitType": "QUANTITY",
+        "storageMaxQuantity": 100,
+        "storagePeriod": 7,
+        "storagePeriodNoLimit": true
+    },
+    "mallJoinConfig": {
+        "authenticationType": "NOT_USED",
+        "authenticationTimeType": "NONE"
+    },
+    "openIdJoinConfig": {
+        "authenticationType": "NOT_USED",
+        "authenticationTimeType": "NONE",
+        "providers": []
+    },
+    "externalServiceConfig": null,
+    "termsConfig": { "fairLogoUrl": null, "fairLogoUsed": false }
+}
