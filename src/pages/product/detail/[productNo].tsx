@@ -261,7 +261,7 @@ const ProductDetail = () => {
 
     const { t: productDetail } = useTranslation('productDetail');
 
-    const productNo = router.query['productNo'] as string;
+    const { productNo } = router.query as { productNo: string };
 
     // useEffect(() => {
     //     if (isNil(productNo)) {
