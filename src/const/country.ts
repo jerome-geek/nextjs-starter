@@ -123,3 +123,19 @@ export const countries = [
     '호주',
     '홍콩',
 ];
+
+export const courseRequestCountries = [
+    { label: '대한민국', value: 'KOR' },
+    { label: '중국/대만', value: 'CNH' },
+    { label: '일본', value: 'JPN' },
+    { label: '동남아시아', value: 'SEA' },
+    { label: '중동', value: 'MDE' },
+    { label: '중앙아시아/인도', value: 'CTA' },
+    { label: '미국', value: 'USA' },
+    { label: '캐나다', value: 'CAN' },
+    { label: '유럽', value: 'EUR' },
+    { label: '호주/뉴질랜드', value: 'OCE' },
+    { label: '중남미', value: 'LAM' },
+    { label: '아프리카', value: 'AFR' },
+    { label: '기타', value: 'OTH' },
+];

@@ -1373,6 +1373,17 @@ enum VC_CONFIRM_METHOD_CD {
     SMS = '02',
 }
 
+enum COURSE_REQUEST_STATUS {
+    // 대기: 현재 관리자 확인 및 대기중인 상태(wait)
+    W = 'W',
+    // 취소: 별도 처리되지 않고 취소된 상태(cancel)
+    C = 'C',
+    // 중복 취소: 중복된 골프장임으로 안내 메일 발송(duplicated)
+    P = 'P',
+    // 완료: 요청 완료, 업데이트 예정일자가 메일로 발송됨(done)
+    D = 'D',
+}
+
 export {
     REQUIRED_TYPE,
     IMAGE_DISPLAY_TYPE,
@@ -1461,4 +1472,5 @@ export {
     VC_CLAUSE_CD,
     VC_MEMBER_STATUS_CD,
     VC_CONFIRM_METHOD_CD,
+    COURSE_REQUEST_STATUS,
 };
