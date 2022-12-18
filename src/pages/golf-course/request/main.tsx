@@ -23,6 +23,7 @@ import media from 'utils/styles/media';
 import upload from 'api/etc/upload';
 import { useMember } from 'hooks';
 import golfCourse, { AdminCourseRequestBody } from 'api/etc/golfCourse';
+import { NextSeo } from 'next-seo';
 
 const CourseRequestContainer = styled.section`
     width: 100%;
@@ -524,11 +525,11 @@ const Request = () => {
             <GolfCourseRequestLayout courseRequestList={requestListQuery.data}>
                 <CourseRequestContainer>
                     <CourseRequestTitle>
-                        {courseRequest('title')}
+                        {vc('golfCourse.request.title')}
                     </CourseRequestTitle>
                     <CourseRequestDescription
                         dangerouslySetInnerHTML={{
-                            __html: courseRequest('guideMessage'),
+                            __html: vc('golfCourse.request.subscription'),
                         }}
                     />
                     <CourseRequestForm>

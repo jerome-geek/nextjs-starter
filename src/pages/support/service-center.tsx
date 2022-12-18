@@ -2,15 +2,15 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import { useWindowSize } from 'usehooks-ts';
 import { useTranslation } from 'react-i18next';
+import { NextSeo } from 'next-seo';
+import { GetStaticProps } from 'next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 import KaKaoMap from 'components/shared/Map';
-import ShareIcon from 'assets/icons/share.svg';
 import ShareModal from 'components/Modal/ShareModal';
 import media from 'utils/styles/media';
 import { isMobile } from 'utils/styles/responsive';
-import { NextSeo } from 'next-seo';
-import { GetServerSideProps, GetStaticProps } from 'next';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import ShareIcon from 'assets/icons/share.svg';
 
 const ServiceCenterContainer = styled.main`
     margin: 116px auto 154px;
@@ -268,18 +268,16 @@ const ServiceCenter = () => {
                 )}
                 <ASNoticeContainer>
                     <ASNoticeContent>
-                        <SubTitle>A/S유의사항</SubTitle>
+                        <SubTitle>{serviceCenter('ASNotice')}</SubTitle>
                         <ASNoticeListContainer>
-                            {noticeList.map((text) => {
-                                return (
-                                    <ASNoticeList key={text}>
-                                        <ASNoticeText>
-                                            <span>&#183;</span>
-                                            {text}
-                                        </ASNoticeText>
-                                    </ASNoticeList>
-                                );
-                            })}
+                            {noticeList.map((text) => (
+                                <ASNoticeList key={text}>
+                                    <ASNoticeText>
+                                        <span>&#183;</span>
+                                        {text}
+                                    </ASNoticeText>
+                                </ASNoticeList>
+                            ))}
                         </ASNoticeListContainer>
                     </ASNoticeContent>
                     <ASNoticeContent>
@@ -287,16 +285,14 @@ const ServiceCenter = () => {
                             {serviceCenter('CheckListBeforeAs')}
                         </SubTitle>
                         <ASNoticeListContainer>
-                            {checkList.map((text, index) => {
-                                return (
-                                    <ASNoticeList key={text + index}>
-                                        <ASNoticeText>
-                                            <span>&#183;</span>
-                                            {text}
-                                        </ASNoticeText>
-                                    </ASNoticeList>
-                                );
-                            })}
+                            {checkList.map((text, index) => (
+                                <ASNoticeList key={text + index}>
+                                    <ASNoticeText>
+                                        <span>&#183;</span>
+                                        {text}
+                                    </ASNoticeText>
+                                </ASNoticeList>
+                            ))}
                         </ASNoticeListContainer>
                     </ASNoticeContent>
                 </ASNoticeContainer>

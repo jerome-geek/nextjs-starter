@@ -36,6 +36,7 @@
         "result": {
             "title": "나의 요청 결과",
             "subTitle": "코스 요청하기",
+            "detail": "자세히",
             "description": "보이스캐디 나의 코스 요청결과",
             "categoryStatus": "상태",
             "categoryTitle": "제목",
@@ -55,5 +56,7 @@
                 ]
             }
         }
-    }
+    },
+    "faq": "자주 묻는 질문",
+    "searchPlaceholder": "궁금한 점을 검색해보세요"
 }

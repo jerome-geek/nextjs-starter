@@ -1,10 +1,10 @@
 {
-    "title": "코스 요청하기",
+    "title": "コースリクエスト",
     "subTitle": "보이스캐디 코스 요청",
-    "description": "보이스캐디 코스 요청하기",
-    "myRequestResult": "나의 요청 결과",
-    "detail": "자세히",
-    "guideMessage": "필요한 골프장 정보를 입력해주세요.<br/>신속하게 반영될 수 있도록 노력하겠습니다.",
+    "description": "보이스캐디 コースリクエスト",
+    "myRequestResult": "リクエスト結果",
+    "detail": "詳細",
+    "guideMessage": "必要なゴルフ場の情報を入力してください。<br />迅速に反映されるよう努めてまいります。",
     "requesterInformation": {
         "title": "요청자 정보",
         "email": {

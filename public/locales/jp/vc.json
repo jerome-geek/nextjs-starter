@@ -13,11 +13,11 @@
         "courseRequestMessage": "원하는 코스가 없으면 요청해 보세요.",
         "courseRequest": "코스 요청하기",
         "courseCategory": {
-            "product": "제품",
-            "country": "국가",
-            "state": "시/도/주",
-            "city": "도시",
-            "golfCourse": "골프장",
+            "product": "製品",
+            "country": "国",
+            "state": "県/市/区",
+            "city": "コース",
+            "golfCourse": "ゴルフ場",
             "course": "코스",
             "green": "그린\n앞/뒤",
             "altitude": "고도",
@@ -30,20 +30,21 @@
         },
         "list": {},
         "request": {
-            "title": "코스 요청하기",
-            "subscription": "필요한 골프장 정보를 입력해주세요.<br/>신속하게 반영될 수 있도록 노력하겠습니다."
+            "title": "コースリクエスト",
+            "subscription": "必要なゴルフ場の情報を入力してください。<br />迅速に反映されるよう努めてまいります。"
         },
         "result": {
-            "title": "나의 요청 결과",
-            "subTitle": "코스 요청하기",
+            "title": "リクエスト結果",
+            "subTitle": "コースリクエスト",
+            "detail": "詳細",
             "description": "보이스캐디 나의 코스 요청결과",
             "categoryStatus": "상태",
             "categoryTitle": "제목",
             "categoryDate": "등록일",
             "status": {
-                "wait": "대기",
-                "cancel": "취소",
-                "done": "완료"
+                "wait": "待機",
+                "cancel": "キャンセル",
+                "done": "完了"
             },
             "notice": {
                 "title": "[안내사항]",
@@ -55,5 +56,7 @@
                 ]
             }
         }
-    }
+    },
+    "faq": "よくある質問",
+    "searchPlaceholder": "気になる点を検索してみてください。"
 }
