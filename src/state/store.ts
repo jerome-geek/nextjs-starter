@@ -13,20 +13,8 @@ import {
     PURGE,
     REGISTER,
 } from 'redux-persist';
-import storage from 'redux-persist/lib/storage'; // default: localStorage
 
 import rootReducer, { InitialRootState } from 'state/reducers';
-
-const persistConfig = {
-    key: 'root',
-    storage,
-    timeout: 1000,
-};
-
-export const persistedReducer = persistReducer(
-    persistConfig,
-    rootReducer as Reducer<CombinedState<InitialRootState>, AnyAction>,
-);
 
 const makeConfiguredStore = (reducer: any) =>
     configureStore({
@@ -53,6 +41,19 @@ export const makeStore = () => {
     if (isServer) {
         return makeConfiguredStore(rootReducer);
     } else {
+        const storage = require('redux-persist/lib/storage').default;
+
+        const persistConfig = {
+            key: 'root',
+            storage,
+            timeout: 1000,
+        };
+
+        const persistedReducer = persistReducer(
+            persistConfig,
+            rootReducer as Reducer<CombinedState<InitialRootState>, AnyAction>,
+        );
+
         // we need it only on client side
         const store = makeConfiguredStore(persistedReducer);
         let persistor = persistStore(store);
