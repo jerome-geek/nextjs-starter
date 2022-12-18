@@ -20,7 +20,7 @@ import rootReducer, { InitialRootState } from 'state/reducers';
 const persistConfig = {
     key: 'root',
     storage,
-    timeout: 500,
+    timeout: 1000,
 };
 
 export const persistedReducer = persistReducer(
@@ -56,7 +56,8 @@ export const makeStore = () => {
         // we need it only on client side
         const store = makeConfiguredStore(persistedReducer);
         let persistor = persistStore(store);
-        return { persistor, ...store };
+
+        return { persistor, ...store, __persistor: persistStore(store) };
     }
 };
 
