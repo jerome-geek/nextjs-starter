@@ -17,6 +17,7 @@ import SearchIcon from 'assets/icons/search.svg';
 import CartIcon from 'assets/icons/cart.svg';
 import BarsIcon from 'assets/icons/bars.svg';
 import PersonIcon from 'assets/icons/person.svg';
+import HeaderNavigation from './HeaderNavigation';
 
 const HeaderContainer = styled.header`
     background-color: #fff;
@@ -187,15 +188,15 @@ export default function Header() {
 
                 {isDesktop(width) && (
                     <NavContainer
-                    // onMouseUp={() => {
-                    //     setHeaderNavigationToggle(false);
-                    // }}
-                    // onMouseEnter={() => {
-                    //     setHeaderNavigationToggle(true);
-                    // }}
-                    // onMouseLeave={() => {
-                    //     setHeaderNavigationToggle(false);
-                    // }}
+                        onMouseUp={() => {
+                            setHeaderNavigationToggle(false);
+                        }}
+                        onMouseEnter={() => {
+                            setHeaderNavigationToggle(true);
+                        }}
+                        onMouseLeave={() => {
+                            setHeaderNavigationToggle(false);
+                        }}
                     >
                         {headerNavList.map(({ url, name }, index) => (
                             <Link key={index} href={{ pathname: url }}>
@@ -203,9 +204,9 @@ export default function Header() {
                             </Link>
                         ))}
 
-                        {/* <HeaderNavigation
+                        <HeaderNavigation
                             headerNavigationToggle={headerNavigationToggle}
-                        /> */}
+                        />
                     </NavContainer>
                 )}
 
