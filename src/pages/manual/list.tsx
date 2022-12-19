@@ -153,7 +153,7 @@ const ManualList = () => {
                     />
 
                     <InputWithIcon
-                        placeholder={vc('manual.searchPlaceholder')}
+                        placeholder={vc('manual.searchPlaceholder') as string}
                         ref={keywords}
                     />
                 </CategoryListContainer>

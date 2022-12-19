@@ -361,7 +361,7 @@ const Sheet = () => {
 
     const { data: mallInfo } = useMall();
 
-    const { t: orderSheet } = useTranslation('orderSheet');
+    const { t: sheet } = useTranslation('sheet');
 
     const { data: orderData, refetch: orderRefetch } = useOrderSheet({
         orderSheetNo,
@@ -606,7 +606,7 @@ const Sheet = () => {
         <>
             <DevTool control={control} placement='top-right' />
 
-            <NextSeo title={orderSheet('progress.now')!} />
+            <NextSeo title={sheet('progress.now')!} />
 
             {isShippingListModal &&
                 (isMobile(width) ? (
@@ -680,42 +680,38 @@ const Sheet = () => {
                     <SheetOrderWrapper>
                         {!isLogin() && !isMobile(width) && (
                             <GuestLoginBox>
-                                <p>{orderSheet('etc.inviteJoin')}</p>
+                                <p>{sheet('etc.inviteJoin')}</p>
                                 <Link href={PATHS.JOIN_AGREEMENT}>
-                                    {orderSheet('etc.joinMember')}
+                                    {sheet('etc.joinMember')}
                                 </Link>
                             </GuestLoginBox>
                         )}
 
                         <SheetTitle marginTop='30px'>
-                            <h3>{orderSheet('orderProduct.title')}</h3>
+                            <h3>{sheet('orderProduct.title')}</h3>
                         </SheetTitle>
 
                         <OrderProductListBox>
                             {!isMobile(width) && (
                                 <CartCategoryBox>
                                     <CartInformation>
-                                        {orderSheet(
+                                        {sheet(
                                             'orderProduct.category.information',
                                         )}
                                     </CartInformation>
                                     <CartCountBox>
-                                        {orderSheet(
-                                            'orderProduct.category.count',
-                                        )}
+                                        {sheet('orderProduct.category.count')}
                                     </CartCountBox>
                                     <CartPrice>
-                                        {orderSheet(
-                                            'orderProduct.category.price',
-                                        )}
+                                        {sheet('orderProduct.category.price')}
                                     </CartPrice>
                                     <CartDelivery>
-                                        {orderSheet(
+                                        {sheet(
                                             'orderProduct.category.deliveryPrice',
                                         )}
                                     </CartDelivery>
                                     <CartAmount>
-                                        {orderSheet(
+                                        {sheet(
                                             'orderProduct.category.amountPrice',
                                         )}
                                     </CartAmount>
@@ -733,7 +729,7 @@ const Sheet = () => {
                         </OrderProductListBox>
 
                         <SheetTitle>
-                            <h3>{orderSheet('ordererInformation.title')}</h3>
+                            <h3>{sheet('ordererInformation.title')}</h3>
                         </SheetTitle>
 
                         <OrdererInformation
@@ -743,13 +739,13 @@ const Sheet = () => {
                         />
 
                         <SheetTitle>
-                            <h3>{orderSheet('shippingAddress.title')}</h3>
+                            <h3>{sheet('shippingAddress.title')}</h3>
                             {member && (
                                 <div
                                     className='shipping-info'
                                     onClick={() => setIsShippingListModal(true)}
                                 >
-                                    {orderSheet(
+                                    {sheet(
                                         'shippingAddress.addressInformation',
                                     )}
                                 </div>
@@ -769,7 +765,7 @@ const Sheet = () => {
                                     ) : (
                                         <UnChecked />
                                     )}
-                                    {orderSheet(
+                                    {sheet(
                                         'shippingAddress.sameOrderInformation',
                                     )}
                                 </label>
@@ -832,7 +828,7 @@ const Sheet = () => {
                     <SheetOrderPriceWrapper>
                         {paymentInfo && (
                             <OrderSheetPrice
-                                title={orderSheet('paymentInformation.title')}
+                                title={sheet('paymentInformation.title')}
                                 totalStandardAmt={paymentInfo.totalStandardAmt}
                                 totalDeliveryAmt={totalDeliveryAmt}
                                 totalDiscountAmt={totalDiscountAmt}
@@ -855,8 +851,8 @@ const Sheet = () => {
                             {isMobile(width)
                                 ? `${KRW(
                                       paymentInfo.paymentAmt,
-                                  ).format()} ${orderSheet('etc.payment')}`
-                                : orderSheet('etc.payment')}
+                                  ).format()} ${sheet('etc.payment')}`
+                                : sheet('etc.payment')}
                         </PaymentButton>
                     </SheetOrderPriceWrapper>
                 </SheetMainContainer>
