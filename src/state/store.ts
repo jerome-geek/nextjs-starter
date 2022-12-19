@@ -21,16 +21,17 @@ const makeConfiguredStore = (reducer: any) =>
         reducer,
         middleware: (getDefaultMiddleware) =>
             getDefaultMiddleware({
-                serializableCheck: {
-                    ignoredActions: [
-                        FLUSH,
-                        REHYDRATE,
-                        PAUSE,
-                        PERSIST,
-                        PURGE,
-                        REGISTER,
-                    ],
-                },
+                // serializableCheck: {
+                //     ignoredActions: [
+                //         FLUSH,
+                //         REHYDRATE,
+                //         PAUSE,
+                //         PERSIST,
+                //         PURGE,
+                //         REGISTER,
+                //     ],
+                // },
+                serializableCheck: false,
             }).concat(logger),
         devTools: process.env.NODE_ENV !== 'production',
     });
@@ -58,7 +59,12 @@ export const makeStore = () => {
         const store = makeConfiguredStore(persistedReducer);
         let persistor = persistStore(store);
 
-        return { persistor, ...store, __persistor: persistStore(store) };
+        return {
+            persistor,
+            ...store,
+            // This creates a persistor object & push that persisted object to .__persistor, so that we can avail the persistability feature
+            __persistor: persistStore(store),
+        };
     }
 };
 

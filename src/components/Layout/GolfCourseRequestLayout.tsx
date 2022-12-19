@@ -12,6 +12,7 @@ import { isMobile } from 'utils/styles/responsive';
 import { GolfCourseRequestList } from 'api/etc/golfCourse';
 import { map, pipe, reduce, take, toArray } from '@fxts/core';
 import { COURSE_REQUEST_STATUS } from 'models';
+import { useTranslation } from 'react-i18next';
 
 const StyledLayout = styled(LayoutResponsive)`
     text-align: left;
@@ -111,6 +112,8 @@ const Layout = ({
     const { width } = useWindowSize();
     const router = useRouter();
 
+    const { t: vc } = useTranslation('vc');
+
     const isDetailLinkVisible = useMemo(
         () =>
             !isMobile(width) &&
@@ -145,13 +148,14 @@ const Layout = ({
     return (
         <StyledLayout>
             <TitleContainer>
-                <Title>나의 요청 결과</Title>
+                <Title>{vc('golfCourse.result.title')}</Title>
+
                 {/* TODO: 신청내역으로 이동 */}
 
                 {isDetailLinkVisible && (
                     <div style={{ textAlign: 'right' }}>
                         <StyledLink href='/golf-course/request/result'>
-                            자세히 <ArrowRight />
+                            {vc('golfCourse.result.detail')} <ArrowRight />
                         </StyledLink>
                     </div>
                 )}
@@ -159,22 +163,22 @@ const Layout = ({
 
             <ProcessList>
                 <ProcessListItem>
-                    <Status>대기</Status>
+                    <Status>{vc('golfCourse.result.status.wait')}</Status>
                     <Count>
-                        {requestStatusCount.W} <sub>건</sub>
+                        {requestStatusCount.W} <sub>{vc('golfCourse.result.cases')}</sub>
                     </Count>
                 </ProcessListItem>
                 <ProcessListItem>
-                    <Status>취소</Status>
+                    <Status>{vc('golfCourse.result.status.cancel')}</Status>
                     <Count>
                         {requestStatusCount.P + requestStatusCount.C}{' '}
-                        <sub>건</sub>
+                        <sub>{vc('golfCourse.result.cases')}</sub>
                     </Count>
                 </ProcessListItem>
                 <ProcessListItem>
-                    <Status>완료</Status>
+                    <Status>{vc('golfCourse.result.status.done')}</Status>
                     <Count>
-                        {requestStatusCount.D} <sub>건</sub>
+                        {requestStatusCount.D} <sub>{vc('golfCourse.result.cases')}</sub>
                     </Count>
                 </ProcessListItem>
             </ProcessList>

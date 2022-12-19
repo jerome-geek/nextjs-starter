@@ -18,7 +18,7 @@ import { WriteInquiry } from 'models/manage';
 import media from 'utils/styles/media';
 import upload from 'api/etc/upload';
 import PATHS from 'const/paths';
-import { GetServerSideProps, GetStaticPaths, GetStaticProps } from 'next';
+import { GetServerSideProps } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 const InquiryContainer = styled.div`

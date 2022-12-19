@@ -1,9 +1,20 @@
 {
-    "manual": {},
-    "manager": {},
+    "viewAll": "全体を見る",
+    "manual": {
+        "noContent": "該当カテゴリに登録されている商品がありません。",
+        "searchPlaceholder": "商品名を検索してください。"
+    },
+    "manager": {
+        "title": "ボイスキャディ·マネージャー",
+        "description": "お持ちの機器を選択した後、よくラウンドされるゴルフコースをダウンロードしてみてください。",
+        "howToUse": "使用方法を見る",
+        "onlyUsePc": "ボイスキャディマネージャーのダウンロードは、PCでのみ行えます。",
+        "macDownload": "Mac版ダウンロード",
+        "windowsDownload": "Windows版ダウンロード"
+    },
     "golfCourse": {
         "title": "지원 골프 코스",
-        "description": "보유하신 기기를 선택하신 후, 지원하신 골프 코스를 다운로드 받아보세요.",
+        "description": "お持ちの機器を選択し、ゴルフコースをダウンロードしてみてください。",
         "inputDetailAddress": "상세 지역을 입력하세요.",
         "country": "국가",
         "state": "시/도/주",
@@ -46,6 +57,7 @@
                 "cancel": "キャンセル",
                 "done": "完了"
             },
+            "cases": "件",
             "notice": {
                 "title": "[안내사항]",
                 "content": [

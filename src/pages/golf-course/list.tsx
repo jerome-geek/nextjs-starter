@@ -1,4 +1,4 @@
-import { useState, useLayoutEffect } from 'react';
+import { useState, useEffect, useLayoutEffect } from 'react';
 import { dehydrate, QueryClient } from 'react-query';
 import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
@@ -34,13 +34,16 @@ const CategoriyListContainer = styled.div`
 `;
 
 const GolfCourseList = () => {
-    const [categoryList, setCategoryList] = useState<CategoryListItem[]>([
-        {
-            categoryNo: 0,
-            label: '전체보기',
-            isSelected: true,
-        },
-    ]);
+    const { t: vc } = useTranslation('vc');
+
+    // const [categoryList, setCategoryList] = useState<CategoryListItem[]>([
+    //     {
+    //         categoryNo: 0,
+    //         label: vc('viewAll') as string,
+    //         isSelected: true,
+    //     },
+    // ]);
+    const [categoryList, setCategoryList] = useState<CategoryListItem[]>([]);
 
     const [searchParams, setSearchParams] = useState<ProductSearchParams>({
         pageNumber: 1,
@@ -55,8 +58,6 @@ const GolfCourseList = () => {
             direction: ORDER_DIRECTION.DESC,
         },
     });
-
-    const { t: vc } = useTranslation('vc');
 
     const router = useRouter();
 
@@ -91,7 +92,7 @@ const GolfCourseList = () => {
         );
     };
 
-    useLayoutEffect(() => {
+    useEffect(() => {
         if (categories.data) {
             setCategoryList((prev) =>
                 pipe(
@@ -101,7 +102,14 @@ const GolfCourseList = () => {
                         label: a.label,
                         isSelected: false,
                     })),
-                    concat(prev),
+                    // concat(prev),
+                    concat([
+                        {
+                            categoryNo: 0,
+                            label: vc('viewAll') as string,
+                            isSelected: true,
+                        },
+                    ]),
                     toArray,
                 ),
             );
@@ -109,14 +117,14 @@ const GolfCourseList = () => {
 
         return () => {
             setCategoryList([
-                {
-                    categoryNo: 0,
-                    label: '전체보기',
-                    isSelected: true,
-                },
+                // {
+                //     categoryNo: 0,
+                //     label: vc('viewAll') as string,
+                //     isSelected: true,
+                // },
             ]);
         };
-    }, [categories.data]);
+    }, [categories.data, vc]);
 
     return (
         <div style={{ marginTop: '150px' }}>
