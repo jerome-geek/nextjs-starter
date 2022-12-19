@@ -1,0 +1,56 @@
+{
+    "progress": { "before": "주문서", "now": "주문 완료", "fail": "주문 실패" },
+    "orderComplete": "주문이 완료되었습니다 !",
+    "orderFail": "주문이 실패하였습니다!",
+    "orderFailMessage": "결제가 정상적으로 이루어지지 않았습니다.<br />다시 결제 진행을 해주시기 바랍니다.<br />지속적으로 문제가 발생될 경우 고객센터에문의 하시기 바랍니다.",
+    "paymentMethod": {
+        "creditCard": "신용카드",
+        "realtimeAccount": "실시간 계좌 이체",
+        "virtualAccount": "가상계좌"
+    },
+    "transferInformation": {
+        "title": "이체정보",
+        "category": {
+            "price": "이체 금액",
+            "accountInformation": "계좌 정보",
+            "depositWait": "입금 기한"
+        }
+    },
+    "paymentInformation": {
+        "title": "결제정보",
+        "category": {
+            "totalPrice": "총 결제 금액",
+            "productPrice": "상품 가격",
+            "deliverPrice": "배송비",
+            "discountPrice": "할인 금액",
+            "couponDiscount": "쿠폰 할인",
+            "useDeposit": "적립금 사용"
+        }
+    },
+    "deliveryInformation": {
+        "title": "배송정보",
+        "category": {
+            "receiver": "받는사람",
+            "address": "주소",
+            "phoneNumber": "전화번호"
+        }
+    },
+    "orderProductList": {
+        "category": {
+            "productInformation": "상품 정보",
+            "count": "수량",
+            "price": "가격",
+            "deliverPrice": "배송비",
+            "totalPrice": "총 상품 금액"
+        }
+    },
+    "etc": {
+        "until": "까지",
+        "intoAccount": "계좌로 입금",
+        "productShipment": "해주시면 제품이 발송됩니다.",
+        "orderNo": "주문번호",
+        "won": "원",
+        "viewOrderList": "주문 내역 보기",
+        "keepShopping": "쇼핑 계속하기"
+    }
+}

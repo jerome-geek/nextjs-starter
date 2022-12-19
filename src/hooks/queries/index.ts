@@ -9,6 +9,8 @@ import useProductOptionList from 'hooks/queries/useProductOptionList';
 import useAccumulationData from 'hooks/queries/useAccumulationData';
 import useOrderSummary from 'hooks/queries/useOrderSummary';
 import useCategories from 'hooks/queries/useCategories';
+import useAddress from 'hooks/queries/useAddress';
+import useOrderSheet from 'hooks/queries/useOrderSheet';
 
 export {
     useBanners,
@@ -22,4 +24,6 @@ export {
     useProductDetail,
     useCategories,
     useProductList,
+    useAddress,
+    useOrderSheet,
 };
