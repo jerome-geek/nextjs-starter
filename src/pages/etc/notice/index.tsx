@@ -1,6 +1,9 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { NextSeo } from 'next-seo';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { GetStaticProps } from 'next';
+import { useTranslation } from 'react-i18next';
 import styled, { css } from 'styled-components';
 import { useQuery } from 'react-query';
 import dayjs from 'dayjs';
@@ -165,6 +168,8 @@ const NoticeListItem = styled.li`
 `;
 
 const Notice = () => {
+    const { t: notice } = useTranslation('notice');
+
     const [boardListParams, setBoardListParams] = useState({
         pageNumber: 1,
         pageSize: 1,
@@ -266,9 +271,9 @@ const Notice = () => {
 
     return (
         <>
-            <NextSeo title='공지사항' description='보이스캐디 공지사항' />
+            <NextSeo title={notice('notice') as string} />
             <NoticeContainer>
-                <NoticeTitle>공지사항</NoticeTitle>
+                <NoticeTitle>{notice('notice')}</NoticeTitle>
 
                 <NoticeCategoryList>
                     {boardCategoryList.map(
@@ -289,8 +294,8 @@ const Notice = () => {
                 <CommunicationSection>
                     <p>
                         {isMobile(width)
-                            ? '커뮤니케이션'
-                            : 'IR 공시 / 커뮤니케이션'}
+                            ? notice('communication')
+                            : `${notice('ir')} / ${notice('communication')}`}
                     </p>
 
                     <p
@@ -304,9 +309,9 @@ const Notice = () => {
 
                 <NoticeList>
                     <NoticeListItemTitle>
-                        <p>번호</p>
-                        <p>제목</p>
-                        <p>등록일</p>
+                        <p>{notice('no')}</p>
+                        <p>{notice('title')}</p>
+                        <p>{notice('regDt')}</p>
                     </NoticeListItemTitle>
                     {boardList.length > 0 ? (
                         boardList.map(({ articleNo, title, registerYmdt }) => (
@@ -337,7 +342,7 @@ const Notice = () => {
                                 alignItems: 'center',
                             }}
                         >
-                            <p>등록된 공지사항이 없습니다</p>
+                            <p>{notice('noContent')}</p>
                         </li>
                     )}
                 </NoticeList>
@@ -380,3 +385,12 @@ const Notice = () => {
 };
 
 export default Notice;
+
+export const getStaticProps: GetStaticProps = async (context) => {
+    return {
+        props: {
+            ...(await serverSideTranslations(context.locale!, ['notice'])),
+        },
+        revalidate: 10,
+    };
+};

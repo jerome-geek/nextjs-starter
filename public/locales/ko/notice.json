@@ -1,0 +1,12 @@
+{
+    "notice": "공지사항",
+    "no": "번호",
+    "title": "제목",
+    "regDt": "등록일",
+    "noContent": "등록된 공지사항이 없습니다.",
+    "ir": "IR 공시",
+    "communication": "커뮤니케이션",
+    "part": "소속",
+    "charge": "담당자",
+    "phone": "연락처"
+}
