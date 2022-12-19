@@ -171,7 +171,7 @@ const ProductList = () => {
             onSuccess: (data) => {
                 setCategoryInfo(
                     pipe(
-                        data.multiLevelCategories,
+                        data?.multiLevelCategories,
                         filter((a) => a.categoryNo.toString() === categoryNo),
                         head,
                     ),
