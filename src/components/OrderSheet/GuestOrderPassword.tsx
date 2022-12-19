@@ -16,7 +16,7 @@ interface GuestOrderPasswordProps {
     errors: FieldErrors<PaymentReserve>;
 }
 
-const PasswordInput = styled(StyledInput)`
+const PasswordInput = styled(StyledInput).attrs({ type: 'password' })`
     letter-spacing: -0.64px;
     font-weight: 400;
     height: 44px;
@@ -183,10 +183,11 @@ const GuestOrderPassword: FC<GuestOrderPasswordProps> = ({
                     </PasswordInputTitleContainer>
                     <PasswordInputContainer>
                         <PasswordInput
-                            placeholder={orderSheet(
-                                'guestPassword.category.placeholder.password',
-                            )}
-                            type={'password'}
+                            placeholder={
+                                orderSheet(
+                                    'guestPassword.category.placeholder.password',
+                                ) as string
+                            }
                             {...register('tempPassword', {
                                 required: {
                                     value: true,
@@ -222,10 +223,11 @@ const GuestOrderPassword: FC<GuestOrderPasswordProps> = ({
 
                     <PasswordInputContainer>
                         <PasswordInput
-                            placeholder={orderSheet(
-                                'guestPassword.category.placeholder.password',
-                            )}
-                            type={'password'}
+                            placeholder={
+                                orderSheet(
+                                    'guestPassword.category.placeholder.password',
+                                ) as string
+                            }
                             value={passwordCheck}
                             onChange={(e) => setPasswordCheck(e.target.value)}
                         />

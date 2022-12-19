@@ -361,7 +361,7 @@ const Sheet = () => {
 
     const { data: mallInfo } = useMall();
 
-    const { t: sheet } = useTranslation('orderSheet');
+    const { t: orderSheet } = useTranslation('orderSheet');
 
     const { data: orderData, refetch: orderRefetch } = useOrderSheet({
         orderSheetNo,
@@ -551,7 +551,6 @@ const Sheet = () => {
     };
 
     const onOrderFormSubmit = handleSubmit(async (data) => {
-        console.log(data);
         if (isAllOrderTermsChecked) {
             await payment.setConfiguration();
             await payment.reservation(data);
@@ -607,7 +606,7 @@ const Sheet = () => {
         <>
             <DevTool control={control} placement='top-right' />
 
-            <NextSeo title={sheet('progress.now')!} />
+            <NextSeo title={orderSheet('progress.now')!} />
 
             {isShippingListModal &&
                 (isMobile(width) ? (
@@ -631,6 +630,7 @@ const Sheet = () => {
                         setIsShippingListModal={setIsShippingListModal}
                     />
                 ))}
+
             {isSearchAddressModal && (
                 <SearchAddressModal
                     onClickToggleModal={() =>
@@ -642,6 +642,7 @@ const Sheet = () => {
                     setValue={setValue}
                 />
             )}
+
             {isCouponListModal &&
                 (isMobile(width) ? (
                     <MobileCouponListModal
@@ -679,38 +680,42 @@ const Sheet = () => {
                     <SheetOrderWrapper>
                         {!isLogin() && !isMobile(width) && (
                             <GuestLoginBox>
-                                <p>{sheet('etc.inviteJoin')}</p>
+                                <p>{orderSheet('etc.inviteJoin')}</p>
                                 <Link href={PATHS.JOIN_AGREEMENT}>
-                                    {sheet('etc.joinMember')}
+                                    {orderSheet('etc.joinMember')}
                                 </Link>
                             </GuestLoginBox>
                         )}
 
                         <SheetTitle marginTop='30px'>
-                            <h3>{sheet('orderProduct.title')}</h3>
+                            <h3>{orderSheet('orderProduct.title')}</h3>
                         </SheetTitle>
 
                         <OrderProductListBox>
                             {!isMobile(width) && (
                                 <CartCategoryBox>
                                     <CartInformation>
-                                        {sheet(
+                                        {orderSheet(
                                             'orderProduct.category.information',
                                         )}
                                     </CartInformation>
                                     <CartCountBox>
-                                        {sheet('orderProduct.category.count')}
+                                        {orderSheet(
+                                            'orderProduct.category.count',
+                                        )}
                                     </CartCountBox>
                                     <CartPrice>
-                                        {sheet('orderProduct.category.price')}
+                                        {orderSheet(
+                                            'orderProduct.category.price',
+                                        )}
                                     </CartPrice>
                                     <CartDelivery>
-                                        {sheet(
+                                        {orderSheet(
                                             'orderProduct.category.deliveryPrice',
                                         )}
                                     </CartDelivery>
                                     <CartAmount>
-                                        {sheet(
+                                        {orderSheet(
                                             'orderProduct.category.amountPrice',
                                         )}
                                     </CartAmount>
@@ -728,7 +733,7 @@ const Sheet = () => {
                         </OrderProductListBox>
 
                         <SheetTitle>
-                            <h3>{sheet('ordererInformation.title')}</h3>
+                            <h3>{orderSheet('ordererInformation.title')}</h3>
                         </SheetTitle>
 
                         <OrdererInformation
@@ -738,13 +743,13 @@ const Sheet = () => {
                         />
 
                         <SheetTitle>
-                            <h3>{sheet('shippingAddress.title')}</h3>
+                            <h3>{orderSheet('shippingAddress.title')}</h3>
                             {member && (
                                 <div
                                     className='shipping-info'
                                     onClick={() => setIsShippingListModal(true)}
                                 >
-                                    {sheet(
+                                    {orderSheet(
                                         'shippingAddress.addressInformation',
                                     )}
                                 </div>
@@ -764,7 +769,7 @@ const Sheet = () => {
                                     ) : (
                                         <UnChecked />
                                     )}
-                                    {sheet(
+                                    {orderSheet(
                                         'shippingAddress.sameOrderInformation',
                                     )}
                                 </label>
@@ -827,7 +832,7 @@ const Sheet = () => {
                     <SheetOrderPriceWrapper>
                         {paymentInfo && (
                             <OrderSheetPrice
-                                title={sheet('paymentInformation.title')}
+                                title={orderSheet('paymentInformation.title')}
                                 totalStandardAmt={paymentInfo.totalStandardAmt}
                                 totalDeliveryAmt={totalDeliveryAmt}
                                 totalDiscountAmt={totalDiscountAmt}
@@ -850,8 +855,8 @@ const Sheet = () => {
                             {isMobile(width)
                                 ? `${KRW(
                                       paymentInfo.paymentAmt,
-                                  ).format()} ${sheet('etc.payment')}`
-                                : sheet('etc.payment')}
+                                  ).format()} ${orderSheet('etc.payment')}`
+                                : orderSheet('etc.payment')}
                         </PaymentButton>
                     </SheetOrderPriceWrapper>
                 </SheetMainContainer>

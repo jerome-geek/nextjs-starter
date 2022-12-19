@@ -1,112 +1,112 @@
 {
-    "progress": { "now": "주문서", "next": "주문완료" },
+    "progress": { "now": "注文書", "next": "注文完了" },
     "orderProduct": {
-        "title": "주문 상품",
+        "title": "注文商品",
         "category": {
-            "information": "상품 정보",
-            "count": "수량",
-            "price": "가격",
-            "deliveryPrice": "배송비",
-            "amountPrice": "총 상품 금액"
+            "information": "商品情報",
+            "count": "数量",
+            "price": "価格",
+            "deliveryPrice": "送料",
+            "amountPrice": "商品の合計額"
         }
     },
     "ordererInformation": {
-        "title": "주문자 정보",
+        "title": "注文者情報",
         "category": {
-            "name": "이름",
-            "phoneNumber": "전화번호",
-            "eMail": "이메일",
+            "name": "名前",
+            "phoneNumber": "電話番号",
+            "eMail": "Eメール",
             "placeholder": {
-                "name": "이름을 입력하세요.",
-                "phoneNumber": "휴대폰 번호 '-' 제외하고 입력해 주세요.",
-                "email": "이메일을 입력해주세요."
+                "name": "お名前を入力してください。",
+                "phoneNumber": "携帯番号「-」を除いて入力してください。",
+                "email": "メールを入力してください。"
             }
         }
     },
     "shippingAddress": {
-        "title": "배송지",
-        "addressInformation": "배송지 정보",
-        "sameOrderInformation": "주문자 정보와 동일",
-        "setDefaultAddress": "기본 배송지로 설정",
+        "title": "お届け先",
+        "addressInformation": "お届け先情報",
+        "sameOrderInformation": "注文者情報と同じ",
+        "setDefaultAddress": "既定のお届け先に設定",
         "category": {
-            "name": "수령인 이름",
-            "phoneNumber": "휴대폰 번호",
-            "searchAddress": "주소 검색",
-            "request": "택배사 요청 사항",
+            "name": "受取人の名前",
+            "phoneNumber": "携帯番号",
+            "searchAddress": "住所検索",
+            "request": "宅配業者の要請事項",
             "placeholder": {
-                "name": "이름을 입력하세요.",
-                "phoneNumber": "휴대폰 번호 '-' 제외하고 입력해 주세요.",
-                "address": "예) 테헤란로 108길 23",
-                "detailAddress": "상세 주소 입력",
-                "request": "택배사 요청 사항을 선택해 주세요."
+                "name": "名前を入力してください。",
+                "phoneNumber": "携帯番号はハイフンなしで入力してください。",
+                "address": "例）東京都渋谷区千駄ヶ谷3-38-10",
+                "detailAddress": "詳細アドレス入力",
+                "request": "宅配業者の要請事項を選択してください。"
             }
         },
         "requestList": {
-            "beforeDelivery": "배송 전에 미리 연락바랍니다.",
-            "putHouse": "집앞에 놔주세요",
-            "securityOffice": "경비실에 맡겨주세요.",
-            "absenceHouse": "부재시 집앞에 놔주세요",
-            "absenceOffice": "부재 시 경비실에 맡겨주세요",
-            "directInput": "직접 입력"
+            "beforeDelivery": "配送前に予めご連絡ください。",
+            "putHouse": "玄関の前に置いてください。",
+            "securityOffice": "宅配ボックスに預けてください。",
+            "absenceHouse": "不在時、玄関の前に置いてください。",
+            "absenceOffice": "不在時、宅配ボックスに預けてください。",
+            "directInput": "直接入力"
         }
     },
     "applyDiscount": {
-        "title": "할인 적용",
+        "title": "割引適用",
         "category": {
-            "coupon": "할인 쿠폰",
-            "accumulation": "적립금"
+            "coupon": "割引クーポン",
+            "accumulation": "ポイント"
         },
-        "applyCoupon": "쿠폰 적용",
-        "useAccumulation": "적립금 사용",
-        "availableAccumulation": "사용 가능 적립금"
+        "applyCoupon": "クーポン使用",
+        "useAccumulation": "ポイントの使用",
+        "availableAccumulation": "使用可能ポイント"
     },
     "paymentMethod": {
-        "title": "결제 방식",
+        "title": "決済方式",
         "category": {
-            "generalPayment": "일반 결제"
+            "generalPayment": "一般決済"
         },
         "paymentList": {
-            "creditCart": "신용카드",
-            "realTime": "실시간 계좌 이체",
-            "virtualAccount": "가상계좌"
+            "creditCart": "クレジットカード",
+            "realTime": "リアルタイム口座振替",
+            "virtualAccount": "仮口座"
         }
     },
     "guestPassword": {
-        "title": "비회원 주문 비밀번호",
-        "desc": "비회원 배송 조회시 사용할 비밀번호를 입력해주세요.",
+        "title": "非会員注文パスワード",
+        "desc": "非会員配送照会時に使用するパスワードを入力してください。",
         "category": {
-            "password": "비밀번호",
-            "checkPassword": "비밀번호 확인",
+            "password": "パスワード",
+            "checkPassword": "パスワード確認",
             "placeholder": {
-                "password": "비밀번호를 입력해주세요.",
-                "checkPassword": "비밀번호 확인"
+                "password": "パスワードをご入力ください。",
+                "checkPassword": "パスワード確認"
             }
         }
     },
     "paymentInformation": {
-        "title": "총 결제 금액",
+        "title": "合計注文金額",
         "category": {
-            "amountOrderPrice": "총 주문금액",
-            "amountDeliveryFee": "총 배송비",
-            "amountDiscount": "총 할인금액",
-            "couponDiscount": "쿠폰 할인",
-            "accumulationDiscount": "적립금 사용금액",
-            "amountPrice": "총 결제금액"
+            "amountOrderPrice": "合計注文金額",
+            "amountDeliveryFee": "合計配送費",
+            "amountDiscount": "合計割引金額",
+            "couponDiscount": "クーポン割引",
+            "accumulationDiscount": "ポイントの使用金額",
+            "amountPrice": "合計決済金額"
         }
     },
     "term": {
-        "agreeAll": "전체 동의",
-        "serviceAgree": "서비스 이용약관 동의",
-        "privacyAgree": "개인정보 처리방침",
-        "purchaseAgree": "주문할 제품의 거래조건을 확인 하였으며,<br /> 구매에 동의하시겠습니까 ?"
+        "agreeAll": "全体同意",
+        "serviceAgree": "サービス利用規約に同意",
+        "privacyAgree": "個人情報処理方針",
+        "purchaseAgree": "注文する製品の取引条件を確認しましたので、<br />の購入に同意します。"
     },
     "etc": {
-        "inviteJoin": "지금 보이스캐디의 회원이 되어 즉시 사용 가능한 3,000원 할인 쿠폰 혜택을 만나보세요.",
-        "mobileInviteJoin": "지금 바로 가입하고 3,000원 쿠폰을 받아보세요!",
-        "joinMember": "회원가입 바로가기",
-        "won": "원",
-        "search": "검색",
-        "require": "필수",
+        "inviteJoin": "今ボイスキャディの会員になって、すぐに使用できる300円割引クーポンの特典をご覧ください。",
+        "mobileInviteJoin": "今すぐ加入して300円クーポンをゲット！",
+        "joinMember": "会員登録のショートカット",
+        "won": "円",
+        "search": "検索",
+        "require": "必須",
         "readMore": "자세히보기",
         "payment": "결제하기",
         "guestAlert": "비회원으로 상품을 구매하시면 보이스캐디의<br/>쿠폰 및 적립급 혜택을 받으실 수 없습니다.",
