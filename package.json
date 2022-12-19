@@ -4,6 +4,7 @@
     "private": true,
     "scripts": {
         "dev": "next dev",
+        "dev:jp": "NEXT_PUBLIC_LANG=jp next dev",
         "build": "next build",
         "start": "next start",
         "lint": "next lint"
