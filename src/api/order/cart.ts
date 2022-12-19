@@ -68,9 +68,10 @@ const cart = {
             method: 'DELETE',
             url: '/cart',
             params: { cartNo },
-            // paramsSerializer: (params) => {
-            //     return qs.stringify(params, { arrayFormat: 'comma' });
-            // },
+            paramsSerializer: {
+                serialize: (params) =>
+                    qs.stringify(params, { arrayFormat: 'comma' }),
+            },
         });
     },
 
@@ -96,8 +97,10 @@ const cart = {
                 cartNo: params.cartNo,
                 divideInvalidProducts: params.divideInvalidProducts,
             },
-            // paramsSerializer: (param) =>
-            //     qs.stringify(param, { arrayFormat: 'comma' }),
+            paramsSerializer: {
+                serialize: (params) =>
+                    qs.stringify(params, { arrayFormat: 'comma' }),
+            },
         });
     },
 

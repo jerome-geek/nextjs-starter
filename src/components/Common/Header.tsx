@@ -1,22 +1,24 @@
-import { useState, useMemo } from 'react';
-import Link from 'next/link';
+import { useMemo, useState } from 'react';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 import styled from 'styled-components';
 import { useLockedBody, useWindowSize } from 'usehooks-ts';
 
-import SearchLayer from 'components/Search/SearchLayer';
 import MemberPopup from 'components/Member/MemberPopup';
-import { useMember } from 'hooks';
+import SearchLayer from 'components/Search/SearchLayer';
+import HeaderNavigation from 'components/shared/HeaderNavigation';
+import SideNavigation from 'components/shared/SideNavigation';
+import { useCart, useMember } from 'hooks';
 import { isDesktop } from 'utils/styles/responsive';
 import media from 'utils/styles/media';
-import { isLogin } from 'utils/users';
 import PATHS from 'const/paths';
 import CATEGORY from 'const/category';
 import HeaderLogo from 'assets/logo/headerLogo.svg';
+import MyPageIcon from 'assets/icons/person.svg';
 import SearchIcon from 'assets/icons/search.svg';
 import CartIcon from 'assets/icons/cart.svg';
 import BarsIcon from 'assets/icons/bars.svg';
-import PersonIcon from 'assets/icons/person.svg';
+import { isLogin } from 'utils/users';
 
 const HeaderContainer = styled.header`
     background-color: #fff;
@@ -83,7 +85,7 @@ const CartCount = styled.div`
     color: #fff;
 `;
 
-export default function Header() {
+const Header = () => {
     const headerNavList = useMemo(
         () => [
             {
@@ -155,15 +157,19 @@ export default function Header() {
         [],
     );
 
+    const { width } = useWindowSize();
+
+    const [_, setLocked] = useLockedBody();
+
     const [myPageToggle, setMyPageToggle] = useState(false);
     const [searchToggle, setSearchToggle] = useState(false);
     const [sideNavigationToggle, setSideNavigationToggle] = useState(false);
     const [headerNavigationToggle, setHeaderNavigationToggle] = useState(false);
 
-    const { width } = useWindowSize();
-    const [_, setLocked] = useLockedBody();
-    const { member, onLoginClick, onLogOutClick } = useMember();
     const router = useRouter();
+
+    const { member, onLoginClick, onLogOutClick } = useMember();
+    const { totalCount } = useCart();
 
     const onMypageClick = () => setMyPageToggle((prev) => !prev);
     const onSearchClick = () => setSearchToggle((prev) => !prev);
@@ -178,43 +184,48 @@ export default function Header() {
 
     return (
         <>
+            <SideNavigation
+                onCloseButtonClick={onCloseButtonClick}
+                sideNavigationToggle={sideNavigationToggle}
+            />
+
             <HeaderContainer>
                 <LogoContainer>
-                    <Link href={{ pathname: PATHS.MAIN }}>
+                    <Link href={PATHS.MAIN}>
                         <HeaderLogo />
                     </Link>
                 </LogoContainer>
 
                 {isDesktop(width) && (
                     <NavContainer
-                    // onMouseUp={() => {
-                    //     setHeaderNavigationToggle(false);
-                    // }}
-                    // onMouseEnter={() => {
-                    //     setHeaderNavigationToggle(true);
-                    // }}
-                    // onMouseLeave={() => {
-                    //     setHeaderNavigationToggle(false);
-                    // }}
+                        onMouseUp={() => {
+                            setHeaderNavigationToggle(false);
+                        }}
+                        onMouseEnter={() => {
+                            setHeaderNavigationToggle(true);
+                        }}
+                        onMouseLeave={() => {
+                            setHeaderNavigationToggle(false);
+                        }}
                     >
-                        {headerNavList.map(({ url, name }, index) => (
-                            <Link key={index} href={{ pathname: url }}>
+                        {headerNavList.map(({ url, name }) => (
+                            <Link key={url} href={url}>
                                 {name}
                             </Link>
                         ))}
 
-                        {/* <HeaderNavigation
+                        <HeaderNavigation
                             headerNavigationToggle={headerNavigationToggle}
-                        /> */}
+                        />
                     </NavContainer>
                 )}
 
                 <IconContainer>
-                    {isDesktop(width) && isLogin() && member && (
+                    {isDesktop(width) && isLogin() && (
                         <MemberName>{`${member?.memberName}님`}</MemberName>
                     )}
                     <div onClick={onMypageClick}>
-                        <PersonIcon />
+                        <MyPageIcon />
                         {myPageToggle && (
                             <MemberPopup
                                 isLogin={isLogin()}
@@ -232,7 +243,7 @@ export default function Header() {
 
                     <div onClick={() => router.push(PATHS.CART)}>
                         <CartIcon />
-                        <CartCount>0</CartCount>
+                        <CartCount>{totalCount}</CartCount>
                     </div>
 
                     {!isDesktop(width) && (
@@ -249,4 +260,6 @@ export default function Header() {
             />
         </>
     );
-}
+};
+
+export default Header;
