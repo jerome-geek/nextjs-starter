@@ -1,5 +1,6 @@
 import { ChangeEvent, useMemo, useState } from 'react';
 import { GetServerSideProps } from 'next';
+import { NextSeo } from 'next-seo';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'react-i18next';
 import { useMutation, useQuery } from 'react-query';
@@ -23,7 +24,7 @@ import media from 'utils/styles/media';
 import upload from 'api/etc/upload';
 import { useMember } from 'hooks';
 import golfCourse, { AdminCourseRequestBody } from 'api/etc/golfCourse';
-import { NextSeo } from 'next-seo';
+
 
 const CourseRequestContainer = styled.section`
     width: 100%;

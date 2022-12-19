@@ -78,6 +78,7 @@ const ManualList = () => {
     }, [categories.data]);
 
     const { t: manual } = useTranslation('manual');
+    const { t: vc } = useTranslation('vc');
     const router = useRouter();
 
     const productList = useProductList({
@@ -152,7 +153,7 @@ const ManualList = () => {
                     />
 
                     <InputWithIcon
-                        placeholder='상품명을 검색하세요.'
+                        placeholder={vc('manual.searchPlaceholder')}
                         ref={keywords}
                     />
                 </CategoryListContainer>
@@ -194,7 +195,7 @@ const ManualList = () => {
                                         padding: '100px',
                                     }}
                                 >
-                                    <p>상품이 없습니다</p>
+                                    <p>{vc('manual.noContent')}</p>
                                 </div>
                             )}
                         </div>
@@ -210,7 +211,10 @@ export default ManualList;
 export const getServerSideProps: GetServerSideProps = async (context) => {
     return {
         props: {
-            ...(await serverSideTranslations(context.locale!, ['manual'])),
+            ...(await serverSideTranslations(context.locale!, [
+                'manual',
+                'vc',
+            ])),
         },
     };
 };

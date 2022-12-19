@@ -9,14 +9,18 @@ import { SwiperProps } from 'swiper/react';
 
 import BandBanner from 'components/Banner/BandBanner';
 import MainSlideBanner from 'components/Banner/MainSlideBanner';
-import styles from '../styles/Home.module.css';
+import MainCategoryBanners from 'components/Banner/MainCategoryBanners';
 import BANNER from 'const/banner';
 import { isMobile } from 'utils/styles/responsive';
 import { sortBanners } from 'utils/banners';
-import { banner } from 'api/display';
+import { banner, productSection } from 'api/display';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
+import PRODUCT_SECTION from 'const/productSection';
+import { BY, SALE_STATUS } from 'models';
+import NewReleases from 'components/Product/NewReleases';
+import LayoutResponsive from 'components/shared/LayoutResponsive';
 
 const Home: NextPage = () => {
     const { width } = useWindowSize();
@@ -25,7 +29,6 @@ const Home: NextPage = () => {
     const onBandBannerCloseClick = () => {
         setBandBannerVisible(false);
     };
-    console.log(`env: ${process.env.NODE_ENV}`);
 
     const getMainBannerCode = useMemo(
         () =>
@@ -62,6 +65,26 @@ const Home: NextPage = () => {
                     mainETCBanner: filteredBannerData(BANNER.MAIN_ETC_BANNER),
                 };
             },
+        },
+    );
+
+    const { data: newReleasesData } = useQuery(
+        ['product_section', PRODUCT_SECTION.NEW_RELEASE],
+        async () =>
+            await productSection.getProductSection(
+                PRODUCT_SECTION.NEW_RELEASE,
+                {
+                    by: BY.ADMIN_SETTING,
+                    soldout: false,
+                    saleStatus: SALE_STATUS.ONSALE,
+                    pageNumber: 1,
+                    pageSize: 10,
+                    hasTotalCount: false,
+                    hasOptionValues: false,
+                },
+            ),
+        {
+            select: ({ data }) => data,
         },
     );
 
@@ -133,58 +156,28 @@ const Home: NextPage = () => {
                 />
             )}
 
-            <main className={styles.main}>
-                <h1 className={styles.title}>
-                    Welcome to <a href='https://nextjs.org'>Next.js!</a>
-                </h1>
+            <LayoutResponsive>
+                {/* 카테고리 아이콘 리스트 */}
+                {mainBannerData?.mainCategoryBanner?.accounts && (
+                    <MainCategoryBanners
+                        banners={sortBanners(
+                            mainBannerData?.mainCategoryBanner?.accounts[0]
+                                .banners,
+                        )}
+                    />
+                )}
 
-                <p className={styles.description}>
-                    Get started by editing{' '}
-                    <code className={styles.code}>pages/index.tsx</code>
-                </p>
-
-                <div className={styles.grid}>
-                    <a href='https://nextjs.org/docs' className={styles.card}>
-                        <h2>Documentation &rarr;</h2>
-                        <p>
-                            Find in-depth information about Next.js features and
-                            API.
-                        </p>
-                    </a>
-
-                    <a href='https://nextjs.org/learn' className={styles.card}>
-                        <h2>Learn &rarr;</h2>
-                        <p>
-                            Learn about Next.js in an interactive course with
-                            quizzes!
-                        </p>
-                    </a>
-
-                    <a
-                        href='https://github.com/vercel/next.js/tree/canary/examples'
-                        className={styles.card}
-                    >
-                        <h2>Examples &rarr;</h2>
-                        <p>
-                            Discover and deploy boilerplate example Next.js
-                            projects.
-                        </p>
-                    </a>
-
-                    <a
-                        href='https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app'
-                        target='_blank'
-                        rel='noopener noreferrer'
-                        className={styles.card}
-                    >
-                        <h2>Deploy &rarr;</h2>
-                        <p>
-                            Instantly deploy your Next.js site to a public URL
-                            with Vercel.
-                        </p>
-                    </a>
-                </div>
-            </main>
+                {/* TODO: New Release */}
+                {newReleasesData?.products && (
+                    <NewReleases
+                        settings={{
+                            ...settings,
+                        }}
+                        title='New Releases'
+                        products={newReleasesData.products}
+                    />
+                )}
+            </LayoutResponsive>
         </div>
     );
 };

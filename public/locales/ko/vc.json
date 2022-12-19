@@ -1,6 +1,17 @@
 {
-    "manual": {},
-    "manager": {},
+    "viewAll": "전체보기",
+    "manual": {
+        "noContent": "해당 카테고리에 등록된 상품이 없습니다.",
+        "searchPlaceholder": "상품명을 검색하세요."
+    },
+    "manager": {
+        "title": "보이스캐디 매니저",
+        "description": "보유하신 기기를 선택하신 후, 지원하신 골프 코스를 다운로드 받아보세요.",
+        "howToUse": "사용방법 보기",
+        "onlyUsePc": "보이스캐디 매니저 다운로드는\nPC에서만 지원합니다.",
+        "macDownload": "맥 다운로드",
+        "windowsDownload": "윈도우 다운로드"
+    },
     "golfCourse": {
         "title": "지원 골프 코스",
         "description": "보유하신 기기를 선택하신 후, 지원하신 골프 코스를 다운로드 받아보세요.",
@@ -46,6 +57,7 @@
                 "cancel": "취소",
                 "done": "완료"
             },
+            "cases": "건",
             "notice": {
                 "title": "[안내사항]",
                 "content": [
