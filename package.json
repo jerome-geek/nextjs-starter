@@ -5,7 +5,8 @@
     "scripts": {
         "dev": "next dev",
         "dev:jp": "NEXT_PUBLIC_LANG=jp next dev",
-        "build": "next build",
+        "build": "NEXT_PUBLIC_LANG=ko next build",
+        "build:jp": "NEXT_PUBLIC_LANG=jp next build",
         "start": "next start",
         "lint": "next lint"
     },
@@ -62,7 +63,6 @@
         "@types/react-datepicker": "^4.8.0",
         "@types/redux-logger": "^3.0.9",
         "@types/styled-components": "^5.1.26",
-        "babel-plugin-styled-components": "^2.0.7",
         "redux-logger": "^3.0.6"
     }
 }

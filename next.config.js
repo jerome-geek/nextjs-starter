@@ -6,7 +6,16 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 });
 
 module.exports = withBundleAnalyzer({
+    swcMinify: true,
+
+    compiler: {
+        // ssr, displayName이 기본으로 켜진다
+        styledComponents: true,
+        removeConsole: process.env.NODE_ENV === 'production',
+    },
+
     reactStrictMode: true,
+
     images: {
         domains: ['rlyfaazj0.toastcdn.net'],
     },
