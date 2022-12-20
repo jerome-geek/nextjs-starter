@@ -1,14 +1,18 @@
 import { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
+import { GetStaticPaths, GetStaticProps } from 'next';
+import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import styled from 'styled-components';
 import dayjs from 'dayjs';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { useTranslation } from 'react-i18next';
 
 import Loader from 'components/shared/Loader';
 import LayoutResponsive from 'components/Layout/LayoutResponsive';
 import { board } from 'api/manage';
-import { BoardDetail, BoardDetailState } from 'models/manage';
+import { BoardDetail } from 'models/manage';
 import { BOARD_DETAIL } from 'const/queryKeys';
 import PATHS from 'const/paths';
 import media from 'utils/styles/media';
@@ -63,9 +67,7 @@ const NoticeContentTitleContainer = styled.div`
 
 const NoticeContent = styled.div`
     padding: 30px 20px;
-    > p {
-        line-height: 18px;
-    }
+    line-height: 1.5rem;
 
     ${media.medium} {
         padding: 20px 10px;
@@ -93,11 +95,16 @@ const StyledLink = styled(Link)`
 `;
 
 const NoticeDetail = () => {
+    const { t: notice } = useTranslation('notice');
+
     const [boardDetail, setBoardDetail] = useState<BoardDetail>();
 
     const router = useRouter();
 
-    const { articleNo, boardNo } = router.query as unknown as BoardDetailState;
+    const { articleNo, boardNo } = router.query as {
+        articleNo: string;
+        boardNo: string;
+    };
 
     useEffect(() => {
         if (!boardNo) {
@@ -106,7 +113,7 @@ const NoticeDetail = () => {
     }, [boardNo, router]);
 
     useQuery(
-        [BOARD_DETAIL, articleNo],
+        [BOARD_DETAIL, articleNo, articleNo],
         async () => await board.getArticleDetail(boardNo, articleNo),
         {
             onSuccess: (response) => {
@@ -117,8 +124,9 @@ const NoticeDetail = () => {
 
     return (
         <>
+            <NextSeo title={notice('notice') as string} />
             <NoticeDetailContainer>
-                <NoticeDetailTitle>공지사항</NoticeDetailTitle>
+                <NoticeDetailTitle>{notice('notice')}</NoticeDetailTitle>
                 {boardDetail ? (
                     <NoticeContentContainer>
                         <NoticeContentTitleContainer>
@@ -129,20 +137,20 @@ const NoticeDetail = () => {
                                 )}
                             </span>
                         </NoticeContentTitleContainer>
-                        <NoticeContent>
-                            <p
-                                dangerouslySetInnerHTML={{
-                                    __html: boardDetail.content,
-                                }}
-                            ></p>
-                        </NoticeContent>
+                        <NoticeContent
+                            dangerouslySetInnerHTML={{
+                                __html: boardDetail.content,
+                            }}
+                        />
                     </NoticeContentContainer>
                 ) : (
                     <Loader />
                 )}
 
                 <div style={{ textAlign: 'center' }}>
-                    <StyledLink href={PATHS.NOTICE}>목록가기</StyledLink>
+                    <StyledLink href={PATHS.NOTICE}>
+                        {notice('goToList')}
+                    </StyledLink>
                 </div>
             </NoticeDetailContainer>
         </>
@@ -150,3 +158,18 @@ const NoticeDetail = () => {
 };
 
 export default NoticeDetail;
+
+export const getStaticPaths: GetStaticPaths<{ slug: string }> = async () => {
+    return {
+        paths: [], //indicates that no page needs be created at build time
+        fallback: 'blocking', //indicates the type of fallback
+    };
+};
+
+export const getStaticProps: GetStaticProps = async (context) => {
+    return {
+        props: {
+            ...(await serverSideTranslations(context.locale!, ['notice'])),
+        },
+    };
+};
