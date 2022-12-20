@@ -1,3 +1,4 @@
+import { GetStaticProps } from 'next';
 import React, {
     KeyboardEvent,
     useCallback,
@@ -5,7 +6,7 @@ import React, {
     useMemo,
     useState,
 } from 'react';
-import { dehydrate, QueryClient, useQueries, useQuery } from 'react-query';
+import { useQueries } from 'react-query';
 import { AxiosError } from 'axios';
 import Link from 'next/link';
 import { NextSeo } from 'next-seo';
@@ -21,6 +22,8 @@ import {
     some,
     toArray,
 } from '@fxts/core';
+import { useTranslation } from 'react-i18next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 import SectionDropdown from 'components/SectionDropdown';
 import Loader from 'components/shared/Loader';
@@ -30,12 +33,10 @@ import BOARD from 'const/board';
 import { BoardDetail } from 'models/manage';
 import { isDesktop, isMobile } from 'utils/styles/responsive';
 import media from 'utils/styles/media';
-import { hideScrollbar } from 'utils/styles/mixin';
+import { flex, hideScrollbar } from 'utils/styles/mixin';
 import { board } from 'api/manage';
 import PATHS from 'const/paths';
 import { useMall } from 'hooks/queries';
-import { GetServerSideProps, GetStaticPaths, GetStaticProps } from 'next';
-import mall from 'api/mall';
 
 const FaqContainer = styled.div`
     max-width: 1060px;
@@ -48,12 +49,13 @@ const FaqContainer = styled.div`
     }
 `;
 
-const FaqTitle = styled.h2`
+const Title = styled.h2`
     margin: 0 0 38px;
     color: ${(props) => props.theme.text1};
     font-size: 1.5rem;
     font-weight: bold;
     letter-spacing: -1.2px;
+
     ${media.small} {
         font-size: 2rem;
     }
@@ -197,7 +199,8 @@ const FaqDetailContainer = styled.div`
     }
 `;
 
-const FaqDetailBox = styled.li`
+const FaqDetailList = styled.ul``;
+const FaqDetailListItem = styled.li`
     display: flex;
     padding: 32px 20px;
     border-top: ${(props) => `1px solid ${props.theme.line2}`};
@@ -252,14 +255,17 @@ const MoreViewButton = styled.button`
     margin: 15px auto;
 `;
 
-const InquiryButton = styled.div`
-    width: auto;
+const InquiryContainer = styled.div`
+    ${flex}
     font-size: 1rem;
     margin: 50px auto 0;
     letter-spacing: -0.64px;
     color: ${(props) => props.theme.text1};
-    text-align: center;
-    > a {
+
+    p {
+        margin-right: 10px;
+    }
+    a {
         font-weight: bold;
         text-decoration: underline;
     }
@@ -275,13 +281,21 @@ interface FaqList {
     categoryNo: number;
 }
 
+interface PageNumberList {
+    categoryNo: number;
+    pageNumber: number;
+}
+
 const Faq = () => {
     const [faqList, setFaqList] = useState<FaqList[]>([]);
     const [keyword, setKeyword] = useState('');
+    const [pageNumberList, setPageNumberList] = useState<PageNumberList[]>([]);
 
     const { width } = useWindowSize();
 
     const { data: mallInfo } = useMall();
+
+    const { t: faq } = useTranslation('faq');
 
     const faqCategoryList = useMemo(() => {
         return (
@@ -292,10 +306,6 @@ const Faq = () => {
             )?.categories
         );
     }, [mallInfo?.boardsCategories]);
-
-    const [pageNumberList, setPageNumberList] = useState<
-        Array<{ categoryNo: number; pageNumber: number }>
-    >([]);
 
     useEffect(() => {
         setPageNumberList(
@@ -314,15 +324,14 @@ const Faq = () => {
         setPageNumberList((prev) => {
             const addedPageNumberList = pipe(
                 prev,
-                map((a) => {
-                    if (a.categoryNo === selectedFaq?.categoryNo) {
-                        return {
-                            categoryNo: a.categoryNo,
-                            pageNumber: a.pageNumber + 1,
-                        };
-                    }
-                    return a;
-                }),
+                map((a) =>
+                    a.categoryNo === selectedFaq?.categoryNo
+                        ? {
+                              categoryNo: a.categoryNo,
+                              pageNumber: a.pageNumber + 1,
+                          }
+                        : a,
+                ),
                 toArray,
             );
             return addedPageNumberList;
@@ -453,17 +462,16 @@ const Faq = () => {
     };
 
     const handleCategoryClick = (categoryNo: number) => () => {
-        setFaqList((prev) => {
-            const changedIsSelectedFaqList = pipe(
+        setFaqList((prev) =>
+            pipe(
                 prev,
                 map((a) => ({
                     ...a,
                     isSelected: a.categoryNo === categoryNo,
                 })),
                 toArray,
-            );
-            return changedIsSelectedFaqList;
-        });
+            ),
+        );
     };
 
     const refetchAll = useCallback(() => {
@@ -485,15 +493,17 @@ const Faq = () => {
     return (
         <>
             <NextSeo
-                title='home'
+                title={faq('faq') as string}
                 description='home description'
                 canonical='https://example.com'
                 openGraph={{
                     url: 'https://example.com',
                 }}
             />
+
             <FaqContainer>
-                <FaqTitle>자주 묻는 질문</FaqTitle>
+                <Title>{faq('faq')}</Title>
+
                 <FaqSearchContainer>
                     <FaqSearchBox
                         onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
@@ -510,7 +520,7 @@ const Faq = () => {
                         }}
                     >
                         <FaqSearchInput
-                            placeholder='궁금한 점을 검색해보세요 :)'
+                            placeholder={faq('searchPlaceholder') as string}
                             value={keyword}
                             onChange={(e) => setKeyword(e.target.value)}
                         />
@@ -523,6 +533,7 @@ const Faq = () => {
                         </FaqSearchButton>
                     </FaqSearchBox>
                 </FaqSearchContainer>
+
                 <MobileFaqCategoryContainer>
                     <FaqCategoryContainer>
                         {faqCategoryList?.map(({ categoryNo, label }) => {
@@ -565,56 +576,61 @@ const Faq = () => {
                                         )?.label}
                                     ({selectedFaq.totalCount})
                                 </div>
-                                <ul>
+                                <FaqDetailList>
                                     {selectedFaq.items.map(
                                         ({
                                             articleNo,
                                             title,
                                             content,
                                             categoryLabel,
-                                        }) => {
-                                            return (
-                                                <FaqDetailBox
-                                                    onClick={getNoticeDetailHandler(
-                                                        articleNo,
-                                                    )}
-                                                    key={articleNo}
-                                                >
-                                                    <FaqDetailLabel>
-                                                        {categoryLabel}
-                                                    </FaqDetailLabel>
-                                                    <SectionDropdown
-                                                        title={title}
-                                                    >
-                                                        <FaqDetail
-                                                            dangerouslySetInnerHTML={{
-                                                                __html: content!,
-                                                            }}
-                                                        />
-                                                    </SectionDropdown>
-                                                </FaqDetailBox>
-                                            );
-                                        },
+                                        }) => (
+                                            <FaqDetailListItem
+                                                onClick={getNoticeDetailHandler(
+                                                    articleNo,
+                                                )}
+                                                key={articleNo}
+                                            >
+                                                <FaqDetailLabel>
+                                                    {categoryLabel}
+                                                </FaqDetailLabel>
+                                                <SectionDropdown title={title}>
+                                                    <FaqDetail
+                                                        dangerouslySetInnerHTML={{
+                                                            __html: content,
+                                                        }}
+                                                    />
+                                                </SectionDropdown>
+                                            </FaqDetailListItem>
+                                        ),
                                     )}
-                                </ul>
+                                </FaqDetailList>
                             </>
                         ) : (
-                            <p>등록된 질문이 없습니다.</p>
+                            <p>{faq('noContent')}</p>
                         )}
                     </FaqDetailContainer>
                 )}
                 {!isMoreFaq && (
                     <MoreViewButton onClick={() => plusPageNumber()}>
-                        더보기
+                        {faq('more')}
                     </MoreViewButton>
                 )}
-                <InquiryButton>
-                    원하는 질문이 없나요?&nbsp;&nbsp;&nbsp;
-                    <Link href={PATHS.INQUIRY}>1:1 문의하기</Link>
-                </InquiryButton>
+
+                <InquiryContainer>
+                    <p>{faq('wantMoreFaq')}</p>
+                    <Link href={PATHS.INQUIRY}>{faq('inquiry')}</Link>
+                </InquiryContainer>
             </FaqContainer>
         </>
     );
 };
 
 export default Faq;
+
+export const getStaticProps: GetStaticProps = async (context) => {
+    return {
+        props: {
+            ...(await serverSideTranslations(context.locale!, ['faq'])),
+        },
+    };
+};
