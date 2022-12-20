@@ -169,7 +169,6 @@ const Header = () => {
     const router = useRouter();
 
     const { member, onLoginClick, onLogOutClick } = useMember();
-    const { totalCount } = useCart();
 
     const onMypageClick = () => setMyPageToggle((prev) => !prev);
     const onSearchClick = () => setSearchToggle((prev) => !prev);
@@ -243,7 +242,7 @@ const Header = () => {
 
                     <div onClick={() => router.push(PATHS.CART)}>
                         <CartIcon />
-                        <CartCount>{totalCount}</CartCount>
+                        <CartCount>{0}</CartCount>
                     </div>
 
                     {!isDesktop(width) && (

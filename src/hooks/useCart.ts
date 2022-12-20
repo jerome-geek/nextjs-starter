@@ -53,19 +53,19 @@ const useCart = () => {
         },
     );
 
-    useLayoutEffect(() => {
-        if (cartInfo) {
-            setTotalCount(
-                pipe(
-                    cartInfo.deliveryGroups,
-                    pluck('orderProducts'),
-                    flatMap((a) => a),
-                    flatMap((b) => b.orderProductOptions),
-                    size,
-                ),
-            );
-        }
-    }, [cartInfo]);
+    // useLayoutEffect(() => {
+    //     if (cartInfo) {
+    //         setTotalCount(
+    //             pipe(
+    //                 cartInfo.deliveryGroups,
+    //                 pluck('orderProducts'),
+    //                 flatMap((a) => a),
+    //                 flatMap((b) => b.orderProductOptions),
+    //                 size,
+    //             ),
+    //         );
+    //     }
+    // }, [cartInfo]);
 
     return {
         cartInfo,
