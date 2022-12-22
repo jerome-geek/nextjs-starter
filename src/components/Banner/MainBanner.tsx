@@ -107,7 +107,7 @@ const MainBanner: FC<MainBannerProps> = ({ imgUrl, title, desc, url }) => {
                         ),
                     }}
                 />
-                <StyledVieMoreButton to={url}>자세히 보기</StyledVieMoreButton>
+                {/* <StyledVieMoreButton to={url}>자세히 보기</StyledVieMoreButton> */}
             </MainBannerContentsContainer>
         </MainBannerContainer>
     );
