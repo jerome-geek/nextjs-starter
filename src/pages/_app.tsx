@@ -8,6 +8,7 @@ import { ReactQueryDevtools } from 'react-query/devtools';
 import { appWithTranslation } from 'next-i18next';
 import { useStore } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
+import { Noto_Sans_KR } from '@next/font/google';
 
 import wrapper from 'state/store';
 import DefaultLayout from 'components/Layout/DefaultLayout';
@@ -22,6 +23,12 @@ declare global {
         NCPPay: any;
     }
 }
+
+const notoSans = Noto_Sans_KR({
+    weight: ['300', '500', '700', '900'],
+    variable: '--noto',
+    display: 'fallback',
+});
 
 function App({ Component, pageProps }: AppProps) {
     const [queryClient] = useState(
@@ -45,6 +52,11 @@ function App({ Component, pageProps }: AppProps) {
 
     return (
         <>
+            <style jsx global>{`
+                :root {
+                    --font-base: ${notoSans.style.fontFamily};
+                }
+            `}</style>
             <PersistGate
                 persistor={store.__persistor}
                 loading={<div>loading...</div>}

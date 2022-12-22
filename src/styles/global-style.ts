@@ -9,10 +9,10 @@ export const GlobalStyle = createGlobalStyle`
 
     }
     html {
-        font-family: 'Noto Sans KR',-apple-system,BlinkMacSystemFont,helvetica,Apple SD Gothic Neo,sans-serif;
+        /* font-family: 'Noto Sans KR',-apple-system,BlinkMacSystemFont,helvetica,Apple SD Gothic Neo,sans-serif; */
+        font-family: var(--font-base),-apple-system,BlinkMacSystemFont,helvetica,Apple SD Gothic Neo,sans-serif;
         -webkit-text-size-adjust: none;
         -ms-overflow-style: none;
-        font-family: 'Noto Sans KR',-apple-system,BlinkMacSystemFont,helvetica,Apple SD Gothic Neo,sans-serif;
         font-weight: normal;
         font-display: fallback;
         letter-spacing: -0.64px;
