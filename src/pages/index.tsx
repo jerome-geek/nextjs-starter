@@ -21,6 +21,9 @@ import PRODUCT_SECTION from 'const/productSection';
 import { BY, SALE_STATUS } from 'models';
 import NewReleases from 'components/Product/NewReleases';
 import LayoutResponsive from 'components/shared/LayoutResponsive';
+import MainBanner from 'components/Banner/MainBanner';
+import MainVideoBanner from 'components/Banner/MainVideoBanner';
+import ETCSection from 'components/Banner/ETCSection';
 
 const Home: NextPage = () => {
     const { width } = useWindowSize();
@@ -175,6 +178,61 @@ const Home: NextPage = () => {
                         }}
                         title='New Releases'
                         products={newReleasesData.products}
+                    />
+                )}
+
+                {/* 메인 배너 리스트 */}
+                {mainBannerData?.mainBanner?.accounts[2]?.banners &&
+                    sortBanners(
+                        mainBannerData?.mainBanner.accounts[2]?.banners,
+                    ).map(
+                        ({
+                            bannerNo,
+                            name,
+                            imageUrl,
+                            description,
+                            browerTargetType,
+                        }) => (
+                            <MainBanner
+                                key={bannerNo}
+                                title={name}
+                                imgUrl={imageUrl}
+                                desc={description}
+                                url={browerTargetType}
+                            />
+                        ),
+                    )}
+            </LayoutResponsive>
+
+            {/* 유튜브 슬라이드 배너 */}
+            {mainBannerData?.mainBanner?.accounts[3]?.banners && (
+                <MainVideoBanner
+                    settings={{
+                        ...settings,
+                        style: {
+                            width: '100%',
+                            maxWidth: '1280px',
+                            height: 'auto',
+                        },
+                    }}
+                    title={mainBannerData?.mainBanner.accounts[3]?.accountName}
+                    banners={mainBannerData?.mainBanner.accounts[3]?.banners}
+                />
+            )}
+
+            {/* ETC */}
+            <LayoutResponsive>
+                {mainBannerData?.mainETCBanner?.accounts[0]?.banners && (
+                    <ETCSection
+                        iconWidth={
+                            mainBannerData?.mainETCBanner.accounts[0]?.width
+                        }
+                        iconHeight={
+                            mainBannerData?.mainETCBanner.accounts[0]?.height
+                        }
+                        banners={sortBanners(
+                            mainBannerData?.mainETCBanner.accounts[0]?.banners,
+                        )}
                     />
                 )}
             </LayoutResponsive>
