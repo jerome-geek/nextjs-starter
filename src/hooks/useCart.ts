@@ -1,4 +1,4 @@
-import { useLayoutEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
 import { shallowEqual } from 'react-redux';
 import { useQuery } from 'react-query';
 import { flatMap, pipe, pluck, size } from '@fxts/core';
@@ -53,19 +53,20 @@ const useCart = () => {
         },
     );
 
-    // useLayoutEffect(() => {
-    //     if (cartInfo) {
-    //         setTotalCount(
-    //             pipe(
-    //                 cartInfo.deliveryGroups,
-    //                 pluck('orderProducts'),
-    //                 flatMap((a) => a),
-    //                 flatMap((b) => b.orderProductOptions),
-    //                 size,
-    //             ),
-    //         );
-    //     }
-    // }, [cartInfo]);
+    const { data: cartCount, refetch: cartCountRefetch } = useQuery(
+        ['cartCount', member?.memberId],
+        async () => await cart.getCartCount(),
+        {
+            staleTime: 1000 * 60 * 10,
+            cacheTime: 1000 * 60 * 10,
+            enabled: isLogin(),
+            select: (response) => response.data,
+        },
+    );
+
+    useEffect(() => {
+        setTotalCount(isLogin() ? cartCount?.count || 0 : guestCartList.length);
+    }, [cartCount, guestCartList]);
 
     return {
         cartInfo,
