@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useWindowSize } from 'usehooks-ts';
 
-import GenuineProductCard from 'components/Card/GenuineProductCard';
+import ActivativeProductCard from 'components/Card/ActivativeProductCard';
 import OriginalRegisterButton from 'components/Button/OriginalRegisterButton';
+import GenuineRegisterModal from 'components/Modal/GenuineRegisterModal';
 import media from 'utils/styles/media';
 import { isMobile } from 'utils/styles/responsive';
+import { activationProducts } from 'mock/activationProducts';
+import { flex } from 'utils/styles/mixin';
 
 const Container = styled.main`
     width: 840px;
@@ -59,13 +62,13 @@ const MyProductListContainer = styled.section`
 `;
 
 const RegisterContainer = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    ${flex}
+
     ${media.medium} {
         flex-direction: column;
         width: 100%;
         margin-bottom: 14px;
+
         > p {
             width: 100%;
             font-size: 1.333rem;
@@ -84,42 +87,56 @@ const RegisterContainer = styled.div`
 `;
 
 const Products = () => {
+    const [isModalVisible, setIsModalVisible] = useState(false);
     const { width } = useWindowSize();
 
     return (
-        <Container>
-            <Title>보유중인 제품</Title>
-            {isMobile(width) && (
-                <RegisterContainer>
-                    <p>정품을 등록하고 다양한 혜택을 확인해보세요!</p>
-                    <OriginalRegisterButton
-                        title={'정품 등록하기'}
-                        onClick={() => {}}
-                    />
-                </RegisterContainer>
-            )}
-            <MyProductListContainer>
-                {!isMobile(width) && (
+        <>
+            <Container>
+                <Title>보유중인 제품</Title>
+
+                {isMobile(width) && (
                     <RegisterContainer>
+                        <p>정품을 등록하고 다양한 혜택을 확인해보세요!</p>
                         <OriginalRegisterButton
-                            title={
-                                [
-                                    '정품을 등록하고',
-                                    <br key={1} />,
-                                    '다양한 혜택을 확인해보세요!',
-                                ] as unknown as string
-                            }
-                            onClick={() => {}}
+                            title={'정품 등록하기'}
+                            onClick={() => setIsModalVisible(true)}
                         />
                     </RegisterContainer>
                 )}
-                <GenuineProductCard />
-                <GenuineProductCard />
-                <GenuineProductCard />
-                <GenuineProductCard />
-                <GenuineProductCard />
-            </MyProductListContainer>
-        </Container>
+
+                <MyProductListContainer>
+                    {!isMobile(width) && (
+                        <RegisterContainer>
+                            <OriginalRegisterButton
+                                title={
+                                    '정품을 등록하고<br/>다양한 혜택을 확인해보세요!'
+                                }
+                                onClick={() => setIsModalVisible(true)}
+                            />
+                        </RegisterContainer>
+                    )}
+
+                    {activationProducts.map(
+                        ({ id, productName, activationCode, imgUrl }) => (
+                            <ActivativeProductCard
+                                key={id}
+                                productName={productName}
+                                activationCode={activationCode}
+                                imgUrl={imgUrl}
+                            />
+                        ),
+                    )}
+                </MyProductListContainer>
+            </Container>
+
+            {isModalVisible && (
+                <GenuineRegisterModal
+                    onClickToggleModal={() => setIsModalVisible(false)}
+                    width={'752px'}
+                />
+            )}
+        </>
     );
 };
 

@@ -18,6 +18,7 @@ const SEO = {
     ],
     openGraph: {
         type: 'website',
+        locale: 'ko_KR',
         site_name: 'Example',
         images: [{ url: 'https://example.com/example_square_image.png' }],
     },

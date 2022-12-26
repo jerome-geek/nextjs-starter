@@ -1,6 +1,7 @@
 import React, { PropsWithChildren } from 'react';
 import styled from 'styled-components';
 
+import Portal from 'components/Common/Portal';
 import CloseButton from 'assets/icons/close_black.svg';
 
 export interface ModalDefaultType {
@@ -33,6 +34,7 @@ const DialogBox = styled.dialog<{ width: string; height?: string }>`
     box-sizing: border-box;
     background-color: white;
     z-index: 10000;
+
     > svg {
         position: absolute;
         top: 20px;
@@ -58,9 +60,20 @@ const Modal = ({
     height,
 }: PropsWithChildren<ModalDefaultType>) => {
     return (
-        <ModalContainer>
-            <DialogBox width={width} height={height}>
-                <CloseButton
+        <Portal selector='modal-root'>
+            <ModalContainer>
+                <DialogBox width={width} height={height}>
+                    <CloseButton
+                        onClick={(e: React.MouseEvent) => {
+                            e.preventDefault();
+                            if (onClickToggleModal) {
+                                onClickToggleModal();
+                            }
+                        }}
+                    />
+                    {children}
+                </DialogBox>
+                <Backdrop
                     onClick={(e: React.MouseEvent) => {
                         e.preventDefault();
                         if (onClickToggleModal) {
@@ -68,17 +81,8 @@ const Modal = ({
                         }
                     }}
                 />
-                {children}
-            </DialogBox>
-            <Backdrop
-                onClick={(e: React.MouseEvent) => {
-                    e.preventDefault();
-                    if (onClickToggleModal) {
-                        onClickToggleModal();
-                    }
-                }}
-            />
-        </ModalContainer>
+            </ModalContainer>
+        </Portal>
     );
 };
 

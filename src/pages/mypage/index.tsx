@@ -1,8 +1,7 @@
-import { useState } from 'react';
-import { useQuery } from 'react-query';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import dayjs from 'dayjs';
 import styled from 'styled-components';
+import { useLockedBody } from 'usehooks-ts';
 
 import GenuineRegisterModal from 'components/Modal/GenuineRegisterModal';
 import LayoutResponsive from 'components/Layout/LayoutResponsive';
@@ -10,16 +9,12 @@ import OrderSummarySection from 'components/Order/OrderSummarySection';
 import ShoppingSummary from 'components/Order/ShoppingSummary';
 import CouponSummary from 'components/MyPage/CouponSummary';
 import MyGoodsSummary from 'components/MyPage/MyGoodsSummary';
-import { accumulation } from 'api/manage';
-import { myOrder } from 'api/order';
 import PATHS from 'const/paths';
 import { useMember } from 'hooks';
 import AngleRightGray from 'assets/icons/angle_right_gray.svg';
 import useCouponData from 'hooks/queries/useCouponData';
-import { isLogin } from 'utils/users';
 import useOrderSummary from 'hooks/queries/useOrderSummary';
 import { useAccumulationData } from 'hooks/queries';
-import { PROFILE_ACCUMULATION, PROFILE_ORDER_SUMMARY } from 'const/queryKeys';
 
 const MyPageSummaryContainer = styled.div`
     display: flex;
@@ -39,12 +34,12 @@ const MyPageContainer = styled(LayoutResponsive)`
     max-width: 840px;
 `;
 
-const MyPageSection = styled.div`
+const StyledSection = styled.div`
     padding: 20px 0;
     border-bottom: 1px solid #dbdbdb;
 `;
 
-const MyPageTitle = styled.h1`
+const Title = styled.h1`
     font-size: 24px;
     font-weight: bold;
 `;
@@ -64,16 +59,21 @@ const Index = () => {
 
     const { data: couponData } = useCouponData({ memberNo: member?.memberNo });
 
+    const [_, setLocked] = useLockedBody();
+    useEffect(() => {
+        setLocked(isGenuineRegisterModal);
+    }, [setLocked, isGenuineRegisterModal]);
+
     return (
         <MyPageContainer>
-            <MyPageSection
+            <StyledSection
                 style={{
                     display: 'flex',
                     justifyContent: 'space-between',
                     alignItems: 'flex-end',
                 }}
             >
-                <MyPageTitle>마이페이지</MyPageTitle>
+                <Title>마이페이지</Title>
                 <ul style={{ display: 'flex', fontSize: '12px' }}>
                     <li style={{ marginRight: '20px' }}>{member?.email}</li>
                     <li
@@ -86,9 +86,9 @@ const Index = () => {
                         로그아웃
                     </li>
                 </ul>
-            </MyPageSection>
+            </StyledSection>
 
-            <MyPageSection>
+            <StyledSection>
                 <MyPageSummaryContainer>
                     <p style={{ fontSize: '30px' }}>
                         <strong style={{ fontWeight: 'bolder' }}>
@@ -116,18 +116,26 @@ const Index = () => {
                         to={PATHS.MY_ORDER_LIST}
                     />
                 )}
-            </MyPageSection>
+            </StyledSection>
 
-            <MyPageSection>
+            <StyledSection>
                 <MyGoodsSummary
                     setIsGenuineRegisterModal={setIsGenuineRegisterModal}
                     myGoods={[1, 2, 3, 4]}
                 />
-            </MyPageSection>
+                {isGenuineRegisterModal && (
+                    <GenuineRegisterModal
+                        onClickToggleModal={() =>
+                            setIsGenuineRegisterModal(false)
+                        }
+                        width={'752px'}
+                    />
+                )}
+            </StyledSection>
 
-            <MyPageSection style={{ border: 0 }}>
+            <StyledSection style={{ border: 0 }}>
                 {couponData && <CouponSummary coupons={couponData?.items} />}
-            </MyPageSection>
+            </StyledSection>
         </MyPageContainer>
     );
 };

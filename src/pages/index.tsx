@@ -112,7 +112,7 @@ const Home: NextPage = () => {
     return (
         <div>
             <NextSeo
-                title='home'
+                title='VOICE CADDIE'
                 description='home description'
                 canonical='https://example.com'
                 openGraph={{
