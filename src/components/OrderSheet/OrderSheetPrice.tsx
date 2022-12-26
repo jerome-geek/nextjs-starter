@@ -103,7 +103,7 @@ const OrderSheetPrice: FC<OrderSheetPriceProps> = ({
     usedAccumulationAmt = 0,
     totalPaymentAmt = 0,
 }) => {
-    const { t: orderSheet } = useTranslation('orderSheet');
+    const { t: sheet } = useTranslation('sheet');
 
     return (
         <OrderSheetPriceContainer>
@@ -111,7 +111,7 @@ const OrderSheetPrice: FC<OrderSheetPriceProps> = ({
             <CartOrderPriceBox>
                 <OrderPriceWrapper>
                     <CartOrderSubTitle>
-                        {orderSheet('price.totalStandardAmt')}
+                        {sheet('price.totalStandardAmt')}
                     </CartOrderSubTitle>
                     <CartOrderPrice>
                         {KRW(totalStandardAmt).format()}
@@ -119,7 +119,7 @@ const OrderSheetPrice: FC<OrderSheetPriceProps> = ({
                 </OrderPriceWrapper>
                 <OrderPriceWrapper>
                     <CartOrderSubTitle>
-                        {orderSheet('price.totalDeliveryAmt')}
+                        {sheet('price.totalDeliveryAmt')}
                     </CartOrderSubTitle>
                     <CartOrderPrice>
                         {KRW(totalDeliveryAmt).format()}
@@ -127,7 +127,7 @@ const OrderSheetPrice: FC<OrderSheetPriceProps> = ({
                 </OrderPriceWrapper>
                 <OrderPriceWrapper>
                     <CartOrderSubTitle>
-                        {orderSheet('price.totalDiscountAmt')}
+                        {sheet('price.totalDiscountAmt')}
                     </CartOrderSubTitle>
                     <CartOrderPrice>
                         {KRW(Math.abs(totalDiscountAmt) * -1).format()}
@@ -135,7 +135,7 @@ const OrderSheetPrice: FC<OrderSheetPriceProps> = ({
                 </OrderPriceWrapper>
                 <OrderPriceWrapper>
                     <CartOrderSubTitle>
-                        {orderSheet('price.totalCouponAmt')}
+                        {sheet('price.totalCouponAmt')}
                     </CartOrderSubTitle>
                     <CartOrderPrice>
                         {KRW(Math.abs(totalCouponAmt) * -1).format()}
@@ -143,7 +143,7 @@ const OrderSheetPrice: FC<OrderSheetPriceProps> = ({
                 </OrderPriceWrapper>
                 <OrderPriceWrapper>
                     <CartOrderSubTitle>
-                        {orderSheet('price.usedAccumulationAmt')}
+                        {sheet('price.usedAccumulationAmt')}
                     </CartOrderSubTitle>
                     <CartOrderPrice>
                         {KRW(Math.abs(usedAccumulationAmt) * -1).format()}
@@ -152,7 +152,7 @@ const OrderSheetPrice: FC<OrderSheetPriceProps> = ({
             </CartOrderPriceBox>
             <CartOrderPaymentAmount>
                 <CartOrderSubTitle>
-                    {orderSheet('price.totalPaymentAmt')}
+                    {sheet('price.totalPaymentAmt')}
                 </CartOrderSubTitle>
                 <CartOrderPrice>
                     <span>
@@ -161,7 +161,7 @@ const OrderSheetPrice: FC<OrderSheetPriceProps> = ({
                             precision: 0,
                         })}
                     </span>
-                    &nbsp;&nbsp;원
+                    &nbsp;&nbsp;{sheet('etc.won')}
                 </CartOrderPrice>
             </CartOrderPaymentAmount>
         </OrderSheetPriceContainer>

@@ -17,6 +17,7 @@ import {
     isEmpty,
 } from '@fxts/core';
 import { useWindowSize } from 'usehooks-ts';
+import { useTranslation } from 'next-i18next';
 
 import SecondaryButton from 'components/Button/SecondaryButton';
 import PaymentButton from 'components/Button/PaymentButton';
@@ -238,6 +239,8 @@ const Cart = () => {
     const dispatch = useAppDispatch();
 
     const router = useRouter();
+
+    const { t: sheet } = useTranslation('sheet');
 
     const setCartHandler = (deliveryGroups: DeliveryGroup[]) => {
         const cartListTemp: any[] = [];
@@ -604,7 +607,7 @@ const Cart = () => {
                 <CartPriceContainer>
                     <CartPriceWrapper>
                         <OrderSheetPrice
-                            title={'주문서'}
+                            title={sheet('progress.now')}
                             totalStandardAmt={checkedPriceData.standardAmt}
                             totalDeliveryAmt={checkedPriceData.totalDeliveryAmt}
                             totalDiscountAmt={
@@ -639,10 +642,10 @@ const Cart = () => {
 
 export default Cart;
 
-export const getStaticProps: GetStaticProps = async (context) => {
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
     return {
         props: {
-            ...(await serverSideTranslations(context.locale!, ['orderSheet'])),
+            ...(await serverSideTranslations(locale!, ['sheet'])),
         },
     };
 };
