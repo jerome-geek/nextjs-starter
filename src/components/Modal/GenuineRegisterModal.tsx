@@ -5,6 +5,7 @@ import { ErrorMessage } from '@hookform/error-message';
 import { useWindowSize } from 'usehooks-ts';
 import styled from 'styled-components';
 import { head } from '@fxts/core';
+import Image from 'next/image';
 
 import Modal, { ModalDefaultType } from 'components/Modal/Modal';
 import MobileModal from 'components/Modal/MobileModal';
@@ -84,25 +85,14 @@ const RegisterFormInputContainer = styled.div`
 const RegisterFormImageContainer = styled.div`
     width: 240px;
     text-align: center;
-    > img {
-        width: 100%;
-    }
-    ${media.medium} {
-        width: 100%;
-        > img {
-            object-fit: scale-down;
-        }
-    }
 `;
 
 const SerialNoDescription = styled.p`
-    line-height: 13px;
+    font-size: 10px;
+    line-height: 14px;
     letter-spacing: -0.36px;
     color: ${(props) => props.theme.text3};
-    font-size: 0.5625rem;
-    ${media.medium} {
-        margin-top: 20px;
-    }
+    font-weight: 300;
 `;
 
 const RegisterInputContainer = styled.div`
@@ -621,7 +611,7 @@ const GenuineRegisterModal = ({
                                     />
                                 </RegisterFormInputContainer>
                                 <RegisterFormImageContainer>
-                                    <img
+                                    {/* <img
                                         src={
                                             productDetailQuery.data?.attachments
                                                 .length
@@ -632,6 +622,16 @@ const GenuineRegisterModal = ({
                                                 : ''
                                         }
                                         alt=''
+                                    /> */}
+                                    <Image
+                                        src={
+                                            '//rlyfaazj0.toastcdn.net/20220623/164839.485302000/thumb-1583508427_3492_vc4_298x436.png'
+                                        }
+                                        width={222}
+                                        height={222}
+                                        loader={({ src }) => src}
+                                        alt='example'
+                                        style={{ marginBottom: '10px' }}
                                     />
                                     <SerialNoDescription>
                                         이미지의 표시된 영역에서 시리얼번호를

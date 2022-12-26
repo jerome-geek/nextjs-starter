@@ -40,6 +40,7 @@ class MyDocument extends Document {
                     {/* 생략부분에는 메타태그를 넣어주거나 웹폰트를 preload 시켜줄 수 있다. */}
                 </Head>
                 <body>
+                    <div id='modal-root' />
                     <Main />
                     <NextScript />
                 </body>

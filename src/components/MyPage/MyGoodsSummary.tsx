@@ -1,11 +1,13 @@
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 import styled from 'styled-components';
-import AngleRightBlack from 'assets/icons/angle_right_black_middle.svg';
 
 import OriginalRegisterButton from 'components/Button/OriginalRegisterButton';
 import ViewAllButton from 'components/Button/ViewAllButton';
-import GenuineProductCard from 'components/Card/GenuineProductCard';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
+import ActivativeProductCard from 'components/Card/ActivativeProductCard';
+import PATHS from 'const/paths';
+import AngleRightBlack from 'assets/icons/angle_right_black_middle.svg';
+import { activationProducts } from 'mock/activationProducts';
 
 const MyGoodsSummaryContainer = styled.div``;
 
@@ -52,10 +54,11 @@ const MyGoodsSummary = ({ myGoods, setIsGenuineRegisterModal }: any) => {
     return (
         <MyGoodsSummaryContainer>
             <div style={{ marginBottom: '20px' }}>
-                <MyGoodsTitle onClick={() => router.push('/mypage/products')}>
+                <MyGoodsTitle onClick={() => router.push(PATHS.MY_PRODUCTS)}>
                     보유중인 제품 <AngleRightBlack />
                 </MyGoodsTitle>
             </div>
+
             {myGoods.length > 0 ? (
                 <div style={{ display: 'flex' }}>
                     <div
@@ -73,15 +76,26 @@ const MyGoodsSummary = ({ myGoods, setIsGenuineRegisterModal }: any) => {
                             }}
                         />
                     </div>
-                    <div style={{ flex: 1 }}>
-                        <GenuineProductCard />
-                    </div>
-                    <div style={{ flex: 1 }}>
-                        <GenuineProductCard />
-                    </div>
+
+                    {activationProducts.slice(0, 2).map((product) => {
+                        return (
+                            <div
+                                style={{ flex: 1, marginRight: '10px' }}
+                                key={product.id}
+                            >
+                                <ActivativeProductCard
+                                    productName={product.productName}
+                                    activationCode={product.activationCode}
+                                    imgUrl={product.imgUrl}
+                                />
+                            </div>
+                        );
+                    })}
+
                     <div style={{ flex: 0.5 }}>
                         <ViewAllButton
                             style={{ width: '100%', height: '100%' }}
+                            onClick={() => router.push(PATHS.MY_PRODUCTS)}
                         />
                     </div>
                 </div>

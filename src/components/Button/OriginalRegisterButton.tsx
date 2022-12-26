@@ -1,9 +1,11 @@
-import React from 'react';
+import { ButtonHTMLAttributes } from 'react';
 import styled from 'styled-components';
+
 import media from 'utils/styles/media';
+import { flex } from 'utils/styles/mixin';
 
 interface OriginalRegisterButtonProps
-    extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+    extends ButtonHTMLAttributes<HTMLButtonElement> {
     title: string;
 }
 
@@ -47,24 +49,23 @@ const ButtonPlus = styled.div`
     }
 `;
 
-const ButtonWrapper = styled.button`
+const StyledButton = styled.button`
     width: 170px;
     height: 212px;
     border: 4px solid #f8f8fa;
     background: #f8f8fa 0% 0% no-repeat padding-box;
     box-shadow: 2px 2px 6px #0000001a;
     opacity: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    ${flex}
     flex-direction: column;
     cursor: pointer;
 `;
 
-const ButtonTitle = styled.span`
+const Title = styled.p`
     font-size: 12px;
-    letter-spacing: 0;
-    color: #000000;
+    line-height: 18px;
+    letter-spacing: 0px;
+    color: #191919;
     padding-top: 20px;
 `;
 
@@ -73,10 +74,10 @@ const OriginalRegisterButton: React.FC<OriginalRegisterButtonProps> = ({
     ...args
 }) => {
     return (
-        <ButtonWrapper {...args}>
+        <StyledButton {...args}>
             <ButtonPlus />
-            <ButtonTitle>{title}</ButtonTitle>
-        </ButtonWrapper>
+            <Title dangerouslySetInnerHTML={{ __html: title }} />
+        </StyledButton>
     );
 };
 
